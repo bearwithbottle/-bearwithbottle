@@ -1,7 +1,11 @@
-import "./App.css";
-
+import Main from "./pages/Main";
+import "./styles/GlobalStyle.css";
 function App() {
-  return <div>start</div>;
+  return (
+    <>
+      <Main />
+    </>
+  );
 }
 
 export default App;
