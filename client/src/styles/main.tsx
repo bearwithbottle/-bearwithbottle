@@ -64,17 +64,17 @@ export const MainGoogleSpan = styled.span`
   font-size: 18px;
 `;
 
-// Kakao
+// Facebook
 export const MainKakaoBox = styled.a`
   width: 312px;
   height: 53px;
-  background-color: #b6a61d;
+  background-color: #31498b;
   border-radius: 10px;
 `;
 export const MainKakaWrap = styled.div`
   width: 312px;
   height: 48px;
-  background-color: #fde61a;
+  background-color: #5475d0;
   border-radius: 10px;
   align-items: center;
 `;
@@ -86,6 +86,6 @@ export const MainKakaoLogo = styled.div`
   margin-right: 10px;
 `;
 export const MainKakaoSpan = styled.span`
-  color: #444444;
+  color: #ffff;
   font-size: 18px;
 `;

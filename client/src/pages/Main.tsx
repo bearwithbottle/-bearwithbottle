@@ -26,7 +26,7 @@ function Main() {
         <MainKakaoBox href="/">
           <MainKakaWrap>
             <MainKakaoLogo />
-            <MainKakaoSpan>카카오로 시작하기</MainKakaoSpan>
+            <MainKakaoSpan>페이스북으로 시작하기</MainKakaoSpan>
           </MainKakaWrap>
         </MainKakaoBox>
       </MainBtnBox>
