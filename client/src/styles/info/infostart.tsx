@@ -12,14 +12,16 @@ export const Backround = styled.div`
   font-family: "ImcreSoojin";
   flex-direction: column;
 `;
-
+export const TopWrap = styled.div`
+  flex-direction: column;
+`;
 export const TopBox = styled.div`
   flex-direction: column;
   align-items: center;
 `;
 export const PreBtnBox = styled.div`
   align-items: center;
-  justify-content: left;
+  justify-content: flex-start;
   color: #909195;
   :hover {
     cursor: pointer;
@@ -76,21 +78,21 @@ export const YesBtnBox = styled.div`
   height: 53px;
   border-radius: 10px;
   background-color: #969696;
+  :hover {
+    color: #ffff;
+    background-color: #9381ff;
+  }
 `;
-export const YesBtnInline = styled.div`
-  width: 145px;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px dashed #9a9a9a;
-  align-items: center;
-  color: #9a9a9a;
-`;
+
 export const YesBtn = styled.div`
   height: 48px;
   width: 100%;
   border-radius: 10px;
   align-items: center;
   background-color: #c6c6c6;
+  :hover {
+    background-color: #9381ff;
+  }
 `;
 export const NoBtnBox = styled.div`
   width: 150px;
@@ -98,14 +100,7 @@ export const NoBtnBox = styled.div`
   border-radius: 10px;
   background-color: #969696;
 `;
-export const NoBtnInline = styled.div`
-  width: 145px;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px dashed #9a9a9a;
-  align-items: center;
-  color: #9a9a9a;
-`;
+
 export const NoBtn = styled.div`
   height: 48px;
   width: 100%;

@@ -13,40 +13,37 @@ import {
   NoBtnBox,
   YesBtn,
   NoBtn,
-  YesBtnInline,
-  NoBtnInline,
+  TopWrap,
 } from "../styles/info/infostart";
 import { IoIosArrowBack } from "react-icons/io";
 
 function InfoStart() {
   return (
     <Backround>
-      <TopBox>
+      <TopWrap>
         <PreBtnBox>
           <IoIosArrowBack className="PreBtn" />
           <PreBtnSpan>이전으로</PreBtnSpan>
         </PreBtnBox>
-        <TopTextBox>
-          <TopText>당신은 성인 입니까?</TopText>
-          <CircleBox>
-            <CircleT />
-            <Circle />
-            <Circle />
-          </CircleBox>
-        </TopTextBox>
-        <BtnBox>
-          <YesBtnBox>
-            <YesBtn>
-              <YesBtnInline>Yes</YesBtnInline>
-            </YesBtn>
-          </YesBtnBox>
-          <NoBtnBox>
-            <NoBtn>
-              <NoBtnInline>No</NoBtnInline>
-            </NoBtn>
-          </NoBtnBox>
-        </BtnBox>
-      </TopBox>
+        <TopBox>
+          <TopTextBox>
+            <TopText>당신은 성인 입니까?</TopText>
+            <CircleBox>
+              <CircleT />
+              <Circle />
+              <Circle />
+            </CircleBox>
+          </TopTextBox>
+          <BtnBox>
+            <YesBtnBox>
+              <YesBtn>Yes</YesBtn>
+            </YesBtnBox>
+            <NoBtnBox>
+              <NoBtn>No</NoBtn>
+            </NoBtnBox>
+          </BtnBox>
+        </TopBox>
+      </TopWrap>
     </Backround>
   );
 }

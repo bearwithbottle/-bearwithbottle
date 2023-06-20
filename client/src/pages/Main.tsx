@@ -1,33 +1,14 @@
-import {
-  MainBox,
-  MainText,
-  MainBtnBox,
-  MainGoogleLogo,
-  MainGoogleBox,
-  MainGoogleSpan,
-  MainGoogleWrap,
-  MainFacebookLogo,
-  MainFacebookSpan,
-  MainFacebookWrap,
-  MainFacebookBox,
-} from "../styles/main";
+import { MainBox, MainText, MainBtnBox } from "../styles/main";
+import GoogleBtn from "../components/main/GoogleBtn";
+import FacaBookBtn from "../components/main/FacaBookBtn";
+
 function Main() {
   return (
     <MainBox>
       <MainText />
       <MainBtnBox>
-        <MainGoogleBox href="/">
-          <MainGoogleWrap>
-            <MainGoogleLogo />
-            <MainGoogleSpan>Google 계정으로 시작</MainGoogleSpan>
-          </MainGoogleWrap>
-        </MainGoogleBox>
-        <MainFacebookBox href="/">
-          <MainFacebookWrap>
-            <MainFacebookLogo />
-            <MainFacebookSpan>페이스북으로 시작하기</MainFacebookSpan>
-          </MainFacebookWrap>
-        </MainFacebookBox>
+        <GoogleBtn />
+        <FacaBookBtn />
       </MainBtnBox>
     </MainBox>
   );
