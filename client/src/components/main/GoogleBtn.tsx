@@ -3,7 +3,7 @@ import {
   MainGoogleWrap,
   MainGoogleLogo,
   MainGoogleSpan,
-} from "../../styles/btn/googlebtn";
+} from "../../styles/mainbtn/googlebtn";
 
 function GoogleBtn() {
   return (

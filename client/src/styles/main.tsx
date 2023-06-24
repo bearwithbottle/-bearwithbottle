@@ -32,6 +32,6 @@ export const MainBtnBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 312px;
-  height: 122px;
-  margin-bottom: 94px;
+  height: 191px;
+  margin-bottom: 50px;
 `;

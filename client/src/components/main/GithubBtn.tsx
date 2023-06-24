@@ -3,14 +3,14 @@ import {
   MainGithubWrap,
   MainGithubLogo,
   MainGithubSpan,
-} from "../../styles/btn/githubbtn";
+} from "../../styles/mainbtn/githubbtn";
 
 function GithubBtn() {
   return (
     <MainGithubBox>
       <MainGithubWrap>
         <MainGithubLogo />
-        <MainGithubSpan>깃허브 계정으로 시작</MainGithubSpan>
+        <MainGithubSpan>Github 계정으로 시작</MainGithubSpan>
       </MainGithubWrap>
     </MainGithubBox>
   );

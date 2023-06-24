@@ -8,6 +8,7 @@ export const MainGoogleBox = styled.a`
   height: 53px;
   background-color: #ae4213;
   border-radius: 10px;
+  cursor: pointer;
 `;
 export const MainGoogleWrap = styled.div`
   width: 312px;

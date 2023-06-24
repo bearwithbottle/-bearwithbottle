@@ -4,7 +4,7 @@ import InfoStart from "./pages/InfoStart";
 function App() {
   return (
     <>
-      <Main />
+      <InfoStart />
     </>
   );
 }

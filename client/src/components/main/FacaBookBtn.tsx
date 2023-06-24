@@ -3,7 +3,7 @@ import {
   MainFacebookWrap,
   MainFacebookLogo,
   MainFacebookSpan,
-} from "../../styles/btn/facebookbtn";
+} from "../../styles/mainbtn/facebookbtn";
 
 function FacaBookBtn() {
   return (

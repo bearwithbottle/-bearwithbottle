@@ -8,6 +8,7 @@ export const MainFacebookBox = styled.a`
   height: 53px;
   background-color: #31498b;
   border-radius: 10px;
+  cursor: pointer;
 `;
 export const MainFacebookWrap = styled.div`
   width: 312px;

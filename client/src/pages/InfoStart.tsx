@@ -1,50 +1,47 @@
 import {
-  Backround,
-  PreBtnBox,
-  PreBtnSpan,
-  TopBox,
-  TopTextBox,
-  TopText,
-  CircleBox,
-  Circle,
-  CircleT,
-  BtnBox,
-  YesBtnBox,
-  NoBtnBox,
-  YesBtn,
-  NoBtn,
-  TopWrap,
+  InfoBox,
+  InfoNameText,
+  InfoCircleWarp,
+  InfoBoxWrap,
+  InfoCircle,
+  NameWrap,
+  NameBox,
+  InfoContainer,
 } from "../styles/info/infostart";
-import { IoIosArrowBack } from "react-icons/io";
-
+import PreBtn from "../components/infostart/PreBtn";
+import NextBtn from "../components/infostart/NextBtn";
+import NextSubmitBtn from "../components/infostart/NextSubmitBtn";
+import { useState } from "react";
 function InfoStart() {
+  const [NameValue, SetNameValue] = useState("");
+  const handleSearchInputChange = (e: any) => {
+    SetNameValue(e.target.value);
+    console.log(e.target.value);
+  };
   return (
-    <Backround>
-      <TopWrap>
-        <PreBtnBox>
-          <IoIosArrowBack className="PreBtn" />
-          <PreBtnSpan>이전으로</PreBtnSpan>
-        </PreBtnBox>
-        <TopBox>
-          <TopTextBox>
-            <TopText>당신은 성인 입니까?</TopText>
-            <CircleBox>
-              <CircleT />
-              <Circle />
-              <Circle />
-            </CircleBox>
-          </TopTextBox>
-          <BtnBox>
-            <YesBtnBox>
-              <YesBtn>Yes</YesBtn>
-            </YesBtnBox>
-            <NoBtnBox>
-              <NoBtn>No</NoBtn>
-            </NoBtnBox>
-          </BtnBox>
-        </TopBox>
-      </TopWrap>
-    </Backround>
+    <InfoContainer>
+      <InfoBox>
+        <PreBtn />
+        <InfoBoxWrap>
+          <InfoNameText>당신의 이름을 작성해 주세요</InfoNameText>
+          <InfoCircleWarp>
+            <InfoCircle />
+            <InfoCircle />
+            <InfoCircle />
+          </InfoCircleWarp>
+          <NameWrap>
+            <NameBox
+              onChange={handleSearchInputChange}
+              maxLength={10}
+              placeholder="닉네임을 적어라 입력하세요. (10자 이하)"
+            />
+          </NameWrap>
+          <div>*샬라샬라 해주세여.</div>
+        </InfoBoxWrap>
+      </InfoBox>
+      {/* <NextBtn /> */}
+      <NextSubmitBtn />
+    </InfoContainer>
   );
 }
 
