@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 
 export const InfoPreBox = styled.div`
   justify-content: flex-start;
-  margin-left: 22.5px;
   margin-bottom: 41px;
 `;
 export const InfoPreWrap = styled.div`
