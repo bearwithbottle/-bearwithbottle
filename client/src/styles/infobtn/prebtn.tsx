@@ -1,8 +1,10 @@
 import { styled } from "styled-components";
 
 export const InfoPreBox = styled.div`
+  width: 360px;
+  height: 57px;
+  margin-left: 20px;
   justify-content: flex-start;
-  margin-bottom: 41px;
 `;
 export const InfoPreWrap = styled.div`
   align-items: center;

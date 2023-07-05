@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import info from "../../assets/main/Frame 283.png";
+import info from "../../assets/main/Frame_288.png";
 export const ModalBox = styled.div``;
 
 export const ModalContainer = styled.div`

@@ -14,6 +14,7 @@ import PreBtn from "../components/infostart/PreBtn";
 import NextBtn from "../components/infostart/NextBtn";
 import NextSubmitBtn from "../components/infostart/NextSubmitBtn";
 import { useState } from "react";
+
 function InfoStart() {
   const [NameValue, SetNameValue] = useState("");
   const [isInfoModalVisible, setInfoModalVisible] = useState(true);
@@ -21,7 +22,6 @@ function InfoStart() {
 
   const handleSearchInputChange = (e: any) => {
     SetNameValue(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleInfoModalClose = () => {
@@ -36,8 +36,17 @@ function InfoStart() {
     setInfoNextModalVisible(false);
   };
   const handleCopyLink = () => {
-    // 링크 복사 동작을 수행하는 코드 작성
+    copyToClipboard("https://www.youtube.com/watch?v=ApXoWvfEYVU");
   };
+  const copyToClipboard = (text: any) => {
+    const el = document.createElement("textarea");
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+  };
+
   return (
     <InfoContainer>
       <InfoBox>

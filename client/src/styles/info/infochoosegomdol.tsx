@@ -1,33 +1,38 @@
 import { styled } from "styled-components";
 import "../../assets/font/font.css";
 import back from "../../assets/main/BG_feature.png";
-export const InfoContainer = styled.div`
+
+export const GomdolContainer = styled.div`
   width: 360px;
   height: 800px;
-  align-items: center;
-  justify-content: space-between;
   flex-direction: column;
   background-image: url(${back});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  align-items: center;
   font-family: "ImcreSoojin";
 `;
-export const InfoBox = styled.div`
-  margin-top: 31px;
-  flex-direction: column;
-`;
-
-export const InfoBoxWrap = styled.div`
-  margin-top: 41px;
+export const GomdolWarp = styled.div`
+  height: 550px;
+  width: 360px;
+  margin-bottom: 62px;
   flex-direction: column;
   align-items: center;
-`;
-export const InfoNameText = styled.span`
-  font-size: 22px;
-  color: #ffff;
+  background-color: red;
 `;
 
+export const PreWrap = styled.div`
+  height: 103px;
+  align-items: center;
+  background-color: yellow;
+`;
+
+export const GomdolText = styled.div`
+  font-size: 18px;
+  margin-top: 20px;
+  color: #fff;
+`;
 export const InfoCircleWarp = styled.div`
   margin: 26.5px 0 31px 0;
   width: 38px;
@@ -41,21 +46,15 @@ export const InfoCircle = styled.div`
   background-color: #4d5055;
 `;
 
-export const NameWrap = styled.div`
+export const GomdolgChoose = styled.div`
   width: 312px;
-  height: 64px;
-  background-color: #afafaf;
+  height: 317px;
   border-radius: 16px;
+  background-color: yellow;
 `;
-
-export const NameBox = styled.input`
-  font-size: 14px;
-  font-family: "ImcreSoojin";
-  padding: 20px 30px;
+export const GomdolgChooseImg = styled.div`
   width: 312px;
-  height: 59px;
-  background-color: #ffff;
+  height: 312px;
   border-radius: 16px;
-  border: none;
-  outline: none;
+  background-color: black;
 `;
