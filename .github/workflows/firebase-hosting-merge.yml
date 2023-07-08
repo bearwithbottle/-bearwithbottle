@@ -15,14 +15,14 @@ jobs:
       - uses: actions/checkout@v3
       - name: Generate .env file
         run: |
-          echo "API_KEY=${{secrets.API_KEY}}" >> client/.env
-          echo "AUTH_DOMAIN=${{secrets.AUTH_DOMAIN}}" >> client/.env
-          echo "PROJECT_ID=${{secrets.PROJECT_ID}}" >> client/.env
-          echo "STORAGE_BUCKET=${{secrets.STORAGE_BUCKET}}" >> client/.env
-          echo "MESSAGING_SENSER_ID=${{secrets.MESSAGING_SENSER_ID}}" >> client/.env
-          echo "APP_ID=${{secrets.APP_ID}}" >> client/.env
-          echo "MEASUREMENT_ID=${{secrets.MEASUREMENT_ID}}" >> client/.env
-          echo "STORAGE_URL=${{secrets.STORAGE_URL}}" >> client/.env
+          echo "API_KEY=$API_KEY" >> client/.env
+          echo "AUTH_DOMAIN=$AUTH_DOMAIN" >> client/.env
+          echo "PROJECT_ID=$PROJECT_ID" >> client/.env
+          echo "STORAGE_BUCKET=$STORAGE_BUCKET" >> client/.env
+          echo "MESSAGING_SENSER_ID=$MESSAGING_SENSER_ID" >> client/.env
+          echo "APP_ID=$APP_ID" >> client/.env
+          echo "MEASUREMENT_ID=$MEASUREMENT_ID" >> client/.env
+          echo "STORAGE_URL=$STORAGE_URL" >> client/.env
         env: 
           API_KEY : '${{ secrets.API_KEY }}'
           AUTH_DOMAIN : '${{ secrets.AUTH_DOMAIN }}'
@@ -32,7 +32,9 @@ jobs:
           APP_ID : '${{ secrets.APP_ID }}'
           MEASUREMENT_ID : '${{ secrets.MEASUREMENT_ID }}'
           STORAGE_URL : '${{ secrets.STORAGE_URL }}'
-      - run: npm ci && npm run build
+      - run: |
+          cd client
+          npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
