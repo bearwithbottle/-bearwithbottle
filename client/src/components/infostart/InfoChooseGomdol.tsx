@@ -10,6 +10,8 @@ import {
 } from "../../styles/info/infochoosegomdol";
 import PreBtn from "./PreBtn";
 import NextSubmitBtn from "./NextSubmitBtn";
+import { Link } from "react-router-dom";
+
 function InfoChooseGomdol() {
   return (
     <GomdolContainer>
@@ -27,7 +29,9 @@ function InfoChooseGomdol() {
           <GomdolgChooseImg />
         </GomdolgChoose>
       </GomdolWarp>
-      <NextSubmitBtn />
+      <Link to="/bar">
+        <NextSubmitBtn />
+      </Link>
     </GomdolContainer>
   );
 }

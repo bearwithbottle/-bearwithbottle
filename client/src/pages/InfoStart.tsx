@@ -14,6 +14,7 @@ import PreBtn from "../components/infostart/PreBtn";
 import NextBtn from "../components/infostart/NextBtn";
 import NextSubmitBtn from "../components/infostart/NextSubmitBtn";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function InfoStart() {
   const [NameValue, SetNameValue] = useState("");
@@ -80,7 +81,13 @@ function InfoStart() {
           </NameWrap>
         </InfoBoxWrap>
       </InfoBox>
-      {NameValue === "" ? <NextBtn /> : <NextSubmitBtn />}
+      {NameValue === "" ? (
+        <NextBtn />
+      ) : (
+        <Link to="/Info-choose-gomdol">
+          <NextSubmitBtn />
+        </Link>
+      )}
     </InfoContainer>
   );
 }

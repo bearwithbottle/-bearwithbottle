@@ -11,6 +11,7 @@ import {
   YesBtnBox,
   YesSubBtnBox,
 } from "../../styles/info/infonextmodal";
+import { useNavigate } from "react-router-dom";
 
 interface InfoNextModalProps {
   onClose: () => void;
@@ -18,9 +19,11 @@ interface InfoNextModalProps {
 }
 
 function InfoNextModal({ onClose, onCopyLink }: InfoNextModalProps) {
+  const navigate = useNavigate();
   const handleYesButtonClick = () => {
     onCopyLink();
     onClose();
+    navigate("/");
   };
 
   return (
