@@ -64,7 +64,6 @@ export const BarDisplay = styled.div`
   margin: 35px 0;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
 `;
 export const Title = styled.div`
   width: 360px;
@@ -107,5 +106,6 @@ export const MidGom = styled.div`
 export const BtnBox = styled.div`
   width: 312px;
   height: 186px;
-  background-color: yellow;
+  flex-direction: column;
+  justify-content: space-between;
 `;

@@ -13,6 +13,9 @@ import {
   BtnBox,
 } from "../styles/mainbar";
 import { useState, useEffect } from "react";
+import ShareBtn from "../components/btn/ShareBtn";
+import Refrigerator from "../components/btn/Refrigerator";
+import ChangeName from "../components/btn/ChangeName";
 function MainPage() {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,7 +43,11 @@ function MainPage() {
               </TextPongBox>
               <MidGom />
             </MidBox>
-            <BtnBox></BtnBox>
+            <BtnBox>
+              <ShareBtn />
+              <Refrigerator />
+              <ChangeName />
+            </BtnBox>
           </BarDisplay>
         </BarMainBox>
       ) : (
