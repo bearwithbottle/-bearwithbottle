@@ -1,14 +1,12 @@
-//firebase.js
 import firebase from "firebase/compat/app";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import "firebase/compat/firestore";
-
 const firebaseConfig = {};
+const provider = new GoogleAuthProvider();
 
-// firebaseConfig 정보로 firebase 시작
 firebase.initializeApp(firebaseConfig);
 
-// firebase의 firestore 인스턴스를 변수에 저장
-const firestore = firebase.firestore();
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-// 필요한 곳에서 사용할 수 있도록 내보내기
-export { firestore };
+const db = firebaseApp.firestore();
+export { db, provider };

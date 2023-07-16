@@ -95,10 +95,11 @@ export const TextPongContents = styled.div`
   background-color: #f2f2f2;
   line-height: 23px;
 `;
-export const MidGom = styled.div`
+export const MidGom = styled.div<{ image: string }>`
   width: 234px;
   height: 200px;
-  background-image: url(${gom});
+  /* background-image: url(${gom}); */
+  ${(props) => props.image && `background-image: url(${props.image});`}
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

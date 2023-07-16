@@ -15,14 +15,23 @@ import NextBtn from "../components/infostart/NextBtn";
 import NextSubmitBtn from "../components/infostart/NextSubmitBtn";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+//Redux
+import { useDispatch } from "react-redux";
+import { setName } from "../action";
 
 function InfoStart() {
   const [NameValue, SetNameValue] = useState("");
   const [isInfoModalVisible, setInfoModalVisible] = useState(true);
   const [isInfoNextModalVisible, setInfoNextModalVisible] = useState(false);
 
+  const dispatch = useDispatch();
+  //value
   const handleSearchInputChange = (e: any) => {
     SetNameValue(e.target.value);
+  };
+  //savename
+  const handleSaveName = () => {
+    dispatch(setName(NameValue));
   };
 
   const handleInfoModalClose = () => {
@@ -84,7 +93,7 @@ function InfoStart() {
       {NameValue === "" ? (
         <NextBtn />
       ) : (
-        <Link to="/Info-choose-gomdol">
+        <Link to="/Info-choose-gomdol" onClick={handleSaveName}>
           <NextSubmitBtn />
         </Link>
       )}

@@ -28,6 +28,7 @@ export const RefrigeratorBox = styled.div`
   &:active {
     ${RefrigeratorWrap} {
       background-color: #6659af;
+      color: #fff;
     }
   }
 `;

@@ -16,8 +16,12 @@ import { useState, useEffect } from "react";
 import ShareBtn from "../components/btn/ShareBtn";
 import Refrigerator from "../components/btn/Refrigerator";
 import ChangeName from "../components/btn/ChangeName";
+import { useSelector } from "react-redux";
+
 function MainPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const name = useSelector((state: { name: string }) => state.name);
+  const image = useSelector((state: { image: string }) => state.image);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -36,12 +40,12 @@ function MainPage() {
             <MidBox>
               <TextPongBox>
                 <TextPongContents>
-                  블라블라님 안녕하십니까?
+                  {name}님 안녕하십니까?
                   <br />
                   자신의 Bar를 홍보 해보시죠.
                 </TextPongContents>
               </TextPongBox>
-              <MidGom />
+              <MidGom image={image} />
             </MidBox>
             <BtnBox>
               <ShareBtn />

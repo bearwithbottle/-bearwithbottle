@@ -5,6 +5,10 @@ import {
   MainGoogleSpan,
 } from "../../styles/mainbtn/googlebtn";
 
+interface GoogleBtnProps {
+  onClick: () => void;
+}
+
 function GoogleBtn() {
   return (
     <MainGoogleBox>
