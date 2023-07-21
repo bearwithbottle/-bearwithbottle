@@ -2,16 +2,14 @@ import { MainBox, MainText, MainBtnBox } from "../styles/main";
 import GoogleBtn from "../components/main/GoogleBtn";
 import FacaBookBtn from "../components/main/FacaBookBtn";
 import GithubBtn from "../components/main/GithubBtn";
-import { Link } from "react-router-dom";
-
+import { db } from "../config";
 function Main() {
+  console.log(db);
   return (
     <MainBox>
       <MainText />
       <MainBtnBox>
-        <Link to="/info-start">
-          <GoogleBtn />
-        </Link>
+        <GoogleBtn />
         <FacaBookBtn />
         <GithubBtn />
       </MainBtnBox>
