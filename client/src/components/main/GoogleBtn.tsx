@@ -4,23 +4,16 @@ import {
   MainGoogleLogo,
   MainGoogleSpan,
 } from "../../styles/mainbtn/googlebtn";
-import { auth, provider } from "../../config";
+import { auth, providerGoogle } from "../../config";
 import { signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-interface User {
-  uid: string;
-  email: string;
-  photoURL?: string;
-  displayName?: string;
-}
 
 function GoogleBtn() {
   const [value, setValue] = useState("");
 
   const handleGoogle = () => {
-    signInWithPopup(auth, provider)
+    signInWithPopup(auth, providerGoogle)
       .then((data) => {
         const user = data.user;
         const email = user.email;
@@ -30,7 +23,7 @@ function GoogleBtn() {
         localStorage.setItem("email", email || "");
       })
       .catch((error) => {
-        console.log("Google Sign-in Error:", error);
+        console.log("Google:", error);
       });
   };
 
