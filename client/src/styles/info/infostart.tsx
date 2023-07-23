@@ -1,110 +1,61 @@
 import { styled } from "styled-components";
 import "../../assets/font/font.css";
 import back from "../../assets/main/BG_feature.png";
-
-export const Backround = styled.div`
+export const InfoContainer = styled.div`
   width: 360px;
   height: 800px;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
   background-image: url(${back});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   font-family: "ImcreSoojin";
-  flex-direction: column;
 `;
-export const TopWrap = styled.div`
+export const InfoBox = styled.div`
+  margin-top: 31px;
   flex-direction: column;
-`;
-export const TopBox = styled.div`
-  flex-direction: column;
-  align-items: center;
-`;
-export const PreBtnBox = styled.div`
-  align-items: center;
-  justify-content: flex-start;
-  color: #909195;
-  :hover {
-    cursor: pointer;
-  }
-  .PreBtn {
-    width: 35px;
-    height: 35px;
-  }
 `;
 
-export const PreBtnSpan = styled.span`
-  font-size: 18px;
-`;
-
-export const TopTextBox = styled.div`
+export const InfoBoxWrap = styled.div`
+  margin-top: 41px;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
-
-export const TopText = styled.span`
-  font-size: 20px;
-  align-items: center;
-  height: 64px;
+export const InfoNameText = styled.span`
+  font-size: 22px;
   color: #ffff;
 `;
-export const CircleBox = styled.div`
+
+export const InfoCircleWarp = styled.div`
+  margin: 26.5px 0 31px 0;
   width: 38px;
+  height: 6px;
   justify-content: space-between;
 `;
-
-export const Circle = styled.div`
-  width: 5px;
-  height: 5px;
+export const InfoCircle = styled.div`
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background-color: #4d5055;
 `;
-export const CircleT = styled.div`
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: #909195;
-`;
 
-export const BtnBox = styled.div`
-  margin-top: 31px;
+export const NameWrap = styled.div`
   width: 312px;
-  height: 53px;
-  justify-content: space-between;
+  height: 64px;
+  background-color: #afafaf;
+  border-radius: 16px;
 `;
 
-export const YesBtnBox = styled.div`
-  width: 150px;
-  height: 53px;
-  border-radius: 10px;
-  background-color: #969696;
-  :hover {
-    color: #ffff;
-    background-color: #9381ff;
-  }
-`;
-
-export const YesBtn = styled.div`
-  height: 48px;
-  width: 100%;
-  border-radius: 10px;
-  align-items: center;
-  background-color: #c6c6c6;
-  :hover {
-    background-color: #9381ff;
-  }
-`;
-export const NoBtnBox = styled.div`
-  width: 150px;
-  height: 53px;
-  border-radius: 10px;
-  background-color: #969696;
-`;
-
-export const NoBtn = styled.div`
-  height: 48px;
-  width: 100%;
-  border-radius: 10px;
-  align-items: center;
-  background-color: #c6c6c6;
+export const NameBox = styled.input`
+  font-size: 14px;
+  font-family: "ImcreSoojin";
+  padding: 20px 30px;
+  width: 312px;
+  height: 59px;
+  background-color: #ffff;
+  border-radius: 16px;
+  border: none;
+  outline: none;
 `;
