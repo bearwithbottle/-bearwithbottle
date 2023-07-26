@@ -1,16 +1,16 @@
-import { MainBox, MainText, MainBtnBox } from "../styles/main";
-import GoogleBtn from "../components/main/GoogleBtn";
-import FacaBookBtn from "../components/main/FacaBookBtn";
-import GithubBtn from "../components/main/GithubBtn";
+import { MainBox, MainText, MainBtnBox } from '../styles/main';
+import GoogleBtn from '../components/main/GoogleBtn';
+import FacaBookBtn from '../components/main/FacaBookBtn';
+import GithubBtn from '../components/main/GithubBtn';
 
-import { ref, onValue } from "firebase/database";
-import { useEffect } from "react";
+import { ref, onValue } from 'firebase/database';
+import { useEffect } from 'react';
 
-import { database } from "../config";
+import { database } from '../config';
 
 function Main() {
   useEffect(() => {
-    const usersRef = ref(database, "users");
+    const usersRef = ref(database, 'users');
     console.log(usersRef);
 
     onValue(usersRef, (snapshot) => {

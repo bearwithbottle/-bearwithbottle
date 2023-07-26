@@ -10,8 +10,6 @@ import { auth, providerGoogle, db } from '../../config';
 import { signInWithPopup } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 
-import { Link } from 'react-router-dom';
-
 function GoogleBtn() {
   const handleGoogle = () => {
     signInWithPopup(auth, providerGoogle)
