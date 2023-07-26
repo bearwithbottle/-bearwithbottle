@@ -3,26 +3,20 @@ import {
   MainFacebookWrap,
   MainFacebookLogo,
   MainFacebookSpan,
-} from "../../styles/mainbtn/facebookbtn";
-import { auth, providerFacebook } from "../../config";
-import { signInWithPopup } from "firebase/auth";
-import { useState } from "react";
+} from '../../styles/mainbtn/facebookbtn';
+import { auth, providerFacebook } from '../../config';
+import { signInWithPopup } from 'firebase/auth';
 
 function FacaBookBtn() {
-  const [value, setValue] = useState("");
-
   const handleFacebook = () => {
     signInWithPopup(auth, providerFacebook)
       .then((data) => {
-        const user = data.user;
-        const email = user.email;
+        const uid = data.user.uid;
 
-        setValue(email || "");
-
-        localStorage.setItem("email", email || "");
+        localStorage.setItem('uid', uid || '');
       })
       .catch((error) => {
-        console.log("Facebook:", error);
+        console.log('Facebook:', error);
       });
   };
   return (

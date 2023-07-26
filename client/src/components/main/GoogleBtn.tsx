@@ -3,27 +3,28 @@ import {
   MainGoogleWrap,
   MainGoogleLogo,
   MainGoogleSpan,
-} from "../../styles/mainbtn/googlebtn";
-import { auth, providerGoogle } from "../../config";
-import { signInWithPopup } from "firebase/auth";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+} from '../../styles/mainbtn/googlebtn';
+
+//firebase
+import { auth, providerGoogle, db } from '../../config';
+import { signInWithPopup } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+
+import { Link } from 'react-router-dom';
 
 function GoogleBtn() {
-  const [value, setValue] = useState("");
-
   const handleGoogle = () => {
     signInWithPopup(auth, providerGoogle)
-      .then((data) => {
-        const user = data.user;
-        const email = user.email;
+      .then(async (data) => {
+        const uid = data.user.uid;
+        await setDoc(doc(db, 'users', uid), {
+          name: '김찬희',
+        });
 
-        setValue(email || "");
-
-        localStorage.setItem("email", email || "");
+        localStorage.setItem('uid', uid || '');
       })
       .catch((error) => {
-        console.log("Google:", error);
+        console.log('Google:', error);
       });
   };
 

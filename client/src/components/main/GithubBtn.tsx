@@ -6,20 +6,14 @@ import {
 } from "../../styles/mainbtn/githubbtn";
 import { auth, providerGithub } from "../../config";
 import { signInWithPopup } from "firebase/auth";
-import { useState } from "react";
 
 function GithubBtn() {
-  const [value, setValue] = useState("");
-
   const handleGithub = () => {
     signInWithPopup(auth, providerGithub)
       .then((data) => {
-        const user = data.user;
-        const email = user.email;
+        const uid = data.user.uid;
 
-        setValue(email || "");
-
-        localStorage.setItem("email", email || "");
+        localStorage.setItem("uid", uid || "");
       })
       .catch((error) => {
         console.log("Github:", error);
