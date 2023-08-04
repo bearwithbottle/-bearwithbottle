@@ -18,10 +18,13 @@ import {
 } from "../../styles/info/infochoosegomdol";
 import PreBtn from "./PreBtn";
 import NextSubmitBtn from "./NextSubmitBtn";
+
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+
 import { setImage } from "../../action";
+import { getImageUrl } from "../../config";
 import gomone from "../../assets/info/gomone.png";
 import gomtwo from "../../assets/info/gomtwo.png";
 import gomthree from "../../assets/info/gomthree.png";
@@ -29,7 +32,20 @@ function InfoChooseGomdol() {
   const [isOne, setIsOne] = useState(true);
   const [isTwo, setIsTwo] = useState(false);
   const [isThree, setIsThress] = useState(false);
+  //img
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   getImageUrl("gomdol1.png")
+  //     .then((url) => {
+  //       setImageUrl(url);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }, []);
 
   const handleOne = () => {
     setIsOne(true);

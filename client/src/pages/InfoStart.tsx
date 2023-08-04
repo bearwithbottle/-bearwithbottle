@@ -19,11 +19,15 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setName } from "../action";
 
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../config";
+
 function InfoStart() {
   const [NameValue, SetNameValue] = useState("");
   const [isInfoModalVisible, setInfoModalVisible] = useState(true);
   const [isInfoNextModalVisible, setInfoNextModalVisible] = useState(false);
 
+  const uid = localStorage.getItem("uid");
   const dispatch = useDispatch();
   //value
   const handleSearchInputChange = (e: any) => {
@@ -32,6 +36,13 @@ function InfoStart() {
   //savename
   const handleSaveName = () => {
     dispatch(setName(NameValue));
+    if (uid) {
+      const updatename = async () => {
+        await setDoc(doc(db, "users", uid), {
+          name: NameValue,
+        });
+      };
+    }
   };
 
   const handleInfoModalClose = () => {
@@ -74,7 +85,11 @@ function InfoStart() {
         )}
         <PreBtn />
         <InfoBoxWrap>
-          <InfoNameText>당신의 이름을 작성해 주세요</InfoNameText>
+          <InfoNameText>
+            만나서 반갑습니다.
+            <br />
+            당신의 성함을 알려주세요.
+          </InfoNameText>
           <InfoCircleWarp>
             <InfoCircle />
             <InfoCircle />

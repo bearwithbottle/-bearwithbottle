@@ -26,6 +26,8 @@ export const InfoBoxWrap = styled.div`
 export const InfoNameText = styled.span`
   font-size: 22px;
   color: #ffff;
+  text-align: center;
+  line-height: 30px;
 `;
 
 export const InfoCircleWarp = styled.div`

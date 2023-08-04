@@ -3,26 +3,30 @@ import {
   MainGoogleWrap,
   MainGoogleLogo,
   MainGoogleSpan,
-} from '../../styles/mainbtn/googlebtn';
+} from "../../styles/mainbtn/googlebtn";
 
 //firebase
-import { auth, providerGoogle, db } from '../../config';
-import { signInWithPopup } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { auth, providerGoogle, db } from "../../config";
+import { signInWithPopup } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+
+import { useNavigate } from "react-router-dom";
 
 function GoogleBtn() {
+  const navigate = useNavigate();
   const handleGoogle = () => {
     signInWithPopup(auth, providerGoogle)
       .then(async (data) => {
         const uid = data.user.uid;
-        await setDoc(doc(db, 'users', uid), {
-          name: '김찬희',
+        await setDoc(doc(db, "users", uid), {
+          name: "김찬희",
         });
 
-        localStorage.setItem('uid', uid || '');
+        localStorage.setItem("uid", uid || "");
+        navigate("/info-start");
       })
       .catch((error) => {
-        console.log('Google:', error);
+        console.log("Google:", error);
       });
   };
 
