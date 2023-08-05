@@ -7,7 +7,8 @@ import {
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBVVl2DxQswWw5F1MKzjl7tgoS1j6dUfGM",
@@ -26,17 +27,6 @@ const providerFacebook = new FacebookAuthProvider();
 const providerGithub = new GithubAuthProvider();
 const db = getFirestore(app);
 const storage = getStorage(app);
-
-export async function getImageUrl(imageName: string) {
-  const storageRef = ref(storage, imageName);
-  try {
-    const url = await getDownloadURL(storageRef);
-    return url;
-  } catch (error) {
-    console.error("Error fetching image:", error);
-    return null;
-  }
-}
 
 export {
   auth,

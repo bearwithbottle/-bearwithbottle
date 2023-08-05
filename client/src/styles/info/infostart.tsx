@@ -55,7 +55,7 @@ export const NameBox = styled.input`
   font-family: "ImcreSoojin";
   padding: 20px 30px;
   width: 312px;
-  height: 59px;
+  height: 20px;
   background-color: #ffff;
   border-radius: 16px;
   border: none;
