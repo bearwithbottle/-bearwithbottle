@@ -2,15 +2,13 @@ import {
   NextSubBtnBox,
   NextSubBtnWrap,
   NextSubBtnDot,
-} from "../../styles/infobtn/nextsubmitbtn";
-
+} from "../../styles/infobtn/nextsubmitbtntwo";
 interface NextSubmitBtnProps {
-  handleGomSubmit: () => void;
+  handleSaveName: () => void;
 }
-
-function NextSubmitBtn({ handleGomSubmit }: NextSubmitBtnProps) {
+function NextSubmitBtnTwo({ handleSaveName }: NextSubmitBtnProps) {
   return (
-    <NextSubBtnBox onClick={handleGomSubmit}>
+    <NextSubBtnBox onClick={handleSaveName}>
       <NextSubBtnWrap>
         <NextSubBtnDot>다음으로</NextSubBtnDot>
       </NextSubBtnWrap>
@@ -18,4 +16,4 @@ function NextSubmitBtn({ handleGomSubmit }: NextSubmitBtnProps) {
   );
 }
 
-export default NextSubmitBtn;
+export default NextSubmitBtnTwo;

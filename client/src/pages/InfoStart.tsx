@@ -12,9 +12,9 @@ import InfoNextModal from "../components/infostart/InfoNextModal";
 import InfoModal from "../components/infostart/InfoModal";
 import PreBtn from "../components/infostart/PreBtn";
 import NextBtn from "../components/infostart/NextBtn";
-import NextSubmitBtn from "../components/infostart/NextSubmitBtn";
+import NextSubmitBtnTwo from "../components/infostart/NextSubmitBtnTwo";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //Redux
 import { useDispatch } from "react-redux";
 import { setName } from "../action";
@@ -26,22 +26,26 @@ function InfoStart() {
   const [NameValue, SetNameValue] = useState("");
   const [isInfoModalVisible, setInfoModalVisible] = useState(true);
   const [isInfoNextModalVisible, setInfoNextModalVisible] = useState(false);
-
-  const uid = localStorage.getItem("uid");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   //value
   const handleSearchInputChange = (e: any) => {
     SetNameValue(e.target.value);
   };
   //savename
-  const handleSaveName = () => {
+  const handleSaveName = async () => {
     dispatch(setName(NameValue));
-    if (uid) {
-      const updatename = async () => {
-        await setDoc(doc(db, "users", uid), {
+    try {
+      const uid = localStorage.getItem("uid");
+      if (uid) {
+        const userDocRef = doc(db, "users", uid);
+        await setDoc(userDocRef, {
           name: NameValue,
         });
-      };
+        navigate("/Info-choose-gomdol");
+      }
+    } catch (error) {
+      console.error("ErrorImg:", error);
     }
   };
 
@@ -108,9 +112,7 @@ function InfoStart() {
       {NameValue === "" ? (
         <NextBtn />
       ) : (
-        <Link to="/Info-choose-gomdol" onClick={handleSaveName}>
-          <NextSubmitBtn />
-        </Link>
+        <NextSubmitBtnTwo handleSaveName={handleSaveName} />
       )}
     </InfoContainer>
   );

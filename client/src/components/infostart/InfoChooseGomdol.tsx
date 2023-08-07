@@ -23,16 +23,13 @@ import {
 import PreBtn from "./PreBtn";
 import NextSubmitBtn from "./NextSubmitBtn";
 
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setImage } from "../../action";
-import { storage } from "../../config";
+import { storage, db } from "../../config";
 import { ref, getDownloadURL } from "firebase/storage";
-import gomone from "../../assets/info/gomone.png";
-import gomtwo from "../../assets/info/gomtwo.png";
-import gomthree from "../../assets/info/gomthree.png";
+import { setDoc, doc, updateDoc } from "firebase/firestore";
 function InfoChooseGomdol() {
   const [isOne, setIsOne] = useState(true);
   const [isTwo, setIsTwo] = useState(false);
@@ -40,12 +37,14 @@ function InfoChooseGomdol() {
   const [isFour, setIsFour] = useState(false);
   const [isFive, setIsFive] = useState(false);
   //img
-  const [oneUrl, setOneUrl] = useState<string | null>(null);
-  const [twoUrl, setTwoUrl] = useState<string | null>(null);
-  const [threeUrl, setThreeUrl] = useState<string | null>(null);
-  const [FourUrl, setFourUrl] = useState<string | null>(null);
-  const [FiveUrl, setFiveUrl] = useState<string | null>(null);
+  const [oneUrl, setOneUrl] = useState<string>("");
+  const [twoUrl, setTwoUrl] = useState<string>("");
+  const [threeUrl, setThreeUrl] = useState<string>("");
+  const [FourUrl, setFourUrl] = useState<string>("");
+  const [FiveUrl, setFiveUrl] = useState<string>("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const selector = useSelector((state: any) => state.image);
   useEffect(() => {
     const getImageUrl = async (imageName: string, setUrl: any) => {
       try {
@@ -70,7 +69,7 @@ function InfoChooseGomdol() {
     setIsThress(false);
     setIsFour(false);
     setIsFive(false);
-    dispatch(setImage(gomone));
+    dispatch(setImage(oneUrl));
   };
 
   const handleTwo = () => {
@@ -79,7 +78,7 @@ function InfoChooseGomdol() {
     setIsThress(false);
     setIsFour(false);
     setIsFive(false);
-    dispatch(setImage(gomtwo));
+    dispatch(setImage(twoUrl));
   };
 
   const handleThree = () => {
@@ -88,7 +87,7 @@ function InfoChooseGomdol() {
     setIsThress(true);
     setIsFour(false);
     setIsFive(false);
-    dispatch(setImage(gomthree));
+    dispatch(setImage(threeUrl));
   };
   const handleFour = () => {
     setIsOne(false);
@@ -96,6 +95,7 @@ function InfoChooseGomdol() {
     setIsThress(false);
     setIsFour(true);
     setIsFive(false);
+    dispatch(setImage(FourUrl));
   };
   const handleFive = () => {
     setIsOne(false);
@@ -103,7 +103,24 @@ function InfoChooseGomdol() {
     setIsThress(false);
     setIsFour(false);
     setIsFive(true);
+    dispatch(setImage(FiveUrl));
   };
+  const handleGomSubmit = async () => {
+    try {
+      // 로컬 스토리지에서 uid 값을 가져오기
+      const uid = localStorage.getItem("uid");
+      if (uid) {
+        const userDocRef = doc(db, "users", uid);
+        await updateDoc(userDocRef, {
+          img: selector,
+        });
+        navigate("/bar");
+      }
+    } catch (error) {
+      console.error("ErrorImg:", error);
+    }
+  };
+
   return (
     <GomdolContainer>
       <PreWrap>
@@ -146,9 +163,7 @@ function InfoChooseGomdol() {
           <ChooseContentsFive FiveUrl={FiveUrl} />
         </ChooseContentsFiveBox>
       </ChooseBox>
-      <Link to="/bar">
-        <NextSubmitBtn />
-      </Link>
+      <NextSubmitBtn handleGomSubmit={handleGomSubmit} />
     </GomdolContainer>
   );
 }

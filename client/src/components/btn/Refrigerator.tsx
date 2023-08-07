@@ -3,10 +3,12 @@ import {
   RefrigeratorWrap,
   RefrigeratorDot,
 } from "../../styles/mainbtn/refrigerator";
-
-function Refrigerator() {
+interface handlemodal {
+  handlemodal: () => void;
+}
+function Refrigerator({ handlemodal }: handlemodal) {
   return (
-    <RefrigeratorBox>
+    <RefrigeratorBox onClick={handlemodal}>
       <RefrigeratorWrap>
         <RefrigeratorDot>냉장고 보기</RefrigeratorDot>
       </RefrigeratorWrap>

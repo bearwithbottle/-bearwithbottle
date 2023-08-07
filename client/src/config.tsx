@@ -10,14 +10,7 @@ import { getDatabase } from "firebase/database";
 
 import { getStorage } from "firebase/storage";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBVVl2DxQswWw5F1MKzjl7tgoS1j6dUfGM",
-  authDomain: "barewithbottle.firebaseapp.com",
-  projectId: "barewithbottle",
-  storageBucket: "barewithbottle.appspot.com",
-  messagingSenderId: "975681050295",
-  appId: "1:975681050295:web:5049477c5f2ac53746df32",
-};
+const firebaseConfig = {};
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
