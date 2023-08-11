@@ -10,7 +10,7 @@ function Btn1() {
     <Btn1Box>
       <Btn1Wrarp>
         <Btn1img />
-        <BtnTextBox>연인이 보고싶을때</BtnTextBox>
+        <BtnTextBox>사랑하는</BtnTextBox>
       </Btn1Wrarp>
     </Btn1Box>
   );

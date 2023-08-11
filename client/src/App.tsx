@@ -9,10 +9,12 @@ import Sand from "./pages/Sand";
 import QuestionList from "./pages/QuestionList";
 import QuestionListTwo from "./pages/QuestionListTwo";
 import Sandbear from "./pages/Sandbear";
+import LineUp from "./pages/LineUp";
 function App() {
   return (
     <>
       <Routes>
+        <Route path="lineup" element={<LineUp />} />
         <Route path="/sandbear" element={<Sandbear />} />
         <Route path="/listtwo" element={<QuestionListTwo />} />
         <Route path="/list" element={<QuestionList />} />

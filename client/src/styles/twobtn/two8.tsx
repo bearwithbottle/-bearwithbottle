@@ -1,14 +1,14 @@
 import { styled } from "styled-components";
-import img from "../../assets/list/thx.png";
+import img from "../../assets/listtwo/kind.png";
 
-export const Btn2Box = styled.div`
+export const Two8Box = styled.div`
   width: 150px;
   height: 146px;
   border-radius: 12px;
   background-color: #afafaf;
   font-family: "ImcreSoojin";
 `;
-export const Btn2Wrarp = styled.div`
+export const Two8Wrarp = styled.div`
   width: 150px;
   height: 140px;
   border-radius: 12px;
@@ -17,7 +17,7 @@ export const Btn2Wrarp = styled.div`
   justify-content: center;
   background-color: #f2f2f2;
 `;
-export const Btn2img = styled.div`
+export const Two8img = styled.div`
   width: 52px;
   height: 48px;
   margin-bottom: 20px;
