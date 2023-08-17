@@ -13,6 +13,7 @@ export const LineUpBox = styled.div`
   background-size: cover;
   background-position: center;
   font-family: "ImcreSoojin";
+  overflow-x: hidden;
 `;
 export const LineUpTextBox = styled.div`
   width: 360px;
@@ -32,7 +33,6 @@ export const RecoBox = styled.div`
   height: 502px;
   justify-content: space-between;
   align-items: center;
-
   margin-bottom: 113px;
 `;
 export const RecoBoxContents = styled.div`
