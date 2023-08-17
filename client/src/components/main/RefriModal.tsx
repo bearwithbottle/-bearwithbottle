@@ -14,12 +14,12 @@ function RfriModal({ handlemodal }: handlemodal) {
   return (
     <RefriModalBox>
       <RefriModalContents>
-        <BottleBox>
+        {/* <BottleBox>
           <BottleBoxImg />
           <BottleBoxNameBox>
             <BottleBoxName>5글자넘어가면안돼요</BottleBoxName>
           </BottleBoxNameBox>
-        </BottleBox>
+        </BottleBox> */}
       </RefriModalContents>
       <Xbox onClick={handlemodal} />
     </RefriModalBox>

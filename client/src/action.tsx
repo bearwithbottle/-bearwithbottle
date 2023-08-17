@@ -4,6 +4,12 @@ import {
   SET_NAME,
   SET_LOGIN_STATUS,
   SET_UID,
+  SET_BEAR,
+  SET_COLOR,
+  SET_MESSAGE,
+  SET_SENDER,
+  SET_STICKER,
+  SET_CODE,
 } from "./types";
 
 export const setImage = (image: string): ActionTypes => ({
@@ -23,4 +29,28 @@ export const setLoginStatus = (isLoggedIn: boolean): ActionTypes => ({
 export const setUid = (uid: string): ActionTypes => ({
   type: SET_UID,
   payload: uid,
+});
+export const setBear = (setbear: string): ActionTypes => ({
+  type: SET_BEAR,
+  payload: setbear,
+});
+export const setColor = (color: string): ActionTypes => ({
+  type: SET_COLOR,
+  payload: color,
+});
+export const setSender = (sender: any): ActionTypes => ({
+  type: SET_SENDER,
+  payload: sender,
+});
+export const setMessage = (message: any): ActionTypes => ({
+  type: SET_MESSAGE,
+  payload: message,
+});
+export const setSticker = (sticker: any): ActionTypes => ({
+  type: SET_STICKER,
+  payload: sticker,
+});
+export const setCode = (code: string): ActionTypes => ({
+  type: SET_CODE,
+  payload: code,
 });

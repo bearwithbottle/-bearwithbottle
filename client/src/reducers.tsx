@@ -4,6 +4,12 @@ import {
   SET_NAME,
   SET_LOGIN_STATUS,
   SET_UID,
+  SET_BEAR,
+  SET_COLOR,
+  SET_SENDER,
+  SET_MESSAGE,
+  SET_STICKER,
+  SET_CODE,
 } from "./types";
 import AppState from "./types";
 
@@ -12,6 +18,13 @@ const initialState: AppState = {
   name: "",
   uid: "",
   isLoggedIn: false,
+  //sand
+  code: "",
+  setbear: "",
+  color: "#bcd5fc",
+  sender: "",
+  message: "",
+  sticker: "",
 };
 
 const reducer = (state = initialState, action: ActionTypes): AppState => {
@@ -35,6 +48,42 @@ const reducer = (state = initialState, action: ActionTypes): AppState => {
       return {
         ...state,
         uid: action.payload,
+      };
+    }
+    case SET_BEAR: {
+      return {
+        ...state,
+        setbear: action.payload,
+      };
+    }
+    case SET_COLOR: {
+      return {
+        ...state,
+        color: action.payload,
+      };
+    }
+    case SET_SENDER: {
+      return {
+        ...state,
+        sender: action.payload,
+      };
+    }
+    case SET_MESSAGE: {
+      return {
+        ...state,
+        message: action.payload,
+      };
+    }
+    case SET_STICKER: {
+      return {
+        ...state,
+        sticker: action.payload,
+      };
+    }
+    case SET_CODE: {
+      return {
+        ...state,
+        code: action.payload,
       };
     }
     default:

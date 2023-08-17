@@ -25,7 +25,7 @@ function Sand() {
               <SandTextPongContents>
                 안녕하십니까?
                 <br />
-                name님에게 술을 보내보시겠어요?
+                님에게 술을 보내보시겠어요?
               </SandTextPongContents>
             </SandTextPongBox>
             <SandMidGom />

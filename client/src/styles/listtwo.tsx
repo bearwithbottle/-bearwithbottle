@@ -24,6 +24,7 @@ export const QuestionListTwoTextBox = styled.div`
 export const QuestionListTwoText = styled.span`
   color: #fff;
   font-size: 20px;
+  text-align: center;
 `;
 export const QuestionListContents = styled.div`
   width: 312px;
@@ -31,6 +32,7 @@ export const QuestionListContents = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 10px;
+  cursor: pointer;
 `;
 export const BtnBox1 = styled.div`
   justify-content: space-between;

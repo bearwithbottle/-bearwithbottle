@@ -89,7 +89,7 @@ function MainPage() {
               </TextPongBox>
               <MidGom image={image} />
             </MidBox>
-            <TextBox onClick={handleopen} />
+            {/* <TextBox onClick={handleopen} /> */}
             <BtnBox>
               <ShareBtn />
               <Refrigerator handlemodal={handlemodal} />

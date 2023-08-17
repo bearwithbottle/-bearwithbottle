@@ -33,7 +33,7 @@ function GithubBtn() {
         await setDoc(userDocRef, {
           name: user.displayName || "", // 사용자의 이름 저장
         });
-        navigate("/info-start");
+        navigate("/infostart");
       }
     } catch (error) {
       console.log("Github:", error);

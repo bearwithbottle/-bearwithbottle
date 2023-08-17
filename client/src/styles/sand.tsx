@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import main from "../assets/main/Bar_BG.png";
 import maintext from "../assets/bar/title.png";
-import gomdolone from "../assets/info/gomone.png";
+
 export const SandBox = styled.div`
   width: 360px;
   height: 800px;
@@ -36,7 +36,7 @@ export const SandBarDisplay = styled.div`
 `;
 export const SandTitle = styled.div`
   width: 360px;
-  height: 124px;
+  height: 130px;
   background-image: url(${maintext});
   background-repeat: no-repeat;
   background-size: cover;

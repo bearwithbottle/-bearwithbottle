@@ -8,20 +8,26 @@ import MainPage from "./pages/MainPage";
 import Sand from "./pages/Sand";
 import QuestionList from "./pages/QuestionList";
 import QuestionListTwo from "./pages/QuestionListTwo";
-import Sandbear from "./pages/Sandbear";
 import LineUp from "./pages/LineUp";
+import Mail from "./pages/Mail";
+import Decorate from "./pages/Decorate";
+import Delivery from "./pages/Delivery";
+import To from "./pages/To";
 function App() {
   return (
     <>
       <Routes>
-        <Route path="lineup" element={<LineUp />} />
-        <Route path="/sandbear" element={<Sandbear />} />
+        <Route path="/to" element={<To />} />
+        <Route path="/delivery" element={<Delivery />} />
+        <Route path="/decorate" element={<Decorate />} />
+        <Route path="/mail" element={<Mail />} />
+        <Route path="/lineup" element={<LineUp />} />
         <Route path="/listtwo" element={<QuestionListTwo />} />
         <Route path="/list" element={<QuestionList />} />
         <Route path="/sand" element={<Sand />} />
         <Route path="/" element={<Main />} />
-        <Route path="/Info-choose-gomdol" element={<InfoChooseGomdol />} />
-        <Route path="/info-start" element={<InfoStart />} />
+        <Route path="/choosegomdol" element={<InfoChooseGomdol />} />
+        <Route path="/infostart" element={<InfoStart />} />
         <Route path="/bar" element={<MainPage />} />
       </Routes>
     </>

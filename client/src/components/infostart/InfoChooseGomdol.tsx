@@ -29,7 +29,7 @@ import { useNavigate } from "react-router-dom";
 import { setImage } from "../../action";
 import { storage, db } from "../../config";
 import { ref, getDownloadURL } from "firebase/storage";
-import { setDoc, doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 function InfoChooseGomdol() {
   const [isOne, setIsOne] = useState(true);
   const [isTwo, setIsTwo] = useState(false);

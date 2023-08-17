@@ -20,7 +20,7 @@ function QuestionList() {
     <QuestionListBox>
       <PreBtn />
       <QuestionListTextBox>
-        <QuestionListText>name님은 어떤사람인가요?</QuestionListText>
+        <QuestionListText>님은 어떤사람인가요?</QuestionListText>
       </QuestionListTextBox>
       <Link to="/listtwo">
         <QuestionListContents>

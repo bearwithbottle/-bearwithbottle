@@ -42,7 +42,7 @@ function InfoStart() {
         await setDoc(userDocRef, {
           name: NameValue,
         });
-        navigate("/Info-choose-gomdol");
+        navigate("/choosegomdol");
       }
     } catch (error) {
       console.error("ErrorImg:", error);
