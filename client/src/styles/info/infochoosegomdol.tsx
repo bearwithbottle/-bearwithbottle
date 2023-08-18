@@ -18,7 +18,7 @@ export const GomdolContainer = styled.div`
   background-position: center;
   align-items: center;
   font-family: "ImcreSoojin";
-  /* overflow: hidden; */
+  overflow: hidden;
 `;
 
 export const PreWrap = styled.div`

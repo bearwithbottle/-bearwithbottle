@@ -30,29 +30,59 @@ import {
   getDocs,
   query,
   where,
+  writeBatch,
+  doc,
 } from "firebase/firestore";
 import Draggable, { DraggableData } from "react-draggable";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useRef } from "react";
+
 function LineUp() {
   const [position, setPosition] = useState<any>({ x: 0 });
-  const [randomBottles, setRandomBottles] = useState<DocumentData[]>([]);
   const [Opacity, setOpacity] = useState(false);
+  const [randomBottles, setRandomBottles] = useState<DocumentData[]>([]);
+  const [randomRecommends, setRandomRecommends] = useState<DocumentData[]>([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function getRandomBottles(
+  function getRecommend(
     count: number,
-    firstChoiceStr: string,
-    secondChoiceStr: string
+    firstChoiceStr: string
+    // secondChoiceStr: string
   ) {
     const bottlesCollectionRef = collection(db, "recommend");
     const q = query(
       bottlesCollectionRef,
-      where("level1", "==", firstChoiceStr),
-      where("level2", "==", secondChoiceStr)
+      where("code", "==", firstChoiceStr)
+      // where("level2", "==", secondChoiceStr)
+    );
+
+    return getDocs(q).then((querySnapshot) => {
+      const documents = querySnapshot.docs.map((doc) => doc.data());
+      const randomRecommends = [];
+
+      while (randomRecommends.length < count && documents.length > 0) {
+        const randomIndex = Math.floor(Math.random() * documents.length);
+        randomRecommends.push(documents[randomIndex]);
+        documents.splice(randomIndex, 1);
+      }
+
+      return randomRecommends;
+    });
+  }
+
+  //수정
+  function getBottles(
+    count: number,
+    firstChoiceStr: string
+    // secondChoiceStr: string
+  ) {
+    const bottlesCollectionRef = collection(db, "bottles");
+    const q = query(
+      bottlesCollectionRef,
+      where("code", "==", firstChoiceStr)
+      // where("level2", "==", secondChoiceStr)
     );
 
     return getDocs(q).then((querySnapshot) => {
@@ -77,17 +107,44 @@ function LineUp() {
   };
 
   useEffect(() => {
-    const firstChoice = "소주";
-    const secondChoice = "승리";
+    const firstChoice = "windsor";
+    // const secondChoice = "승리";
 
-    getRandomBottles(3, firstChoice, secondChoice).then((bottles) => {
+    getRecommend(3, firstChoice).then((bottles) => {
+      setRandomRecommends(bottles);
+      console.log("Reco", bottles);
+    });
+    getBottles(1, firstChoice).then((bottles) => {
       setRandomBottles(bottles);
-      console.log(bottles);
+      console.log("Bottles", bottles[0]);
+      const date = bottles[0];
+      const bottlesCollectionRef = collection(db, "recommend");
+      const q = query(bottlesCollectionRef, where("code", "==", firstChoice));
+
+      getDocs(q).then((querySnapshot) => {
+        const batch = writeBatch(db);
+
+        querySnapshot.forEach((docSnapshot) => {
+          const docRef = doc(bottlesCollectionRef, docSnapshot.id);
+
+          const updatedFields = { ...date };
+
+          batch.update(docRef, updatedFields);
+        });
+
+        batch
+          .commit()
+          .then(() => {
+            console.log("Data updated successfully", randomRecommends);
+          })
+          .catch((error) => {
+            console.error("Error updating data:", error);
+          });
+      });
     });
   }, []);
   const trackPos = (data: any) => {
     setPosition({ x: data.x });
-    console.log(position);
   };
 
   const handleStart = () => {

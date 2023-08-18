@@ -22,14 +22,15 @@ import {
 } from "../../styles/info/infochoosegomdol";
 import PreBtn from "./PreBtn";
 import NextSubmitBtn from "./NextSubmitBtn";
+import { setImage } from "../../action";
+import { storage, db } from "../../config";
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setImage } from "../../action";
-import { storage, db } from "../../config";
 import { ref, getDownloadURL } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
+import Draggable from "react-draggable";
 function InfoChooseGomdol() {
   const [isOne, setIsOne] = useState(true);
   const [isTwo, setIsTwo] = useState(false);
@@ -45,6 +46,9 @@ function InfoChooseGomdol() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selector = useSelector((state: any) => state.image);
+  //drag
+  const [position, setPosition] = useState<any>({ x: 0 });
+  const [Opacity, setOpacity] = useState(false);
   useEffect(() => {
     const getImageUrl = async (imageName: string, setUrl: any) => {
       try {
@@ -120,6 +124,16 @@ function InfoChooseGomdol() {
       console.error("ErrorImg:", error);
     }
   };
+  const trackPos = (data: any) => {
+    setPosition({ x: data.x });
+  };
+
+  const handleStart = () => {
+    setOpacity(true);
+  };
+  const handleEnd = () => {
+    setOpacity(false);
+  };
 
   return (
     <GomdolContainer>
@@ -145,24 +159,32 @@ function InfoChooseGomdol() {
           isFive={isFive}
         />
       </GomdolBox>
-      <ChooseBox>
-        <ChooseContentsOneBox onClick={handleOne} isOne={isOne}>
-          <ChooseContentsOne oneUrl={oneUrl} />
-        </ChooseContentsOneBox>
-        <ChooseContentsTwoBox onClick={handleTwo} isTwo={isTwo}>
-          <ChooseContentsTwo twoUrl={twoUrl} />
-        </ChooseContentsTwoBox>
-        <ChooseContentsThreeBox onClick={handleThree} isThree={isThree}>
-          <ChooseContentsThree threeUrl={threeUrl} />
-        </ChooseContentsThreeBox>
-        {/* 4,5 rr */}
-        <ChooseContentsFourBox onClick={handleFour} isFour={isFour}>
-          <ChooseContentsFour FourUrl={FourUrl} />
-        </ChooseContentsFourBox>
-        <ChooseContentsFiveBox onClick={handleFive} isFive={isFive}>
-          <ChooseContentsFive FiveUrl={FiveUrl} />
-        </ChooseContentsFiveBox>
-      </ChooseBox>
+      <Draggable
+        axis="x"
+        onDrag={(e, data) => trackPos(data)}
+        onStart={handleStart}
+        onStop={handleEnd}
+        bounds={{ left: -170, right: 170 }}
+      >
+        <ChooseBox>
+          <ChooseContentsOneBox onClick={handleOne} isOne={isOne}>
+            <ChooseContentsOne oneUrl={oneUrl} />
+          </ChooseContentsOneBox>
+          <ChooseContentsTwoBox onClick={handleTwo} isTwo={isTwo}>
+            <ChooseContentsTwo twoUrl={twoUrl} />
+          </ChooseContentsTwoBox>
+          <ChooseContentsThreeBox onClick={handleThree} isThree={isThree}>
+            <ChooseContentsThree threeUrl={threeUrl} />
+          </ChooseContentsThreeBox>
+          {/* 4,5 rr */}
+          <ChooseContentsFourBox onClick={handleFour} isFour={isFour}>
+            <ChooseContentsFour FourUrl={FourUrl} />
+          </ChooseContentsFourBox>
+          <ChooseContentsFiveBox onClick={handleFive} isFive={isFive}>
+            <ChooseContentsFive FiveUrl={FiveUrl} />
+          </ChooseContentsFiveBox>
+        </ChooseBox>
+      </Draggable>
       <NextSubmitBtn handleGomSubmit={handleGomSubmit} />
     </GomdolContainer>
   );

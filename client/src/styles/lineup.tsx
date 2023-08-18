@@ -31,6 +31,7 @@ export const LineUpText = styled.span`
 export const RecoBox = styled.div`
   width: 960px;
   height: 502px;
+  cursor: grab;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 113px;
