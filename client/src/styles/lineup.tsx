@@ -53,13 +53,13 @@ export const RecoBoxContentsIn = styled.div`
   align-items: center;
   background-color: #f2f2f2;
 `;
-export const RecoImgBox = styled.div`
+export const RecoImgBox = styled.div<{ back: string }>`
   width: 272px;
   height: 168px;
   border-radius: 16px;
   justify-content: center;
   align-items: center;
-  background-color: blue;
+  background-image: ${({ back }) => `url(${back})`};
 `;
 export const RecoImg = styled.div<{ url: string }>`
   width: 54px;

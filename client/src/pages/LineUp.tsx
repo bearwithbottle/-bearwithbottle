@@ -30,59 +30,31 @@ import {
   getDocs,
   query,
   where,
-  writeBatch,
-  doc,
 } from "firebase/firestore";
-import Draggable, { DraggableData } from "react-draggable";
+import Draggable from "react-draggable";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function LineUp() {
   const [position, setPosition] = useState<any>({ x: 0 });
   const [Opacity, setOpacity] = useState(false);
   const [randomBottles, setRandomBottles] = useState<DocumentData[]>([]);
-  const [randomRecommends, setRandomRecommends] = useState<DocumentData[]>([]);
 
+  const first = useSelector((state: any) => state.firstChoice);
+  const second = useSelector((state: any) => state.secondChoice);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function getRecommend(
+  function getRandomBottles(
     count: number,
-    firstChoiceStr: string
-    // secondChoiceStr: string
+    firstChoiceStr: string,
+    secondChoiceStr: string
   ) {
     const bottlesCollectionRef = collection(db, "recommend");
     const q = query(
       bottlesCollectionRef,
-      where("code", "==", firstChoiceStr)
-      // where("level2", "==", secondChoiceStr)
-    );
-
-    return getDocs(q).then((querySnapshot) => {
-      const documents = querySnapshot.docs.map((doc) => doc.data());
-      const randomRecommends = [];
-
-      while (randomRecommends.length < count && documents.length > 0) {
-        const randomIndex = Math.floor(Math.random() * documents.length);
-        randomRecommends.push(documents[randomIndex]);
-        documents.splice(randomIndex, 1);
-      }
-
-      return randomRecommends;
-    });
-  }
-
-  //수정
-  function getBottles(
-    count: number,
-    firstChoiceStr: string
-    // secondChoiceStr: string
-  ) {
-    const bottlesCollectionRef = collection(db, "bottles");
-    const q = query(
-      bottlesCollectionRef,
-      where("code", "==", firstChoiceStr)
-      // where("level2", "==", secondChoiceStr)
+      where("level1", "==", firstChoiceStr),
+      where("level2", "==", secondChoiceStr)
     );
 
     return getDocs(q).then((querySnapshot) => {
@@ -98,51 +70,17 @@ function LineUp() {
       return randomBottles;
     });
   }
-  const handleGiftClick = (index: any) => {
-    if (randomBottles[index]) {
-      dispatch(setBear(randomBottles[index].storage));
-      dispatch(setCode(randomBottles[index].code));
-      navigate("/mail");
-    }
-  };
 
   useEffect(() => {
-    const firstChoice = "windsor";
-    // const secondChoice = "승리";
+    const firstChoice = first;
+    const secondChoice = second;
 
-    getRecommend(3, firstChoice).then((bottles) => {
-      setRandomRecommends(bottles);
-      console.log("Reco", bottles);
-    });
-    getBottles(1, firstChoice).then((bottles) => {
+    getRandomBottles(3, firstChoice, secondChoice).then((bottles) => {
       setRandomBottles(bottles);
-      console.log("Bottles", bottles[0]);
-      const date = bottles[0];
-      const bottlesCollectionRef = collection(db, "recommend");
-      const q = query(bottlesCollectionRef, where("code", "==", firstChoice));
-
-      getDocs(q).then((querySnapshot) => {
-        const batch = writeBatch(db);
-
-        querySnapshot.forEach((docSnapshot) => {
-          const docRef = doc(bottlesCollectionRef, docSnapshot.id);
-
-          const updatedFields = { ...date };
-
-          batch.update(docRef, updatedFields);
-        });
-
-        batch
-          .commit()
-          .then(() => {
-            console.log("Data updated successfully", randomRecommends);
-          })
-          .catch((error) => {
-            console.error("Error updating data:", error);
-          });
-      });
+      console.log(bottles);
     });
   }, []);
+
   const trackPos = (data: any) => {
     setPosition({ x: data.x });
   };
@@ -152,6 +90,13 @@ function LineUp() {
   };
   const handleEnd = () => {
     setOpacity(false);
+  };
+  const handleGiftClick = (index: any) => {
+    if (randomBottles[index]) {
+      dispatch(setBear(randomBottles[index].storage));
+      dispatch(setCode(randomBottles[index].code));
+      navigate("/mail");
+    }
   };
 
   return (
@@ -176,7 +121,7 @@ function LineUp() {
               <div key={index}>
                 <RecoBoxContents>
                   <RecoBoxContentsIn>
-                    <RecoImgBox>
+                    <RecoImgBox back={bottle.back_image}>
                       <RecoImg url={bottle.storage} />
                     </RecoImgBox>
                     <RecoTextBox>

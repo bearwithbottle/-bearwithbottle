@@ -4,10 +4,12 @@ import {
   BtnTextBox,
   Btn1img,
 } from "../../styles/listbtn/btn1";
-
-function Btn1() {
+interface handleBtn1Click {
+  handleBtn1Click: () => void;
+}
+function Btn1({ handleBtn1Click }: handleBtn1Click) {
   return (
-    <Btn1Box>
+    <Btn1Box onClick={handleBtn1Click}>
       <Btn1Wrarp>
         <Btn1img />
         <BtnTextBox>사랑하는</BtnTextBox>

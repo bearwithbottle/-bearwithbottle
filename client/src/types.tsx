@@ -10,6 +10,8 @@ interface AppState {
   message: any;
   sticker: any;
   code: string;
+  firstChoice: string;
+  secondChoice: string;
 }
 
 export default AppState;
@@ -24,6 +26,8 @@ export const SET_SENDER = "SET_SENDER";
 export const SET_MESSAGE = "SET_MESSAGE";
 export const SET_STICKER = "SET_STICKER";
 export const SET_CODE = "SET_CODE";
+export const SET_FIRSTCHOICE = "SET_FIRSTCHOICE";
+export const SET_SECONDCHOICE = "SET_SECONDCHOICE";
 
 interface SetImageAction {
   type: typeof SET_IMAGE;
@@ -67,6 +71,14 @@ interface SetCodeAction {
   type: typeof SET_CODE;
   payload: any;
 }
+interface SetFirstAction {
+  type: typeof SET_FIRSTCHOICE;
+  payload: string;
+}
+interface SetSecondAction {
+  type: typeof SET_SECONDCHOICE;
+  payload: string;
+}
 export type ActionTypes =
   | SetImageAction
   | SetNameAction
@@ -77,4 +89,6 @@ export type ActionTypes =
   | SetMessageAction
   | SetSendAction
   | SetStickerAction
-  | SetCodeAction;
+  | SetCodeAction
+  | SetFirstAction
+  | SetSecondAction;

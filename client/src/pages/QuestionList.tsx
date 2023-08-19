@@ -14,8 +14,40 @@ import Btn5 from "../components/listbtn/Btn5";
 import Btn6 from "../components/listbtn/Btn6";
 import Btn7 from "../components/listbtn/Btn7";
 import Btn8 from "../components/listbtn/Btn8";
+
+import { setSecond } from "../action";
+
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 function QuestionList() {
+  const dispatch = useDispatch();
+
+  const handleBtn1Click = () => {
+    dispatch(setSecond("연인"));
+  };
+  const handleBtn2Click = () => {
+    dispatch(setSecond("감사"));
+  };
+  const handleBtn3Click = () => {
+    dispatch(setSecond("퇴근"));
+  };
+  const handleBtn4Click = () => {
+    dispatch(setSecond("위로"));
+  };
+  const handleBtn5Click = () => {
+    dispatch(setSecond("축제"));
+  };
+  const handleBtn6Click = () => {
+    dispatch(setSecond("승리"));
+  };
+  const handleBtn7Click = () => {
+    dispatch(setSecond("기본"));
+  };
+  const handleBtn8Click = () => {
+    dispatch(setSecond("기념"));
+  };
+
   return (
     <QuestionListBox>
       <PreBtn />
@@ -25,20 +57,20 @@ function QuestionList() {
       <Link to="/listtwo">
         <QuestionListContents>
           <BtnBox1>
-            <Btn1 />
-            <Btn2 />
+            <Btn1 handleBtn1Click={handleBtn1Click} />
+            <Btn2 handleBtn2Click={handleBtn2Click} />
           </BtnBox1>
           <BtnBox1>
-            <Btn3 />
-            <Btn4 />
+            <Btn3 handleBtn3Click={handleBtn3Click} />
+            <Btn4 handleBtn4Click={handleBtn4Click} />
           </BtnBox1>
           <BtnBox1>
-            <Btn5 />
-            <Btn6 />
+            <Btn5 handleBtn5Click={handleBtn5Click} />
+            <Btn6 handleBtn6Click={handleBtn6Click} />
           </BtnBox1>
           <BtnBox1>
-            <Btn7 />
-            <Btn8 />
+            <Btn7 handleBtn7Click={handleBtn7Click} />
+            <Btn8 handleBtn8Click={handleBtn8Click} />
           </BtnBox1>
         </QuestionListContents>
       </Link>

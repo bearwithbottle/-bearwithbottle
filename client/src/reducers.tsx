@@ -10,6 +10,8 @@ import {
   SET_MESSAGE,
   SET_STICKER,
   SET_CODE,
+  SET_FIRSTCHOICE,
+  SET_SECONDCHOICE,
 } from "./types";
 import AppState from "./types";
 
@@ -25,6 +27,8 @@ const initialState: AppState = {
   sender: "",
   message: "",
   sticker: "",
+  firstChoice: "",
+  secondChoice: "",
 };
 
 const reducer = (state = initialState, action: ActionTypes): AppState => {
@@ -84,6 +88,18 @@ const reducer = (state = initialState, action: ActionTypes): AppState => {
       return {
         ...state,
         code: action.payload,
+      };
+    }
+    case SET_FIRSTCHOICE: {
+      return {
+        ...state,
+        firstChoice: action.payload,
+      };
+    }
+    case SET_SECONDCHOICE: {
+      return {
+        ...state,
+        secondChoice: action.payload,
       };
     }
     default:

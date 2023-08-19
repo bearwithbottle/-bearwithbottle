@@ -10,6 +10,8 @@ import {
   SET_SENDER,
   SET_STICKER,
   SET_CODE,
+  SET_SECONDCHOICE,
+  SET_FIRSTCHOICE,
 } from "./types";
 
 export const setImage = (image: string): ActionTypes => ({
@@ -53,4 +55,12 @@ export const setSticker = (sticker: any): ActionTypes => ({
 export const setCode = (code: string): ActionTypes => ({
   type: SET_CODE,
   payload: code,
+});
+export const setFirst = (firstChoice: string): ActionTypes => ({
+  type: SET_FIRSTCHOICE,
+  payload: firstChoice,
+});
+export const setSecond = (secondChoice: string): ActionTypes => ({
+  type: SET_SECONDCHOICE,
+  payload: secondChoice,
 });

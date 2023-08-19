@@ -4,13 +4,15 @@ import {
   BtnTextBox,
   Btn6img,
 } from "../../styles/listbtn/btn6";
-
-function Btn6() {
+interface handleBtn6Click {
+  handleBtn6Click: () => void;
+}
+function Btn6({ handleBtn6Click }: handleBtn6Click) {
   return (
-    <Btn6Box>
+    <Btn6Box onClick={handleBtn6Click}>
       <Btn6Wrarp>
         <Btn6img />
-        <BtnTextBox>함께 즐기고 싶은</BtnTextBox>
+        <BtnTextBox>응원하고싶은</BtnTextBox>
       </Btn6Wrarp>
     </Btn6Box>
   );
