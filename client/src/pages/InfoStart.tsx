@@ -12,26 +12,41 @@ import InfoNextModal from "../components/infostart/InfoNextModal";
 import InfoModal from "../components/infostart/InfoModal";
 import PreBtn from "../components/infostart/PreBtn";
 import NextBtn from "../components/infostart/NextBtn";
-import NextSubmitBtn from "../components/infostart/NextSubmitBtn";
+import NextSubmitBtnTwo from "../components/infostart/NextSubmitBtnTwo";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //Redux
 import { useDispatch } from "react-redux";
 import { setName } from "../action";
+
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../config";
 
 function InfoStart() {
   const [NameValue, SetNameValue] = useState("");
   const [isInfoModalVisible, setInfoModalVisible] = useState(true);
   const [isInfoNextModalVisible, setInfoNextModalVisible] = useState(false);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   //value
   const handleSearchInputChange = (e: any) => {
     SetNameValue(e.target.value);
   };
   //savename
-  const handleSaveName = () => {
+  const handleSaveName = async () => {
     dispatch(setName(NameValue));
+    try {
+      const uid = localStorage.getItem("uid");
+      if (uid) {
+        const userDocRef = doc(db, "users", uid);
+        await setDoc(userDocRef, {
+          name: NameValue,
+        });
+        navigate("/choosegomdol");
+      }
+    } catch (error) {
+      console.error("ErrorImg:", error);
+    }
   };
 
   const handleInfoModalClose = () => {
@@ -74,7 +89,11 @@ function InfoStart() {
         )}
         <PreBtn />
         <InfoBoxWrap>
-          <InfoNameText>당신의 이름을 작성해 주세요</InfoNameText>
+          <InfoNameText>
+            만나서 반갑습니다.
+            <br />
+            당신의 성함을 알려주세요.
+          </InfoNameText>
           <InfoCircleWarp>
             <InfoCircle />
             <InfoCircle />
@@ -93,9 +112,7 @@ function InfoStart() {
       {NameValue === "" ? (
         <NextBtn />
       ) : (
-        <Link to="/Info-choose-gomdol" onClick={handleSaveName}>
-          <NextSubmitBtn />
-        </Link>
+        <NextSubmitBtnTwo handleSaveName={handleSaveName} />
       )}
     </InfoContainer>
   );

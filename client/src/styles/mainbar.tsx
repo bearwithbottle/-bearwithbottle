@@ -1,13 +1,12 @@
 import { styled } from "styled-components";
-import mainbar_back from "../assets/main/main_background.png";
+
 import barBG from "../assets/main/Bar_BG.png";
 import "../assets/font/font.css";
 import wait from "../assets/main/BG_feature.png";
-import loding_s from "../assets/main/Loding_s.png";
+
 import loding_e from "../assets/main/Loding_e.png";
 import loding_text from "../assets/main/please Wait....png";
-// bar
-import gom from "../assets/bar/gom.png";
+import text from "../assets/test.png";
 import title from "../assets/bar/title.png";
 export const WaitBox = styled.div`
   width: 360px;
@@ -89,7 +88,7 @@ export const TextPongBox = styled.div`
 `;
 export const TextPongContents = styled.div`
   width: 238px;
-  height: 78px;
+  height: 60px;
   border-radius: 10px;
   padding: 19px 12px;
   background-color: #f2f2f2;
@@ -98,7 +97,6 @@ export const TextPongContents = styled.div`
 export const MidGom = styled.div<{ image: string }>`
   width: 234px;
   height: 200px;
-  /* background-image: url(${gom}); */
   ${(props) => props.image && `background-image: url(${props.image});`}
   background-repeat: no-repeat;
   background-size: cover;
@@ -109,4 +107,14 @@ export const BtnBox = styled.div`
   height: 186px;
   flex-direction: column;
   justify-content: space-between;
+`;
+export const TextBox = styled.div`
+  width: 54px;
+  height: 120px;
+  top: 450px;
+  right: 790px;
+  position: fixed;
+  background-image: url(${text});
+  background-size: cover;
+  cursor: pointer;
 `;

@@ -15,42 +15,126 @@ import {
   ChooseContentsOne,
   ChooseContentsTwo,
   ChooseContentsThree,
+  ChooseContentsFourBox,
+  ChooseContentsFour,
+  ChooseContentsFiveBox,
+  ChooseContentsFive,
 } from "../../styles/info/infochoosegomdol";
 import PreBtn from "./PreBtn";
 import NextSubmitBtn from "./NextSubmitBtn";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { setImage } from "../../action";
-import gomone from "../../assets/info/gomone.png";
-import gomtwo from "../../assets/info/gomtwo.png";
-import gomthree from "../../assets/info/gomthree.png";
+import { storage, db } from "../../config";
+
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ref, getDownloadURL } from "firebase/storage";
+import { doc, updateDoc } from "firebase/firestore";
+import Draggable from "react-draggable";
 function InfoChooseGomdol() {
   const [isOne, setIsOne] = useState(true);
   const [isTwo, setIsTwo] = useState(false);
   const [isThree, setIsThress] = useState(false);
+  const [isFour, setIsFour] = useState(false);
+  const [isFive, setIsFive] = useState(false);
+  //img
+  const [oneUrl, setOneUrl] = useState<string>("");
+  const [twoUrl, setTwoUrl] = useState<string>("");
+  const [threeUrl, setThreeUrl] = useState<string>("");
+  const [FourUrl, setFourUrl] = useState<string>("");
+  const [FiveUrl, setFiveUrl] = useState<string>("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const selector = useSelector((state: any) => state.image);
+  //drag
+  const [position, setPosition] = useState<any>({ x: 0 });
+  const [Opacity, setOpacity] = useState(false);
+  useEffect(() => {
+    const getImageUrl = async (imageName: string, setUrl: any) => {
+      try {
+        const imageRef = ref(storage, imageName);
+        const url = await getDownloadURL(imageRef);
+        setUrl(url);
+      } catch (error) {
+        console.error(imageName, error);
+      }
+    };
+
+    getImageUrl("gomdol1.png", setOneUrl);
+    getImageUrl("gomdol2.png", setTwoUrl);
+    getImageUrl("gomdol3.png", setThreeUrl);
+    getImageUrl("gomdol4.png", setFourUrl);
+    getImageUrl("gomdol5.png", setFiveUrl);
+  }, []);
 
   const handleOne = () => {
     setIsOne(true);
     setIsTwo(false);
     setIsThress(false);
-    dispatch(setImage(gomone));
+    setIsFour(false);
+    setIsFive(false);
+    dispatch(setImage(oneUrl));
   };
 
   const handleTwo = () => {
     setIsOne(false);
     setIsTwo(true);
     setIsThress(false);
-    dispatch(setImage(gomtwo));
+    setIsFour(false);
+    setIsFive(false);
+    dispatch(setImage(twoUrl));
   };
 
   const handleThree = () => {
     setIsOne(false);
     setIsTwo(false);
     setIsThress(true);
-    dispatch(setImage(gomthree));
+    setIsFour(false);
+    setIsFive(false);
+    dispatch(setImage(threeUrl));
   };
+  const handleFour = () => {
+    setIsOne(false);
+    setIsTwo(false);
+    setIsThress(false);
+    setIsFour(true);
+    setIsFive(false);
+    dispatch(setImage(FourUrl));
+  };
+  const handleFive = () => {
+    setIsOne(false);
+    setIsTwo(false);
+    setIsThress(false);
+    setIsFour(false);
+    setIsFive(true);
+    dispatch(setImage(FiveUrl));
+  };
+  const handleGomSubmit = async () => {
+    try {
+      // 로컬 스토리지에서 uid 값을 가져오기
+      const uid = localStorage.getItem("uid");
+      if (uid) {
+        const userDocRef = doc(db, "users", uid);
+        await updateDoc(userDocRef, {
+          img: selector,
+        });
+        navigate("/bar");
+      }
+    } catch (error) {
+      console.error("ErrorImg:", error);
+    }
+  };
+  const trackPos = (data: any) => {
+    setPosition({ x: data.x });
+  };
+
+  const handleStart = () => {
+    setOpacity(true);
+  };
+  const handleEnd = () => {
+    setOpacity(false);
+  };
+
   return (
     <GomdolContainer>
       <PreWrap>
@@ -67,22 +151,41 @@ function InfoChooseGomdol() {
         </TextBoxBox>
       </TextBox>
       <GomdolBox>
-        <GomdolNow isOne={isOne} isTwo={isTwo} isThree={isThree} />
+        <GomdolNow
+          isOne={isOne}
+          isTwo={isTwo}
+          isThree={isThree}
+          isFour={isFour}
+          isFive={isFive}
+        />
       </GomdolBox>
-      <ChooseBox>
-        <ChooseContentsOneBox onClick={handleOne} isOne={isOne}>
-          <ChooseContentsOne />
-        </ChooseContentsOneBox>
-        <ChooseContentsTwoBox onClick={handleTwo} isTwo={isTwo}>
-          <ChooseContentsTwo />
-        </ChooseContentsTwoBox>
-        <ChooseContentsThreeBox onClick={handleThree} isThree={isThree}>
-          <ChooseContentsThree />
-        </ChooseContentsThreeBox>
-      </ChooseBox>
-      <Link to="/bar">
-        <NextSubmitBtn />
-      </Link>
+      <Draggable
+        axis="x"
+        onDrag={(e, data) => trackPos(data)}
+        onStart={handleStart}
+        onStop={handleEnd}
+        bounds={{ left: -170, right: 170 }}
+      >
+        <ChooseBox>
+          <ChooseContentsOneBox onClick={handleOne} isOne={isOne}>
+            <ChooseContentsOne oneUrl={oneUrl} />
+          </ChooseContentsOneBox>
+          <ChooseContentsTwoBox onClick={handleTwo} isTwo={isTwo}>
+            <ChooseContentsTwo twoUrl={twoUrl} />
+          </ChooseContentsTwoBox>
+          <ChooseContentsThreeBox onClick={handleThree} isThree={isThree}>
+            <ChooseContentsThree threeUrl={threeUrl} />
+          </ChooseContentsThreeBox>
+          {/* 4,5 rr */}
+          <ChooseContentsFourBox onClick={handleFour} isFour={isFour}>
+            <ChooseContentsFour FourUrl={FourUrl} />
+          </ChooseContentsFourBox>
+          <ChooseContentsFiveBox onClick={handleFive} isFive={isFive}>
+            <ChooseContentsFive FiveUrl={FiveUrl} />
+          </ChooseContentsFiveBox>
+        </ChooseBox>
+      </Draggable>
+      <NextSubmitBtn handleGomSubmit={handleGomSubmit} />
     </GomdolContainer>
   );
 }

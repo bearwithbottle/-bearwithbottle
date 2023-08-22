@@ -5,6 +5,8 @@ import frame from "../../assets/info/Frame_291.png";
 import gomone from "../../assets/info/gomone.png";
 import gomtwo from "../../assets/info/gomtwo.png";
 import gomthree from "../../assets/info/gomthree.png";
+import gomfour from "../../assets/info/gomfour.png";
+import gomfive from "../../assets/info/gomfive.png";
 
 export const GomdolContainer = styled.div`
   width: 360px;
@@ -16,6 +18,7 @@ export const GomdolContainer = styled.div`
   background-position: center;
   align-items: center;
   font-family: "ImcreSoojin";
+  overflow: hidden;
 `;
 
 export const PreWrap = styled.div`
@@ -66,6 +69,8 @@ export const GomdolNow = styled.div<{
   isOne: boolean;
   isTwo: boolean;
   isThree: boolean;
+  isFour: boolean;
+  isFive: boolean;
 }>`
   width: 312px;
   height: 267px;
@@ -74,12 +79,14 @@ export const GomdolNow = styled.div<{
   ${(props) => props.isOne && `background-image: url(${gomone});`}
   ${(props) => props.isTwo && `background-image: url(${gomtwo});`}
   ${(props) => props.isThree && `background-image: url(${gomthree});`}
+  ${(props) => props.isFour && `background-image: url(${gomfour});`}
+  ${(props) => props.isFive && `background-image: url(${gomfive});`}
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 `;
 export const ChooseBox = styled.div`
-  width: 397px;
+  width: 665px;
   height: 128px;
   align-items: center;
   justify-content: space-between;
@@ -93,11 +100,11 @@ export const ChooseContentsOneBox = styled.div<{ isOne: boolean }>`
   ${(props) => props.isOne && "background-color: #6659AF;"}
   ${(props) => props.isOne && " outline: 3px solid #9381FF;"}
 `;
-export const ChooseContentsOne = styled.div`
+export const ChooseContentsOne = styled.div<{ oneUrl: any }>`
   width: 120px;
   height: 120px;
   border-radius: 10px;
-  background-image: url(${gomone});
+  background-image: url(${(props) => props.oneUrl});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -110,11 +117,11 @@ export const ChooseContentsTwoBox = styled.div<{ isTwo: boolean }>`
   ${(props) => props.isTwo && "background-color: #6659AF;"}
   ${(props) => props.isTwo && " outline: 3px solid #9381FF;"}
 `;
-export const ChooseContentsTwo = styled.div`
+export const ChooseContentsTwo = styled.div<{ twoUrl: any }>`
   width: 120px;
   height: 120px;
   border-radius: 10px;
-  background-image: url(${gomtwo});
+  background-image: url(${(props) => props.twoUrl});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -128,11 +135,45 @@ export const ChooseContentsThreeBox = styled.div<{ isThree: boolean }>`
   ${(props) => props.isThree && "background-color: #6659AF;"}
   ${(props) => props.isThree && " outline: 3px solid #9381FF;"}
 `;
-export const ChooseContentsThree = styled.div`
+export const ChooseContentsThree = styled.div<{ threeUrl: any }>`
   width: 120px;
   height: 120px;
   border-radius: 10px;
-  background-image: url(${gomthree});
+  background-image: url(${(props) => props.threeUrl});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+`;
+export const ChooseContentsFourBox = styled.div<{ isFour: boolean }>`
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  background-color: #757380;
+  ${(props) => props.isFour && "background-color: #6659AF;"}
+  ${(props) => props.isFour && " outline: 3px solid #9381FF;"}
+`;
+export const ChooseContentsFour = styled.div<{ FourUrl: any }>`
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  background-image: url(${(props) => props.FourUrl});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+`;
+export const ChooseContentsFiveBox = styled.div<{ isFive: boolean }>`
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  background-color: #757380;
+  ${(props) => props.isFive && "background-color: #6659AF;"}
+  ${(props) => props.isFive && " outline: 3px solid #9381FF;"}
+`;
+export const ChooseContentsFive = styled.div<{ FiveUrl: any }>`
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  background-image: url(${(props) => props.FiveUrl});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

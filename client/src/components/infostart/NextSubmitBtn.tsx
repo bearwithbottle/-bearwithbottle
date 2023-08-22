@@ -4,9 +4,13 @@ import {
   NextSubBtnDot,
 } from "../../styles/infobtn/nextsubmitbtn";
 
-function NextSubmitBtn() {
+interface NextSubmitBtnProps {
+  handleGomSubmit: () => void;
+}
+
+function NextSubmitBtn({ handleGomSubmit }: NextSubmitBtnProps) {
   return (
-    <NextSubBtnBox>
+    <NextSubBtnBox onClick={handleGomSubmit}>
       <NextSubBtnWrap>
         <NextSubBtnDot>다음으로</NextSubBtnDot>
       </NextSubBtnWrap>

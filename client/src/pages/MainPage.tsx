@@ -11,18 +11,28 @@ import {
   TextPongContents,
   MidGom,
   BtnBox,
+  TextBox,
 } from "../styles/mainbar";
 import { useState, useEffect } from "react";
 import ShareBtn from "../components/btn/ShareBtn";
 import Refrigerator from "../components/btn/Refrigerator";
 import ChangeName from "../components/btn/ChangeName";
-import { useSelector } from "react-redux";
-
+import RfriModal from "../components/main/RefriModal";
+import BottlesModal from "../components/main/BottlesModal";
+import { useSelector, useDispatch } from "react-redux";
+import { db } from "../config";
+import { doc, getDoc } from "firebase/firestore";
+import { setImage, setName } from "../action";
 function MainPage() {
+  const [isModal, setIsModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const name = useSelector((state: { name: string }) => state.name);
-  const image = useSelector((state: { image: string }) => state.image);
-
+  const dispatch = useDispatch();
+  const [name, image] = [
+    useSelector((state: { name: string }) => state.name),
+    useSelector((state: { image: string }) => state.image),
+  ];
+  console.log("name", name);
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(true);
@@ -30,11 +40,43 @@ function MainPage() {
 
     return () => clearTimeout(timer);
   }, []);
+  useEffect(() => {
+    const uid = localStorage.getItem("uid");
+    if (uid) {
+      const docRef = doc(db, "users", uid);
+
+      getDoc(docRef)
+        .then((docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const userData = docSnapshot.data();
+            const nameData = userData.name;
+            const imgData = userData.img;
+            dispatch(setName(nameData));
+            dispatch(setImage(imgData));
+            console.log("Data:", userData);
+          } else {
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.error("Error getting document:", error);
+        });
+    }
+  }, []);
+
+  const handlemodal = () => {
+    setIsModal((pre) => !pre);
+  };
+  const handleopen = () => {
+    setIsOpen((pre) => !pre);
+  };
 
   return (
     <WaitBox>
       {isLoading ? (
         <BarMainBox>
+          {isModal && <RfriModal handlemodal={handlemodal} />}
+          {isOpen && <BottlesModal handleopen={handleopen} />}
           <BarDisplay>
             <Title />
             <MidBox>
@@ -47,9 +89,10 @@ function MainPage() {
               </TextPongBox>
               <MidGom image={image} />
             </MidBox>
+            {/* <TextBox onClick={handleopen} /> */}
             <BtnBox>
               <ShareBtn />
-              <Refrigerator />
+              <Refrigerator handlemodal={handlemodal} />
               <ChangeName />
             </BtnBox>
           </BarDisplay>
