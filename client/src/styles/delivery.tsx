@@ -38,12 +38,12 @@ export const DeliveryImgBoxIn = styled.div`
   justify-content: space-evenly;
   background-color: #f2f2f2;
 `;
-export const DeliveryImgBack = styled.div`
+export const DeliveryImgBack = styled.div<{ back: any }>`
   width: 272px;
   height: 232px;
   border-radius: 16px;
   align-items: center;
-  background-color: blue;
+  background-image: ${({ back }) => `url(${back})`};
 `;
 export const DeliveryImg = styled.div<{ url: string }>`
   width: 81px;

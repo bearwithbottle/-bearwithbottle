@@ -48,7 +48,7 @@ export const DecorateImg = styled.div<{ img: any }>`
   width: 135px;
   height: 300px;
   position: absolute;
-  background-color: blue;
+
   background-size: cover;
   background-image: ${({ img }) => `url(${img})`};
 `;

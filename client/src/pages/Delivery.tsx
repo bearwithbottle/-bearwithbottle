@@ -22,7 +22,7 @@ import PreBtn from "../components/infostart/PreBtn";
 import NextDelivery from "../components/infostart/NextDelivery";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "../config";
 import { Link } from "react-router-dom";
 function Delivery() {
@@ -32,7 +32,11 @@ function Delivery() {
   const code = useSelector((state: { code: string }) => state.code);
   const sticker = useSelector((state: { sticker: string }) => state.sticker);
   async function getDocuments(value: string) {
-    const q = query(collection(db, "bottles"), where("code", "==", value));
+    const q = query(
+      collection(db, "recommend"),
+      where("code", "==", value),
+      limit(1)
+    );
 
     try {
       const querySnapshot = await getDocs(q);
@@ -63,7 +67,7 @@ function Delivery() {
           {Value.map((document: any, index: any) => (
             <div key={index}>
               <DeliveryImgBoxIn>
-                <DeliveryImgBack>
+                <DeliveryImgBack back={document.back_image}>
                   <DeliveryImg url={document.storage} />
                   <DeliverySticker sticker={sticker} />
                 </DeliveryImgBack>
