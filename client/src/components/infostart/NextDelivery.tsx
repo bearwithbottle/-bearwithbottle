@@ -3,12 +3,14 @@ import {
   NextSubBtnWrap,
   NextSubBtnDot,
 } from "../../styles/infobtn/nextsubmitbtn";
-
-function NextDelivery() {
+interface handleExport {
+  handleExport: () => void;
+}
+function NextDelivery({ handleExport }: handleExport) {
   return (
-    <NextSubBtnBox>
+    <NextSubBtnBox onClick={handleExport}>
       <NextSubBtnWrap>
-        <NextSubBtnDot>다음으로</NextSubBtnDot>
+        <NextSubBtnDot>보내기</NextSubBtnDot>
       </NextSubBtnWrap>
     </NextSubBtnBox>
   );

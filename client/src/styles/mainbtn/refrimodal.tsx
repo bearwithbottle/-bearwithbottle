@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import test from "../../assets/test.png";
 import xbox from "../../assets/main/boxX.png";
 export const RefriModalBox = styled.div`
   background-color: rgba(35, 35, 35, 0.9); /* 배경색에 투명도 추가 */
@@ -25,8 +24,8 @@ export const BottleBox = styled.div`
   align-items: center;
   justify-content: center;
 `;
-export const BottleBoxImg = styled.div`
-  background-image: url(${test});
+export const BottleBoxImg = styled.div<{ img: string }>`
+  ${(props) => props.img && `background-image: url(${props.img});`}
   background-size: cover;
   width: 54px;
   height: 120px;
@@ -56,4 +55,13 @@ export const Xbox = styled.div`
   background-image: url(${xbox});
   background-size: cover;
   margin-top: 92px;
+`;
+export const LetterStiker = styled.div<{ sticker: string }>`
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  cursor: pointer;
+  transform: translate(30%, 80%);
+  ${(props) => props.sticker && `background-image: url(${props.sticker});`}
+  background-size: cover;
 `;

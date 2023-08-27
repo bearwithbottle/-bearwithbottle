@@ -26,14 +26,14 @@ function GithubBtn() {
       dispatch(setUid(uid));
       if (userDocSnap.exists()) {
         // 이미 존재하는 uid라면 /bar로 이동
-        navigate("/bar");
+        navigate(`/bar/${uid}`);
       } else {
         // 새로운 uid면 데이터베이스에 추가하고 /info-start로 이동
         const user = result.user; // 사용자 정보 가져오기
         await setDoc(userDocRef, {
           name: user.displayName || "", // 사용자의 이름 저장
         });
-        navigate("/infostart");
+        navigate(`/infostart/${uid}`);
       }
     } catch (error) {
       console.log("Github:", error);

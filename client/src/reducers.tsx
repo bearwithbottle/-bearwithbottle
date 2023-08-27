@@ -12,6 +12,7 @@ import {
   SET_CODE,
   SET_FIRSTCHOICE,
   SET_SECONDCHOICE,
+  SET_USERID,
 } from "./types";
 import AppState from "./types";
 
@@ -20,6 +21,7 @@ const initialState: AppState = {
   name: "",
   uid: "",
   isLoggedIn: false,
+  userid: "",
   //sand
   code: "",
   setbear: "",
@@ -100,6 +102,12 @@ const reducer = (state = initialState, action: ActionTypes): AppState => {
       return {
         ...state,
         secondChoice: action.payload,
+      };
+    }
+    case SET_USERID: {
+      return {
+        ...state,
+        userid: action.payload,
       };
     }
     default:

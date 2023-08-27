@@ -22,7 +22,17 @@ import PreBtn from "../components/infostart/PreBtn";
 import NextDelivery from "../components/infostart/NextDelivery";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { collection, query, where, getDocs, limit } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  limit,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
+
 import { db } from "../config";
 import { Link } from "react-router-dom";
 function Delivery() {
@@ -31,6 +41,7 @@ function Delivery() {
   const message = useSelector((state: { message: string }) => state.message);
   const code = useSelector((state: { code: string }) => state.code);
   const sticker = useSelector((state: { sticker: string }) => state.sticker);
+  const setbear = useSelector((state: { setbear: string }) => state.setbear);
   async function getDocuments(value: string) {
     const q = query(
       collection(db, "recommend"),
@@ -53,6 +64,32 @@ function Delivery() {
     const documentsWithSpecificValue = await getDocuments(value);
     setValue(documentsWithSpecificValue);
   }
+  async function addValuesToLettersField() {
+    try {
+      const docRef = doc(db, "users", "Jra60o8ONZP92VV9M6xcLevu7Pe2");
+
+      const newData = {
+        sender: sender,
+        message: message,
+        code: code,
+        sticker: sticker,
+        setbear: setbear,
+      };
+
+      const userDoc = await getDoc(docRef);
+      const existingLetters = userDoc.data()?.letters || []; // 기존의 letters 배열 가져오기
+
+      const updatedLetters = [...existingLetters, newData]; // 새 데이터를 추가한 새로운 배열 생성
+
+      await setDoc(docRef, { letters: updatedLetters }, { merge: true });
+      console.log("테스트성공");
+    } catch (error) {
+      console.error("애러애러", error);
+    }
+  }
+  const handleExport = () => {
+    addValuesToLettersField();
+  };
 
   useEffect(() => {
     fetchData();
@@ -100,7 +137,7 @@ function Delivery() {
         </MailBox>
       </DeliveryMidBox>
       <Link to="/to">
-        <NextDelivery />
+        <NextDelivery handleExport={handleExport} />
       </Link>
     </DeliveryBox>
   );

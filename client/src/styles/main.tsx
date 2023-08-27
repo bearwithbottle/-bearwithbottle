@@ -17,11 +17,12 @@ export const MainBox = styled.div`
 `;
 
 export const MainText = styled.div`
-  width: 360px;
-  height: 313px;
+  width: 310px;
+  height: 316px;
   background-image: url(${maintext});
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   margin-top: 141px;
 `;
 

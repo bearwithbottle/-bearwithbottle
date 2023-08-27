@@ -13,7 +13,14 @@ import Mail from "./pages/Mail";
 import Decorate from "./pages/Decorate";
 import Delivery from "./pages/Delivery";
 import To from "./pages/To";
+import Name from "./pages/Name";
+// import { useEffect } from "react";
+// import { useSelector } from "react-redux/";
 function App() {
+  const uid = localStorage.getItem("uid");
+
+  // const id = useSelector((state: any) => state.userid);
+
   return (
     <>
       <Routes>
@@ -24,11 +31,12 @@ function App() {
         <Route path="/lineup" element={<LineUp />} />
         <Route path="/listtwo" element={<QuestionListTwo />} />
         <Route path="/list" element={<QuestionList />} />
-        <Route path="/sand" element={<Sand />} />
+        <Route path={`/send`} element={<Sand />} />
         <Route path="/" element={<Main />} />
-        <Route path="/choosegomdol" element={<InfoChooseGomdol />} />
-        <Route path="/infostart" element={<InfoStart />} />
-        <Route path="/bar" element={<MainPage />} />
+        <Route path={`/choosegomdol/${uid}`} element={<InfoChooseGomdol />} />
+        <Route path={`/infostart/${uid}`} element={<InfoStart />} />
+        <Route path={`/bar/${uid}`} element={<MainPage />} />
+        <Route path={`/name/${uid}`} element={<Name />} />
       </Routes>
     </>
   );

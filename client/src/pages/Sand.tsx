@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   SandBox,
   SandMainBox,
@@ -12,9 +13,25 @@ import {
 
 import SandBtn from "../components/btn/SandBtn";
 import HomeBtn from "../components/btn/HomeBtn";
-import { Link } from "react-router-dom";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUserid } from "../action";
 function Sand() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loca = useLocation();
+  const parts = loca.pathname.split("/");
+  const userId = parts[parts.length - 1];
+
+  useEffect(() => {
+    const uid = localStorage.getItem("uid");
+    if (uid === userId) {
+      navigate(`/bar/${uid}`);
+    } else {
+      dispatch(setUserid(userId));
+    }
+  }, []);
   return (
     <SandBox>
       <SandMainBox>

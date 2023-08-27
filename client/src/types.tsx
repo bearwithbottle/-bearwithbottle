@@ -5,6 +5,7 @@ interface AppState {
   isLoggedIn: boolean;
   setbear: string;
   color: string;
+  userid: string;
   // send
   sender: string;
   message: any;
@@ -28,7 +29,7 @@ export const SET_STICKER = "SET_STICKER";
 export const SET_CODE = "SET_CODE";
 export const SET_FIRSTCHOICE = "SET_FIRSTCHOICE";
 export const SET_SECONDCHOICE = "SET_SECONDCHOICE";
-
+export const SET_USERID = "SET_USERID";
 interface SetImageAction {
   type: typeof SET_IMAGE;
   payload: string;
@@ -79,6 +80,10 @@ interface SetSecondAction {
   type: typeof SET_SECONDCHOICE;
   payload: string;
 }
+interface SetUserIdAction {
+  type: typeof SET_USERID;
+  payload: string;
+}
 export type ActionTypes =
   | SetImageAction
   | SetNameAction
@@ -91,4 +96,5 @@ export type ActionTypes =
   | SetStickerAction
   | SetCodeAction
   | SetFirstAction
-  | SetSecondAction;
+  | SetSecondAction
+  | SetUserIdAction;

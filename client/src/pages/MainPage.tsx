@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   WaitBox,
   LodingBox,
@@ -11,7 +12,9 @@ import {
   TextPongContents,
   MidGom,
   BtnBox,
-  TextBox,
+  LettersBox,
+  LetterCodeBox,
+  LetterStiker,
 } from "../styles/mainbar";
 import { useState, useEffect } from "react";
 import ShareBtn from "../components/btn/ShareBtn";
@@ -21,18 +24,24 @@ import RfriModal from "../components/main/RefriModal";
 import BottlesModal from "../components/main/BottlesModal";
 import { useSelector, useDispatch } from "react-redux";
 import { db } from "../config";
-import { doc, getDoc } from "firebase/firestore";
+import { DocumentData, doc, getDoc } from "firebase/firestore";
 import { setImage, setName } from "../action";
+import { Link } from "react-router-dom";
+
 function MainPage() {
   const [isModal, setIsModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const uid = localStorage.getItem("uid");
+  const [letters, setLetters] = useState<DocumentData[]>([]);
+
   const dispatch = useDispatch();
   const [name, image] = [
     useSelector((state: { name: string }) => state.name),
     useSelector((state: { image: string }) => state.image),
   ];
-  console.log("name", name);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(true);
@@ -63,6 +72,27 @@ function MainPage() {
         });
     }
   }, []);
+  useEffect(() => {
+    async function fetchLetters() {
+      if (uid) {
+        try {
+          const userDocRef = doc(db, "users", uid); // 로컬 uid 값으로 사용자 문서 참조 가져오기
+
+          const docSnapshot = await getDoc(userDocRef);
+          if (docSnapshot.exists()) {
+            const userData = docSnapshot.data();
+            const lettersData = userData.letters || []; // letters 배열 데이터 가져오기
+            setLetters(lettersData);
+            console.log(lettersData);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+    }
+
+    fetchLetters();
+  }, []);
 
   const handlemodal = () => {
     setIsModal((pre) => !pre);
@@ -88,12 +118,22 @@ function MainPage() {
                 </TextPongContents>
               </TextPongBox>
               <MidGom image={image} />
+              <LettersBox>
+                {letters.map((letter, index) => (
+                  <li key={index}>
+                    <LetterCodeBox img={letter.setbear} />
+                    <LetterStiker sticker={letter.sticker} />
+                    {isOpen && <BottlesModal handleopen={handleopen} />}
+                  </li>
+                ))}
+              </LettersBox>
             </MidBox>
-            {/* <TextBox onClick={handleopen} /> */}
             <BtnBox>
               <ShareBtn />
               <Refrigerator handlemodal={handlemodal} />
-              <ChangeName />
+              <Link to={`/name/${uid}`}>
+                <ChangeName />
+              </Link>
             </BtnBox>
           </BarDisplay>
         </BarMainBox>

@@ -3,10 +3,10 @@ import { styled } from "styled-components";
 import barBG from "../assets/main/Bar_BG.png";
 import "../assets/font/font.css";
 import wait from "../assets/main/BG_feature.png";
-
+//lo
 import loding_e from "../assets/main/Loding_e.png";
+
 import loding_text from "../assets/main/please Wait....png";
-import text from "../assets/test.png";
 import title from "../assets/bar/title.png";
 export const WaitBox = styled.div`
   width: 360px;
@@ -17,7 +17,6 @@ export const WaitBox = styled.div`
   background-image: url(${wait});
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
   font-family: "ImcreSoojin";
 `;
 export const LodingBox = styled.div`
@@ -77,6 +76,7 @@ export const MidBox = styled.div`
   height: 296px;
   padding-left: 24px;
   flex-direction: column;
+
   margin-top: 16px;
   margin-bottom: 85px;
 `;
@@ -108,13 +108,28 @@ export const BtnBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
-export const TextBox = styled.div`
-  width: 54px;
-  height: 120px;
-  top: 450px;
-  right: 790px;
-  position: fixed;
-  background-image: url(${text});
-  background-size: cover;
+export const LettersBox = styled.div`
+  width: 360px;
+  height: 128px;
+  transform: translate(-3%, 85%);
+  position: absolute;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+`;
+export const LetterCodeBox = styled.div<{ img: string }>`
+  width: 64px;
+  height: 128px;
   cursor: pointer;
+  ${(props) => props.img && `background-image: url(${props.img});`}
+  background-size: cover;
+`;
+export const LetterStiker = styled.div<{ sticker: string }>`
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  cursor: pointer;
+  transform: translate(30%, 250%);
+  ${(props) => props.sticker && `background-image: url(${props.sticker});`}
+  background-size: cover;
 `;

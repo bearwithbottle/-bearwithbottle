@@ -12,6 +12,7 @@ import {
   SET_CODE,
   SET_SECONDCHOICE,
   SET_FIRSTCHOICE,
+  SET_USERID,
 } from "./types";
 
 export const setImage = (image: string): ActionTypes => ({
@@ -63,4 +64,8 @@ export const setFirst = (firstChoice: string): ActionTypes => ({
 export const setSecond = (secondChoice: string): ActionTypes => ({
   type: SET_SECONDCHOICE,
   payload: secondChoice,
+});
+export const setUserid = (userid: string): ActionTypes => ({
+  type: SET_SECONDCHOICE,
+  payload: userid,
 });
