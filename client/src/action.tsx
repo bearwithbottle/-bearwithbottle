@@ -66,6 +66,10 @@ export const setSecond = (secondChoice: string): ActionTypes => ({
   payload: secondChoice,
 });
 export const setUserid = (userid: string): ActionTypes => ({
-  type: SET_SECONDCHOICE,
+  type: SET_USERID,
   payload: userid,
+});
+export const setSendUid = (senduid: string): ActionTypes => ({
+  type: SET_USERID,
+  payload: senduid,
 });

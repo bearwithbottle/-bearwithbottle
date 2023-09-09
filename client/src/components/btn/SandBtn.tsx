@@ -3,10 +3,12 @@ import {
   SandBtnDot,
   SandBtnWrap,
 } from "../../styles/mainbtn/sandbtn";
-
-function SandBtn() {
+interface handleSave {
+  handleSave: () => void;
+}
+function SandBtn({ handleSave }: handleSave) {
   return (
-    <SandBtnBox>
+    <SandBtnBox onClick={handleSave}>
       <SandBtnWrap>
         <SandBtnDot>주류 선물하기</SandBtnDot>
       </SandBtnWrap>

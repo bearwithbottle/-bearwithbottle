@@ -32,6 +32,7 @@ function GithubBtn() {
         const user = result.user; // 사용자 정보 가져오기
         await setDoc(userDocRef, {
           name: user.displayName || "", // 사용자의 이름 저장
+          id: uid,
         });
         navigate(`/infostart/${uid}`);
       }
@@ -43,7 +44,7 @@ function GithubBtn() {
     <MainGithubBox onClick={handleGithub}>
       <MainGithubWrap>
         <MainGithubLogo />
-        <MainGithubSpan>Github 계정으로 시작</MainGithubSpan>
+        <MainGithubSpan>깃허브(으)로 시작하기</MainGithubSpan>
       </MainGithubWrap>
     </MainGithubBox>
   );

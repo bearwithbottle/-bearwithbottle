@@ -13,6 +13,7 @@ interface AppState {
   code: string;
   firstChoice: string;
   secondChoice: string;
+  senduid: string;
 }
 
 export default AppState;
@@ -30,6 +31,7 @@ export const SET_CODE = "SET_CODE";
 export const SET_FIRSTCHOICE = "SET_FIRSTCHOICE";
 export const SET_SECONDCHOICE = "SET_SECONDCHOICE";
 export const SET_USERID = "SET_USERID";
+export const SET_SENDUID = "SET_SENDUID";
 interface SetImageAction {
   type: typeof SET_IMAGE;
   payload: string;
@@ -84,6 +86,10 @@ interface SetUserIdAction {
   type: typeof SET_USERID;
   payload: string;
 }
+interface SetSendUidIdAction {
+  type: typeof SET_SENDUID;
+  payload: string;
+}
 export type ActionTypes =
   | SetImageAction
   | SetNameAction
@@ -97,4 +103,5 @@ export type ActionTypes =
   | SetCodeAction
   | SetFirstAction
   | SetSecondAction
-  | SetUserIdAction;
+  | SetUserIdAction
+  | SetSendUidIdAction;

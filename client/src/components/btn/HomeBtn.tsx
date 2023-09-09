@@ -3,10 +3,12 @@ import {
   HomeBtnBox,
   HomeBtnDot,
 } from "../../styles/mainbtn/homebtn";
-
-function HomeBtn() {
+interface handleBar {
+  handleBar: () => void;
+}
+function HomeBtn({ handleBar }: handleBar) {
   return (
-    <HomeBtnBox>
+    <HomeBtnBox onClick={handleBar}>
       <HomeBtnWrap>
         <HomeBtnDot>내 Bar가기</HomeBtnDot>
       </HomeBtnWrap>

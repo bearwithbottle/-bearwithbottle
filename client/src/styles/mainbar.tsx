@@ -4,7 +4,7 @@ import barBG from "../assets/main/Bar_BG.png";
 import "../assets/font/font.css";
 import wait from "../assets/main/BG_feature.png";
 //lo
-import loding_e from "../assets/main/Loding_e.png";
+import loding_e from "../assets/main/loading_30.gif";
 
 import loding_text from "../assets/main/please Wait....png";
 import title from "../assets/bar/title.png";

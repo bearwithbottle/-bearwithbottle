@@ -14,12 +14,8 @@ import Decorate from "./pages/Decorate";
 import Delivery from "./pages/Delivery";
 import To from "./pages/To";
 import Name from "./pages/Name";
-// import { useEffect } from "react";
-// import { useSelector } from "react-redux/";
 function App() {
   const uid = localStorage.getItem("uid");
-
-  // const id = useSelector((state: any) => state.userid);
 
   return (
     <>
@@ -31,7 +27,7 @@ function App() {
         <Route path="/lineup" element={<LineUp />} />
         <Route path="/listtwo" element={<QuestionListTwo />} />
         <Route path="/list" element={<QuestionList />} />
-        <Route path={`/send`} element={<Sand />} />
+        <Route path={`/send/users/:id`} element={<Sand />} />
         <Route path="/" element={<Main />} />
         <Route path={`/choosegomdol/${uid}`} element={<InfoChooseGomdol />} />
         <Route path={`/infostart/${uid}`} element={<InfoStart />} />

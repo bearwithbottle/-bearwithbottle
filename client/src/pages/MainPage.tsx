@@ -35,6 +35,10 @@ function MainPage() {
 
   const uid = localStorage.getItem("uid");
   const [letters, setLetters] = useState<DocumentData[]>([]);
+  const [selectedLetter, setSelectedLetter] = useState<DocumentData | null>(
+    null
+  );
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const dispatch = useDispatch();
   const [name, image] = [
@@ -62,7 +66,6 @@ function MainPage() {
             const imgData = userData.img;
             dispatch(setName(nameData));
             dispatch(setImage(imgData));
-            console.log("Data:", userData);
           } else {
             console.log("No such document!");
           }
@@ -83,7 +86,6 @@ function MainPage() {
             const userData = docSnapshot.data();
             const lettersData = userData.letters || []; // letters 배열 데이터 가져오기
             setLetters(lettersData);
-            console.log(lettersData);
           }
         } catch (error) {
           console.error("Error:", error);
@@ -93,12 +95,47 @@ function MainPage() {
 
     fetchLetters();
   }, []);
+  const getRandomLetters = () => {
+    if (letters.length <= 5) {
+      return letters;
+    }
+
+    const shuffledLetters = [...letters];
+
+    for (let i = shuffledLetters.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledLetters[i], shuffledLetters[j]] = [
+        shuffledLetters[j],
+        shuffledLetters[i],
+      ];
+    }
+
+    return shuffledLetters.slice(0, 5);
+  };
+  const randomLetters = getRandomLetters();
 
   const handlemodal = () => {
     setIsModal((pre) => !pre);
   };
   const handleopen = () => {
     setIsOpen((pre) => !pre);
+  };
+  const handleLetterClick = (e: any, index: number) => {
+    e.preventDefault();
+    if (randomLetters[index]) {
+      setSelectedLetter(randomLetters[index]);
+      console.log(randomLetters[index]);
+    }
+  };
+  const openModal = (index: any) => {
+    setSelectedLetter(index);
+    setIsModalOpen(true);
+  };
+
+  // 모달 닫기
+  const closeModal = () => {
+    setSelectedLetter(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -119,8 +156,8 @@ function MainPage() {
               </TextPongBox>
               <MidGom image={image} />
               <LettersBox>
-                {letters.map((letter, index) => (
-                  <li key={index}>
+                {randomLetters.map((letter, index) => (
+                  <li key={index} onClick={(e) => handleLetterClick(e, index)}>
                     <LetterCodeBox img={letter.setbear} />
                     <LetterStiker sticker={letter.sticker} />
                     {isOpen && <BottlesModal handleopen={handleopen} />}

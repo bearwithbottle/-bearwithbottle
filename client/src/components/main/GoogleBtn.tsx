@@ -33,6 +33,7 @@ function GoogleBtn() {
         const user = result.user; // 사용자 정보 가져오기
         await setDoc(userDocRef, {
           name: user.displayName || "", // 사용자의 이름 저장
+          id: uid,
         });
         navigate(`/infostart/${uid}`);
       }

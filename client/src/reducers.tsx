@@ -13,6 +13,7 @@ import {
   SET_FIRSTCHOICE,
   SET_SECONDCHOICE,
   SET_USERID,
+  SET_SENDUID,
 } from "./types";
 import AppState from "./types";
 
@@ -31,6 +32,7 @@ const initialState: AppState = {
   sticker: "",
   firstChoice: "",
   secondChoice: "",
+  senduid: "Jra60o8ONZP92VV9M6xcLevu7Pe2",
 };
 
 const reducer = (state = initialState, action: ActionTypes): AppState => {
@@ -108,6 +110,12 @@ const reducer = (state = initialState, action: ActionTypes): AppState => {
       return {
         ...state,
         userid: action.payload,
+      };
+    }
+    case SET_SENDUID: {
+      return {
+        ...state,
+        senduid: action.payload,
       };
     }
     default:
