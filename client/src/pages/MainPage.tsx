@@ -8,6 +8,8 @@ import {
   BarDisplay,
   Title,
   TextPongBox,
+  TextImg,
+  TextPongBox33,
   MidBox,
   TextPongContents,
   MidGom,
@@ -22,6 +24,7 @@ import Refrigerator from "../components/btn/Refrigerator";
 import ChangeName from "../components/btn/ChangeName";
 import RfriModal from "../components/main/RefriModal";
 import BottlesModal from "../components/main/BottlesModal";
+import Share from "../components/Share";
 import { useSelector, useDispatch } from "react-redux";
 import { db } from "../config";
 import { DocumentData, doc, getDoc } from "firebase/firestore";
@@ -30,7 +33,7 @@ import { Link } from "react-router-dom";
 
 function MainPage() {
   const [isModal, setIsModal] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isShare, setIsShare] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const uid = localStorage.getItem("uid");
@@ -117,56 +120,74 @@ function MainPage() {
   const handlemodal = () => {
     setIsModal((pre) => !pre);
   };
-  const handleopen = () => {
-    setIsOpen((pre) => !pre);
-  };
+
   const handleLetterClick = (e: any, index: number) => {
     e.preventDefault();
     if (randomLetters[index]) {
       setSelectedLetter(randomLetters[index]);
-      console.log(randomLetters[index]);
+      setIsModalOpen(true);
     }
   };
-  const openModal = (index: any) => {
-    setSelectedLetter(index);
-    setIsModalOpen(true);
-  };
-
-  // 모달 닫기
-  const closeModal = () => {
-    setSelectedLetter(null);
+  const handleIndex = () => {
     setIsModalOpen(false);
   };
+  const hadleShare = () => {
+    setIsShare((pre) => !pre);
+  };
+  const textPongBox =
+    name.length <= 10 ? (
+      <TextPongBox>
+        <TextImg />
+        <TextPongContents>
+          {name}님 안녕하십니까?
+          <br />
+          자신의 Bar를 홍보 해보시죠.
+        </TextPongContents>
+      </TextPongBox>
+    ) : (
+      <TextPongBox33>
+        <TextImg />
+        <TextPongContents>
+          {name}님
+          <br />
+          안녕하십니까?
+          <br />
+          자신의 Bar를 홍보 해보시죠.
+        </TextPongContents>
+      </TextPongBox33>
+    );
 
   return (
     <WaitBox>
       {isLoading ? (
         <BarMainBox>
           {isModal && <RfriModal handlemodal={handlemodal} />}
-          {isOpen && <BottlesModal handleopen={handleopen} />}
+          {isModalOpen && (
+            <BottlesModal
+              handleLetterClick={handleLetterClick}
+              selectedLetter={selectedLetter}
+              handleIndex={handleIndex}
+            />
+          )}
+          {isShare && (
+            <Share name={name} image={image} hadleShare={hadleShare} />
+          )}
           <BarDisplay>
             <Title />
             <MidBox>
-              <TextPongBox>
-                <TextPongContents>
-                  {name}님 안녕하십니까?
-                  <br />
-                  자신의 Bar를 홍보 해보시죠.
-                </TextPongContents>
-              </TextPongBox>
+              {textPongBox}
               <MidGom image={image} />
               <LettersBox>
                 {randomLetters.map((letter, index) => (
                   <li key={index} onClick={(e) => handleLetterClick(e, index)}>
                     <LetterCodeBox img={letter.setbear} />
                     <LetterStiker sticker={letter.sticker} />
-                    {isOpen && <BottlesModal handleopen={handleopen} />}
                   </li>
                 ))}
               </LettersBox>
             </MidBox>
             <BtnBox>
-              <ShareBtn />
+              <ShareBtn hadleShare={hadleShare} />
               <Refrigerator handlemodal={handlemodal} />
               <Link to={`/name/${uid}`}>
                 <ChangeName />

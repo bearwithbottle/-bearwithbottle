@@ -20,10 +20,39 @@ import {
   MailContent,
   Xbox,
 } from "../../styles/mainbtn/bottlesmodal";
-interface handleopen {
-  handleopen: () => void;
-}
-function BottlesModal({ handleopen }: handleopen) {
+import { useEffect, useState } from "react";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { db } from "../../config";
+function BottlesModal({ handleLetterClick, selectedLetter, handleIndex }: any) {
+  const [arr, setArr] = useState<any>(null);
+
+  function getRandomBottles(count: number, firstChoiceStr: string) {
+    const bottlesCollectionRef = collection(db, "recommend");
+    const q = query(bottlesCollectionRef, where("code", "==", firstChoiceStr));
+
+    return getDocs(q).then((querySnapshot) => {
+      const documents = querySnapshot.docs.map((doc) => doc.data());
+      const randomBottles = [];
+
+      while (randomBottles.length < count && documents.length > 0) {
+        const randomIndex = Math.floor(Math.random() * documents.length);
+        randomBottles.push(documents[randomIndex]);
+        documents.splice(randomIndex, 1);
+      }
+
+      return randomBottles;
+    });
+  }
+  useEffect(() => {
+    const firstChoice = selectedLetter.code;
+    async function fetchBottles() {
+      const bottles = await getRandomBottles(1, firstChoice);
+      setArr(bottles);
+    }
+
+    fetchBottles();
+  }, []);
+
   return (
     <BottlesModalBox>
       <BottlesModalContents>
@@ -33,42 +62,35 @@ function BottlesModal({ handleopen }: handleopen) {
               <BottlesImg />
             </BottlesImgBox>
             <BottlesTextBox>
-              <BottlesTextTitle>아페롤</BottlesTextTitle>
-              <BottlesTextName>Aperol</BottlesTextName>
+              <BottlesTextTitle>{arr && arr[0].name}</BottlesTextTitle>
+              <BottlesTextName>{arr && arr[0].code}</BottlesTextName>
             </BottlesTextBox>
             {/* Tags */}
             <BottlesTagBox>
               <Tags>
-                <TagText>#오렌지</TagText>
+                <TagText>{arr && arr[0].hash1}</TagText>
               </Tags>
               <Tags>
-                <TagText>#독특함</TagText>
+                <TagText>{arr && arr[0].hash2}</TagText>
               </Tags>
               <Tags>
-                <TagText>#허브</TagText>
+                <TagText>{arr && arr[0].hash3}</TagText>
               </Tags>
             </BottlesTagBox>
             <MidLine />
-            <TextBox>
-              활기차고 생생한 오렌지 색의 색조가 독특한 느낌을 줍니다. 식전주로
-              많이 활용되는만큼, 특별한 식사 자리에 함께해 보세요
-            </TextBox>
+            <TextBox>{arr && arr[0].text}</TextBox>
           </BottlesModalInfoIn>
         </BottlesModalInfo>
         <MailBox>
           <MailBoxIn>
             <MailDot>
-              <MailName>5글자넘어가면안돼요</MailName>
-              <MailContent>
-                반가워요반가워요반가워요반 가워요반가워요반가워요반가워요반
-                가워요반가워요반가워요반가워요반가워
-                반가워요반가워요반가워요반가워요요반가워요반가워요반가워요반가워요반가워요반가워요반가워요
-              </MailContent>
+              <MailName>{selectedLetter.sender}</MailName>
+              <MailContent>{selectedLetter.message}</MailContent>
             </MailDot>
           </MailBoxIn>
         </MailBox>
       </BottlesModalContents>
-      <Xbox onClick={handleopen} />
+      <Xbox onClick={handleIndex} />
     </BottlesModalBox>
   );
 }

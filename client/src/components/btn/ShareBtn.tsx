@@ -4,9 +4,9 @@ import {
   ShareBtnBox,
 } from "../../styles/mainbtn/sharebtn";
 
-function ShareBtn() {
+function ShareBtn({ hadleShare }: any) {
   return (
-    <ShareBtnBox>
+    <ShareBtnBox onClick={hadleShare}>
       <ShareBtnWrap>
         <ShareBtnDot>공유하기</ShareBtnDot>
       </ShareBtnWrap>

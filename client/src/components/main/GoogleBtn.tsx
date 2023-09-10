@@ -35,6 +35,7 @@ function GoogleBtn() {
           name: user.displayName || "", // 사용자의 이름 저장
           id: uid,
         });
+
         navigate(`/infostart/${uid}`);
       }
     } catch (error) {

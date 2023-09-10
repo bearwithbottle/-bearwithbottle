@@ -8,6 +8,7 @@ import loding_e from "../assets/main/loading_30.gif";
 
 import loding_text from "../assets/main/please Wait....png";
 import title from "../assets/bar/title.png";
+import line33 from "../assets/text/speech_2line.png";
 export const WaitBox = styled.div`
   width: 360px;
   height: 800px;
@@ -80,20 +81,7 @@ export const MidBox = styled.div`
   margin-top: 16px;
   margin-bottom: 85px;
 `;
-export const TextPongBox = styled.div`
-  width: 238px;
-  height: 83px;
-  border-radius: 10px;
-  background-color: #afafaf;
-`;
-export const TextPongContents = styled.div`
-  width: 238px;
-  height: 60px;
-  border-radius: 10px;
-  padding: 19px 12px;
-  background-color: #f2f2f2;
-  line-height: 23px;
-`;
+
 export const MidGom = styled.div<{ image: string }>`
   width: 234px;
   height: 200px;
@@ -132,4 +120,25 @@ export const LetterStiker = styled.div<{ sticker: string }>`
   transform: translate(30%, 250%);
   ${(props) => props.sticker && `background-image: url(${props.sticker});`}
   background-size: cover;
+`;
+export const TextPongBox = styled.div`
+  width: 238px;
+  height: 94px;
+  position: relative;
+`;
+export const TextPongBox33 = styled.div`
+  width: 250px;
+  height: 100px;
+  position: relative;
+`;
+export const TextImg = styled.div`
+  width: 100%;
+  vertical-align: middle;
+  background-image: url(${line33});
+  background-size: cover;
+`;
+export const TextPongContents = styled.p`
+  position: absolute;
+  line-height: 150%;
+  transform: translate(0%, 20%);
 `;

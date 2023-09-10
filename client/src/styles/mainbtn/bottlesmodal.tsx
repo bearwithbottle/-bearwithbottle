@@ -5,7 +5,7 @@ export const BottlesModalBox = styled.div`
   background-color: rgba(35, 35, 35, 0.9); /* 배경색에 투명도 추가 */
   width: 360px;
   height: 800px;
-  transform: translate(0%, -47.35%);
+  transform: translate(0%, 0%);
   font-family: "ImcreSoojin";
   position: fixed;
   z-index: 1;
