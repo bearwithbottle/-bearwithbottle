@@ -17,13 +17,17 @@ import {
   LettersBox,
   LetterCodeBox,
   LetterStiker,
+  LogoutBox,
+  LogoutText,
 } from "../styles/mainbar";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ShareBtn from "../components/btn/ShareBtn";
 import Refrigerator from "../components/btn/Refrigerator";
 import ChangeName from "../components/btn/ChangeName";
 import RfriModal from "../components/main/RefriModal";
 import BottlesModal from "../components/main/BottlesModal";
+import LogoutModal from "../components/main/LogoutModal";
 import Share from "../components/Share";
 import { useSelector, useDispatch } from "react-redux";
 import { db } from "../config";
@@ -35,6 +39,7 @@ function MainPage() {
   const [isModal, setIsModal] = useState(false);
   const [isShare, setIsShare] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const navi = useNavigate();
 
   const uid = localStorage.getItem("uid");
   const [letters, setLetters] = useState<DocumentData[]>([]);
@@ -42,7 +47,7 @@ function MainPage() {
     null
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isOut, setIsOut] = useState(false);
   const dispatch = useDispatch();
   const [name, image] = [
     useSelector((state: { name: string }) => state.name),
@@ -76,6 +81,8 @@ function MainPage() {
         .catch((error) => {
           console.error("Error getting document:", error);
         });
+    } else {
+      navi("/");
     }
   }, []);
   useEffect(() => {
@@ -134,6 +141,9 @@ function MainPage() {
   const hadleShare = () => {
     setIsShare((pre) => !pre);
   };
+  const handleLogout = () => {
+    setIsOut((pre) => !pre);
+  };
   const textPongBox =
     name.length <= 10 ? (
       <TextPongBox>
@@ -172,6 +182,7 @@ function MainPage() {
           {isShare && (
             <Share name={name} image={image} hadleShare={hadleShare} />
           )}
+          {isOut && <LogoutModal handleLogout={handleLogout} />}
           <BarDisplay>
             <Title />
             <MidBox>
@@ -189,9 +200,12 @@ function MainPage() {
             <BtnBox>
               <ShareBtn hadleShare={hadleShare} />
               <Refrigerator handlemodal={handlemodal} />
-              <Link to={`/name/${uid}`}>
-                <ChangeName />
-              </Link>
+              <LogoutBox>
+                <Link to={`/name`}>
+                  <ChangeName />
+                </Link>
+                <LogoutText onClick={handleLogout}>로그 아웃</LogoutText>
+              </LogoutBox>
             </BtnBox>
           </BarDisplay>
         </BarMainBox>

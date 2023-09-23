@@ -36,7 +36,7 @@ function Name() {
           },
           { merge: true }
         );
-        navigate(`/bar/${uid}`);
+        navigate(`/bar`);
       }
     } catch (error) {
       console.error("ErrorImg:", error);

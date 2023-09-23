@@ -15,7 +15,7 @@ import Delivery from "./pages/Delivery";
 import To from "./pages/To";
 import Name from "./pages/Name";
 function App() {
-  const uid = localStorage.getItem("uid");
+  // const uid = localStorage.getItem("uid");
 
   return (
     <>
@@ -29,10 +29,10 @@ function App() {
         <Route path="/list" element={<QuestionList />} />
         <Route path={`/send/users/:id`} element={<Sand />} />
         <Route path="/" element={<Main />} />
-        <Route path={`/choosegomdol/${uid}`} element={<InfoChooseGomdol />} />
-        <Route path={`/infostart/${uid}`} element={<InfoStart />} />
-        <Route path={`/bar/${uid}`} element={<MainPage />} />
-        <Route path={`/name/${uid}`} element={<Name />} />
+        <Route path={`/choosegomdol`} element={<InfoChooseGomdol />} />
+        <Route path={`/infostart`} element={<InfoStart />} />
+        <Route path={`/bar`} element={<MainPage />} />
+        <Route path={`/name`} element={<Name />} />
       </Routes>
     </>
   );

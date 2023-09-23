@@ -36,7 +36,7 @@ function Sand() {
   const dispatch = useDispatch();
   const navi = useNavigate();
   const save = id;
-  const uid = localStorage.getItem("uid");
+
   useEffect(() => {
     async function fetchUserData() {
       try {
@@ -59,11 +59,7 @@ function Sand() {
     }
   };
   const handleBar = () => {
-    if (uid) {
-      navi(`/bar/${uid}`);
-    } else {
-      navi(`/`);
-    }
+    navi(`/`);
   };
   return (
     <SandBox>

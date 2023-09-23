@@ -95,6 +95,7 @@ export const BtnBox = styled.div`
   height: 186px;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 `;
 export const LettersBox = styled.div`
   width: 360px;
@@ -141,4 +142,15 @@ export const TextPongContents = styled.p`
   position: absolute;
   line-height: 150%;
   transform: translate(0%, 20%);
+`;
+export const LogoutBox = styled.div`
+  width: 300px;
+  height: 48px;
+`;
+export const LogoutText = styled.div`
+  cursor: pointer;
+  width: 150px;
+  height: 48px;
+  align-items: center;
+  color: #fff;
 `;
