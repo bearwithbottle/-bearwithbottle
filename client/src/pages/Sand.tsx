@@ -45,6 +45,8 @@ function Sand() {
           const q = query(userCollectionRef, where("id", "==", id));
           const userDocSnap = await getDocs(q);
           setUserData(userDocSnap);
+        } else {
+          navi("/");
         }
       } catch (error) {
         console.error("사용자 데이터 가져오기 중 오류 발생:", error);

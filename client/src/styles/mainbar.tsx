@@ -99,8 +99,9 @@ export const BtnBox = styled.div`
 `;
 export const LettersBox = styled.div`
   width: 360px;
-  height: 128px;
-  transform: translate(-3%, 85%);
+  height: 180px;
+  overflow-y: hidden;
+  transform: translate(-3%, 50%);
   position: absolute;
   align-items: center;
   justify-content: flex-start;
@@ -108,17 +109,18 @@ export const LettersBox = styled.div`
 `;
 export const LetterCodeBox = styled.div<{ img: string }>`
   width: 64px;
-  height: 128px;
+  height: 170px;
   cursor: pointer;
   ${(props) => props.img && `background-image: url(${props.img});`}
   background-size: cover;
 `;
 export const LetterStiker = styled.div<{ sticker: string }>`
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   position: absolute;
   cursor: pointer;
-  transform: translate(30%, 250%);
+
+  transform: translate(35%, 260%);
   ${(props) => props.sticker && `background-image: url(${props.sticker});`}
   background-size: cover;
 `;

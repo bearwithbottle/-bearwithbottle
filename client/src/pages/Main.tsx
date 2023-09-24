@@ -9,7 +9,7 @@ function Main() {
   useEffect(() => {
     const uid = localStorage.getItem("uid");
     if (uid) {
-      goback(`/bar/${uid}`);
+      goback(`/bar`);
     }
   }, []);
   return (

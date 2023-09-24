@@ -6,7 +6,6 @@ import {
   ShareText,
   ImgBox,
   ImgGom,
-  ImgText,
   OOO,
   InText,
   ShareBtnWrap,
@@ -19,9 +18,8 @@ import {
   TextPongContents,
 } from "../styles/share";
 
-import { useEffect, useState } from "react";
-import { getDocs, collection, query, where } from "firebase/firestore";
-import { db } from "../config";
+import { useState } from "react";
+
 function Share({ name, image, hadleShare }: any) {
   const [isShare, setIsShare] = useState(false);
 
