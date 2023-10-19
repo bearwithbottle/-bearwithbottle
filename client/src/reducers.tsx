@@ -32,7 +32,7 @@ const initialState: AppState = {
   sticker: "",
   firstChoice: "",
   secondChoice: "",
-  senduid: "Jra60o8ONZP92VV9M6xcLevu7Pe2",
+  senduid: "",
 };
 
 const reducer = (state = initialState, action: ActionTypes): AppState => {

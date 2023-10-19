@@ -2,4 +2,12 @@
   @font-face {
     font-family: 'ImcreSoojin';
     src: url('./ImcreSoojin.ttf');
+    
+  }
+
+  
+  @font-face {
+    font-family: 'Pre';
+    src: url('./Pretendard-Medium.otf');
+    
   }

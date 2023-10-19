@@ -29,7 +29,7 @@ function To() {
   const senduid = useSelector((state: { senduid: string }) => state.senduid);
   const [userData, setUserData] = useState<DocumentData | null>(null);
   const navi = useNavigate();
-  const uid = localStorage.getItem("uid");
+  // const uid = localStorage.getItem("uid");
   useEffect(() => {
     async function fetchUserData() {
       try {
@@ -56,7 +56,7 @@ function To() {
     navi(`/send/users/${senduid}`);
   };
   const handleToHome = () => {
-    navi(`/bar/${uid}`);
+    navi(`/bar`);
   };
   return (
     <ToBox>

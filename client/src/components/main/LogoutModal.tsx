@@ -12,6 +12,8 @@ import {
   HomeBtnDot,
   HomeBtnBox,
 } from "../../styles/mainbtn/logoutmodal";
+import { signOut } from "firebase/auth";
+import { auth } from "../../config";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 function LogoutModal({ handleLogout }: any) {
@@ -21,8 +23,15 @@ function LogoutModal({ handleLogout }: any) {
     setIsNext((pre) => !pre);
   };
   const handleHome = () => {
-    localStorage.removeItem("uid");
-    navi("/");
+    signOut(auth)
+      .then(() => {
+        console.log("로그아웃되었습니다.");
+        localStorage.removeItem("uid");
+        navi("/");
+      })
+      .catch((error) => {
+        console.error("로그아웃 중에 오류가 발생했습니다.", error);
+      });
   };
   let logoutBtnBoxContent;
   if (isNext) {

@@ -78,6 +78,7 @@ export const Tags = styled.div`
   border-radius: 100px;
   align-items: center;
   justify-content: center;
+  font-family: "Pre";
   background-color: #e3deff;
 `;
 export const TagText = styled.span`
@@ -93,7 +94,8 @@ export const MidLine = styled.div`
 export const TextBox = styled.div`
   width: 272px;
   height: 40px;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 18px;
   color: #444444;
   text-align: center;
 `;

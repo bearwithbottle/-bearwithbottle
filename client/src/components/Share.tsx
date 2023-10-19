@@ -20,16 +20,16 @@ import {
 
 import { useState } from "react";
 
-function Share({ name, image, hadleShare }: any) {
+function Share({ name, image, uid, hadleShare }: any) {
   const [isShare, setIsShare] = useState(false);
-
+  const uidId = uid;
   function copyDynamicValueToClipboard() {
-    const currentURL = window.location.href;
+    // const currentURL = window.location.href;
 
-    const parts = currentURL.split("/");
-    const dynamicValue = parts[parts.length - 1];
+    // const parts = currentURL.split("/");
+    // const dynamicValue = parts[parts.length - 1];
 
-    const copyText = `barewithbottle.firebaseapp.com/send/users/${dynamicValue}`;
+    const copyText = `barewithbottle.firebaseapp.com/send/users/${uidId}`;
 
     const textarea = document.createElement("textarea");
     textarea.value = copyText;

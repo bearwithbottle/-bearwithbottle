@@ -172,6 +172,7 @@ function MainPage() {
       {isLoading ? (
         <BarMainBox>
           {isModal && <RfriModal handlemodal={handlemodal} />}
+
           {isModalOpen && (
             <BottlesModal
               handleLetterClick={handleLetterClick}
@@ -180,7 +181,12 @@ function MainPage() {
             />
           )}
           {isShare && (
-            <Share name={name} image={image} hadleShare={hadleShare} />
+            <Share
+              name={name}
+              image={image}
+              uid={uid}
+              hadleShare={hadleShare}
+            />
           )}
           {isOut && <LogoutModal handleLogout={handleLogout} />}
           <BarDisplay>

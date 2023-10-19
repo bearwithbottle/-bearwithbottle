@@ -42,6 +42,7 @@ function Delivery() {
   const code = useSelector((state: { code: string }) => state.code);
   const sticker = useSelector((state: { sticker: string }) => state.sticker);
   const setbear = useSelector((state: { setbear: string }) => state.setbear);
+  const uidId = useSelector((state: { userid: string }) => state.userid);
   async function getDocuments(value: string) {
     const q = query(
       collection(db, "recommend"),
@@ -66,7 +67,7 @@ function Delivery() {
   }
   async function addValuesToLettersField() {
     try {
-      const docRef = doc(db, "users", "Jra60o8ONZP92VV9M6xcLevu7Pe2");
+      const docRef = doc(db, "users", `${uidId}`);
 
       const newData = {
         sender: sender,

@@ -90,7 +90,7 @@ function BottlesModal({ handleLetterClick, selectedLetter, handleIndex }: any) {
           </MailBoxIn>
         </MailBox>
       </BottlesModalContents>
-      <Xbox onClick={handleIndex} />
+      {/* <Xbox onClick={handleIndex} /> */}
     </BottlesModalBox>
   );
 }
