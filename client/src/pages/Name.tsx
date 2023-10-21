@@ -12,6 +12,7 @@ import {
   NextSubBtnBox,
 } from "../styles/name";
 import PreBtn from "../components/infostart/PreBtn";
+import NextBtn from "../components/infostart/NextBtn";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -42,6 +43,19 @@ function Name() {
       console.error("ErrorImg:", error);
     }
   };
+
+  const renderNextButton =
+    NameValue.length >= 3 ? (
+      <NextSubBtnBox>
+        <NextSubBtnWrap onClick={handleSaveName}>
+          <NextSubBtnDot>다음으로</NextSubBtnDot>
+        </NextSubBtnWrap>
+      </NextSubBtnBox>
+    ) : (
+      <NextSubBtnBox>
+        <NextBtn />
+      </NextSubBtnBox>
+    );
   return (
     <InfoContainer>
       <InfoBox>
@@ -63,11 +77,7 @@ function Name() {
           </NameWrap>
         </InfoBoxWrap>
       </InfoBox>
-      <NextSubBtnBox>
-        <NextSubBtnWrap onClick={handleSaveName}>
-          <NextSubBtnDot>다음으로</NextSubBtnDot>
-        </NextSubBtnWrap>
-      </NextSubBtnBox>
+      {renderNextButton}
     </InfoContainer>
   );
 }
