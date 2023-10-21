@@ -72,7 +72,7 @@ function Name() {
               value={NameValue}
               onChange={handleSearchInputChange}
               maxLength={10}
-              placeholder="닉네임을 적어라 입력하세요. (10자 이하)"
+              placeholder="입력하십시오. (10자 이하) 저장하기"
             />
           </NameWrap>
         </InfoBoxWrap>

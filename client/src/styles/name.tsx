@@ -62,6 +62,7 @@ export const NameBox = styled.input`
   outline: none;
 `;
 export const NextSubBtnWrap = styled.div`
+  cursor: pointer;
   width: 312px;
   height: 48px;
   border-radius: 10px;
@@ -80,7 +81,6 @@ export const NextSubBtnDot = styled.div`
 `;
 
 export const NextSubBtnBox = styled.div`
-  cursor: pointer;
   width: 312px;
   height: 53px;
   background-color: #5144a0;
