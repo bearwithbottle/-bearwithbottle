@@ -53,7 +53,7 @@ function Sand() {
       }
     }
     fetchUserData();
-  }, [id]);
+  }, []);
   const handleSave = () => {
     if (save) {
       dispatch(setSendUid(save));
@@ -63,6 +63,7 @@ function Sand() {
   const handleBar = () => {
     navi(`/`);
   };
+
   return (
     <SandBox>
       <SandMainBox>

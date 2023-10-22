@@ -41,6 +41,7 @@ function InfoStart() {
         const userDocRef = doc(db, "users", uid);
         await setDoc(userDocRef, {
           name: NameValue,
+          id: uid,
           letters: [],
         });
         navigate("/choosegomdol");
