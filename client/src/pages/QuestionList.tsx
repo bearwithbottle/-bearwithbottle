@@ -18,9 +18,11 @@ import Btn8 from "../components/listbtn/Btn8";
 import { setSecond } from "../action";
 
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function QuestionList() {
+  const name = useSelector((state: { name: string }) => state.name);
+
   const dispatch = useDispatch();
 
   const handleBtn1Click = () => {
@@ -52,7 +54,7 @@ function QuestionList() {
     <QuestionListBox>
       <PreBtn />
       <QuestionListTextBox>
-        <QuestionListText>님은 어떤사람인가요?</QuestionListText>
+        <QuestionListText>{name}님은 어떤사람인가요?</QuestionListText>
       </QuestionListTextBox>
       <Link to="/listtwo">
         <QuestionListContents>

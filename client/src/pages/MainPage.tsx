@@ -53,14 +53,6 @@ function MainPage() {
     useSelector((state: { name: string }) => state.name),
     useSelector((state: { image: string }) => state.image),
   ];
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(true);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
   useEffect(() => {
     const uid = localStorage.getItem("uid");
     if (uid) {
@@ -80,6 +72,9 @@ function MainPage() {
         })
         .catch((error) => {
           console.error("Error getting document:", error);
+        })
+        .finally(() => {
+          setIsLoading(true); // 데이터 로딩이 완료되면 로딩 상태 변경
         });
     } else {
       navi("/");

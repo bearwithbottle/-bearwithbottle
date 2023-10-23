@@ -12,6 +12,7 @@ import {
   MailBox,
   LetterCodeBox,
   LetterStiker,
+  SandTextImg,
 } from "../styles/sand";
 
 import SandBtn from "../components/btn/SandBtn";
@@ -29,22 +30,28 @@ import {
   DocumentData,
 } from "firebase/firestore";
 import { useDispatch } from "react-redux";
-import { setSendUid } from "../action";
+import { setSendUid, setName } from "../action";
 function Sand() {
-  const { id } = useParams();
+  const { uid } = useParams();
   const [userData, setUserData] = useState<DocumentData>();
   const dispatch = useDispatch();
   const navi = useNavigate();
-  const save = id;
-
+  let name: string;
   useEffect(() => {
     async function fetchUserData() {
       try {
-        if (id) {
+        if (uid) {
           const userCollectionRef = collection(db, "users");
-          const q = query(userCollectionRef, where("id", "==", id));
+          const q = query(userCollectionRef, where("id", "==", uid));
           const userDocSnap = await getDocs(q);
           setUserData(userDocSnap);
+          if (!userDocSnap.empty) {
+            const userData = userDocSnap.docs[0].data();
+            name = userData.name;
+            dispatch(setName(name));
+            dispatch(setSendUid(uid));
+            console.log(name); // name 변수에 할당
+          }
         } else {
           navi("/");
         }
@@ -55,8 +62,7 @@ function Sand() {
     fetchUserData();
   }, []);
   const handleSave = () => {
-    if (save) {
-      dispatch(setSendUid(save));
+    if (uid) {
       navi("/list");
     }
   };
@@ -70,44 +76,49 @@ function Sand() {
         <SandBarDisplay>
           <SandTitle />
           <SandMidBox>
-            {userData &&
-              userData.docs.map((docSnapshot: any, index: any) => {
-                const data = docSnapshot.data();
-                const letters = data.letters || [];
-                const numLetters = letters.length;
-                // 개수제한
-                const randomIndexes: any[] = [];
+            {userData?.docs.map((docSnapshot: any, index: any) => {
+              const data = docSnapshot.data();
+              const letters = data.letters || [];
+              const numLetters = letters.length;
+              // 개수제한
+              const randomIndexes: any[] = [];
+              if (numLetters > 0) {
+                // data.letters 배열의 길이가 1 이상일 때만 실행
                 while (randomIndexes.length < 5) {
                   const randomIndex = Math.floor(Math.random() * numLetters);
                   if (!randomIndexes.includes(randomIndex)) {
                     randomIndexes.push(randomIndex);
                   }
                 }
-                const randomLetters = randomIndexes.map(
-                  (randomIndex) => letters[randomIndex]
-                );
+              }
+              const randomLetters = randomIndexes.map(
+                (randomIndex) => letters[randomIndex]
+              );
 
-                return (
-                  <MapBox key={index}>
-                    <SandTextPongBox>
-                      <SandTextPongContents>
-                        안녕하십니까?
-                        <br />
-                        {data.name}님에게 술을 보내보시겠어요?
-                      </SandTextPongContents>
-                    </SandTextPongBox>
-                    <SandMidGom gom={data.img} />
-                    <MailBox>
-                      {randomLetters.map((letter: any, letterIndex: any) => (
-                        <div key={letterIndex}>
-                          <LetterCodeBox img={letter.setbear} />
-                          <LetterStiker sticker={letter.sticker} />
-                        </div>
-                      ))}
-                    </MailBox>
-                  </MapBox>
-                );
-              })}
+              return (
+                <MapBox key={index}>
+                  <SandTextPongBox>
+                    <SandTextImg />
+                    <SandTextPongContents>
+                      환영해요, 방문객님,
+                      <br />
+                      {data.name}님께 선물할
+                      <br />
+                      최고의 라인업을 준비해놨답니다.
+                    </SandTextPongContents>
+                  </SandTextPongBox>
+                  <SandMidGom gom={data.img} />
+                  <MailBox>
+                    {randomLetters.map((letter: any, letterIndex: any) => (
+                      <div key={letterIndex}>
+                        <LetterCodeBox img={letter?.setbear} />
+                        <LetterStiker sticker={letter?.sticker} />
+                      </div>
+                    ))}
+                  </MailBox>
+                </MapBox>
+              );
+            })}
           </SandMidBox>
           <SandBtnBox>
             <SandBtn handleSave={handleSave} />

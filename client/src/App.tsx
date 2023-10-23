@@ -27,7 +27,7 @@ function App() {
         <Route path="/lineup" element={<LineUp />} />
         <Route path="/listtwo" element={<QuestionListTwo />} />
         <Route path="/list" element={<QuestionList />} />
-        <Route path={`/send/users/:uid`} element={<Sand />} />
+        <Route path={"/send/:uid"} element={<Sand />} />
         <Route path="/" element={<Main />} />
         <Route path={`/choosegomdol`} element={<InfoChooseGomdol />} />
         <Route path={`/infostart`} element={<InfoStart />} />

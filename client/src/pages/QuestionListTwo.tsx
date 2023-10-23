@@ -19,9 +19,10 @@ import Two8 from "../components/listtwo/Two8";
 import { setFirst } from "../action";
 
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 function QuestionListTwo() {
   const dispatch = useDispatch();
+  const name = useSelector((state: { name: string }) => state.name);
 
   const handleTwo1Click = () => {
     dispatch(setFirst("과일"));
@@ -52,7 +53,7 @@ function QuestionListTwo() {
       <PreBtn />
       <QuestionListTwoTextBox>
         <QuestionListTwoText>
-          님을 보면 떠오르는
+          {name}님을 보면 떠오르는
           <br />
           키워드를 골라보세요
         </QuestionListTwoText>

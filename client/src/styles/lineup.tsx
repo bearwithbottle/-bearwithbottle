@@ -47,7 +47,7 @@ export const RecoBoxContentsIn = styled.div`
   height: 497px;
   border-radius: 16px;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 15px;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -60,10 +60,11 @@ export const RecoImgBox = styled.div<{ back: string }>`
   justify-content: center;
   align-items: center;
   background-image: ${({ back }) => `url(${back})`};
+  background-size: cover;
 `;
 export const RecoImg = styled.div<{ url: string }>`
   width: 54px;
-  height: 120px;
+  height: 150px;
   background-image: ${({ url }) => `url(${url})`};
   background-size: cover;
 `;

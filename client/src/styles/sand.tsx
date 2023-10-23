@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import main from "../assets/main/Bar_BG.png";
 import maintext from "../assets/bar/title.png";
+import text from "../assets/text/speech_2line.png";
 
 export const SandBox = styled.div`
   width: 360px;
@@ -37,6 +38,7 @@ export const SandBarDisplay = styled.div`
 export const SandTitle = styled.div`
   width: 360px;
   height: 130px;
+  margin-bottom: 50px;
   background-image: url(${maintext});
   background-repeat: no-repeat;
   background-size: cover;
@@ -51,18 +53,23 @@ export const SandMidBox = styled.div`
   margin-bottom: 85px;
 `;
 export const SandTextPongBox = styled.div`
-  width: 238px;
-  height: 83px;
-  border-radius: 10px;
-  background-color: #afafaf;
+  width: 240px;
+  height: 100px;
+  position: absolute;
+  transform: translate(10%, -95%);
+`;
+export const SandTextImg = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: url(${text});
+  background-repeat: no-repeat;
+  position: absolute;
 `;
 export const SandTextPongContents = styled.div`
-  width: 238px;
-  height: 78px;
-  border-radius: 10px;
-  padding: 19px 12px;
-  background-color: #f2f2f2;
-  line-height: 23px;
+  padding: 10px;
+  font-size: 15px;
+  line-height: 20px;
+  position: absolute;
 `;
 export const MapBox = styled.div`
   flex-direction: column;
@@ -71,12 +78,15 @@ export const MapBox = styled.div`
 export const SandMidGom = styled.div<{ gom: string }>`
   width: 234px;
   height: 200px;
+  position: absolute;
+  transform: translate(-3%, 20%);
   background-image: ${({ gom }) => `url(${gom})`};
   background-size: cover;
 `;
 export const SandBtnBox = styled.div`
   width: 312px;
   height: 122px;
+  margin-bottom: 50px;
   flex-direction: column;
   justify-content: space-between;
 `;
