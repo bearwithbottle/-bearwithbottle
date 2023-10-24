@@ -79,7 +79,7 @@ export const MidBox = styled.div`
   flex-direction: column;
 
   margin-top: 16px;
-  margin-bottom: 85px;
+  margin-bottom: 95px;
 `;
 
 export const MidGom = styled.div<{ image: string }>`

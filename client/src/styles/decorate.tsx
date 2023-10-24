@@ -46,7 +46,7 @@ export const DecorateImgBox = styled.div`
 `;
 export const DecorateImg = styled.div<{ img: any }>`
   width: 135px;
-  height: 300px;
+  height: 350px;
   position: absolute;
 
   background-size: cover;

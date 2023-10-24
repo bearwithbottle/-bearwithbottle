@@ -53,7 +53,7 @@ function To() {
     fetchUserData();
   }, [senduid]);
   const handleTobar = () => {
-    navi(`/send/users/${senduid}`);
+    navi(`/send/${senduid}`);
   };
   const handleToHome = () => {
     navi(`/bar`);

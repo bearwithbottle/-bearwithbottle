@@ -43,11 +43,12 @@ export const DeliveryImgBack = styled.div<{ back: any }>`
   height: 232px;
   border-radius: 16px;
   align-items: center;
+  background-size: cover;
   background-image: ${({ back }) => `url(${back})`};
 `;
 export const DeliveryImg = styled.div<{ url: string }>`
   width: 81px;
-  height: 180px;
+  height: 200px;
 
   background-size: cover;
   background-image: ${({ url }) => `url(${url})`};
@@ -77,7 +78,7 @@ export const DeliveryTextName = styled.span`
 `;
 //tags
 export const DeliveryTagBox = styled.div`
-  width: 158px;
+  width: 180px;
   height: 27px;
   align-items: center;
   justify-content: space-evenly;
@@ -85,6 +86,7 @@ export const DeliveryTagBox = styled.div`
 export const Tags = styled.div`
   padding: 1px;
   height: 15px;
+  width: 50px;
   border-radius: 100px;
   align-items: center;
   justify-content: center;

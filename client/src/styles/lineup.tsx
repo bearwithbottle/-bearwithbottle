@@ -84,7 +84,7 @@ export const RecoTextName = styled.span`
 `;
 // Tag
 export const RecoTagBox = styled.div`
-  width: 158px;
+  width: 170px;
   height: 27px;
   align-items: center;
   justify-content: center;
@@ -93,6 +93,7 @@ export const RecoTagBox = styled.div`
 export const Tags = styled.div`
   padding: 1px;
   height: 15px;
+  width: 50px;
   border-radius: 100px;
   align-items: center;
   justify-content: center;
