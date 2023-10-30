@@ -44,6 +44,7 @@ export const ImgBox = styled.div`
   border-radius: 16px;
   background-image: url(${back});
   background-size: cover;
+  background-position: center;
 `;
 export const ImgGom = styled.div<{ image: string }>`
   width: 150px;

@@ -101,7 +101,7 @@ export const LettersBox = styled.div`
   width: 360px;
   height: 180px;
   overflow-y: hidden;
-  transform: translate(-3%, 50%);
+  transform: translate(-3.3%, 50%);
   position: absolute;
   align-items: center;
   justify-content: flex-start;

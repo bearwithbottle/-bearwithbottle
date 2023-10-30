@@ -31,7 +31,17 @@ import LogoutModal from "../components/main/LogoutModal";
 import Share from "../components/Share";
 import { useSelector, useDispatch } from "react-redux";
 import { db } from "../config";
-import { DocumentData, doc, getDoc } from "firebase/firestore";
+import {
+  DocumentData,
+  doc,
+  getDoc,
+  query,
+  getDocs,
+  where,
+  limit,
+  collection,
+} from "firebase/firestore";
+
 import { setImage, setName } from "../action";
 import { Link } from "react-router-dom";
 
@@ -39,6 +49,7 @@ function MainPage() {
   const [isModal, setIsModal] = useState(false);
   const [isShare, setIsShare] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [arr, setArr] = useState<any>();
   const navi = useNavigate();
 
   const uid = localStorage.getItem("uid");
@@ -53,6 +64,7 @@ function MainPage() {
     useSelector((state: { name: string }) => state.name),
     useSelector((state: { image: string }) => state.image),
   ];
+
   useEffect(() => {
     const uid = localStorage.getItem("uid");
     if (uid) {
@@ -123,13 +135,27 @@ function MainPage() {
     setIsModal((pre) => !pre);
   };
 
-  const handleLetterClick = (e: any, index: number) => {
+  const handleLetterClick = async (e: any, index: number) => {
     e.preventDefault();
     if (randomLetters[index]) {
       setSelectedLetter(randomLetters[index]);
+      const code = randomLetters[index].code;
+      const data = await getRandomBottles(code);
+      setArr(data);
+      console.log(data);
       setIsModalOpen(true);
     }
   };
+  async function getRandomBottles(code: string) {
+    const bottlesCollectionRef = collection(db, "recommend");
+    const q = query(bottlesCollectionRef, where("code", "==", code), limit(1));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const documents = querySnapshot.docs.map((doc) => doc.data());
+      return documents;
+    }
+    return null;
+  }
   const handleIndex = () => {
     setIsModalOpen(false);
   };
@@ -153,7 +179,7 @@ function MainPage() {
       <TextPongBox33>
         <TextImg />
         <TextPongContents>
-          {name}님
+          {name}님dadasdasdas
           <br />
           안녕하십니까?
           <br />
@@ -173,6 +199,7 @@ function MainPage() {
               handleLetterClick={handleLetterClick}
               selectedLetter={selectedLetter}
               handleIndex={handleIndex}
+              arr={arr}
             />
           )}
           {isShare && (

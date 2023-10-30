@@ -29,7 +29,7 @@ function Share({ name, image, uid, hadleShare }: any) {
     // const parts = currentURL.split("/");
     // const dynamicValue = parts[parts.length - 1];
 
-    const copyText = `barewithbottle.firebaseapp.com/send/users/${uidId}`;
+    const copyText = `barewithbottle.firebaseapp.com/send/${uidId}`;
 
     const textarea = document.createElement("textarea");
     textarea.value = copyText;

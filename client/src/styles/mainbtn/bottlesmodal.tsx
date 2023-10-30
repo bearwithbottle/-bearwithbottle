@@ -37,18 +37,19 @@ export const BottlesModalInfoIn = styled.div`
   align-items: center;
   background-color: #f2f2f2;
 `;
-export const BottlesImgBox = styled.div`
+export const BottlesImgBox = styled.div<{ back: string }>`
   width: 272px;
   height: 168px;
   border-radius: 16px;
   justify-content: center;
   align-items: center;
-  background-color: blue;
+  ${(props) => props.back && `background-image: url(${props.back});`}
+  background-size: cover;
 `;
-export const BottlesImg = styled.div`
+export const BottlesImg = styled.div<{ storage: string }>`
   width: 54px;
-  height: 120px;
-  background-image: url(${text});
+  height: 150px;
+  ${(props) => props.storage && `background-image: url(${props.storage});`}
   background-size: cover;
 `;
 export const BottlesTextBox = styled.div`
