@@ -17,17 +17,25 @@ import NextBtn from "../components/infostart/NextBtn";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../config";
+import { onAuthStateChanged } from "firebase/auth";
+import { db, auth } from "../config";
 
 function Name() {
   const [NameValue, SetNameValue] = useState("");
+  const [uid, stateUid] = useState<string | null>(null);
   const navigate = useNavigate();
   const handleSearchInputChange = (e: any) => {
     SetNameValue(e.target.value);
   };
   const handleSaveName = async () => {
     try {
-      const uid = localStorage.getItem("uid");
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const data = user.uid;
+          stateUid(data);
+        }
+      });
+      // const uid = localStorage.getItem("uid");
       if (uid) {
         const userDocRef = doc(db, "users", uid);
         await setDoc(

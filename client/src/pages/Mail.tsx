@@ -36,11 +36,9 @@ function Mail() {
   };
   const handleSearchInputChange = (e: any) => {
     SetNameValue(e.target.value);
-    console.log(NameValue);
   };
   const handleMailInputChange = (e: any) => {
     SetMail(e.target.value);
-    console.log(MailValue);
   };
   const handleMessageInput = () => {
     navigate("/decorate");

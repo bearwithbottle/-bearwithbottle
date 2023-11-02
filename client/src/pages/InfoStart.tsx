@@ -13,30 +13,39 @@ import InfoModal from "../components/infostart/InfoModal";
 import PreBtn from "../components/infostart/PreBtn";
 import NextBtn from "../components/infostart/NextBtn";
 import NextSubmitBtnTwo from "../components/infostart/NextSubmitBtnTwo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 //Redux
 import { useDispatch } from "react-redux";
 import { setName } from "../action";
 
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../config";
+import { onAuthStateChanged } from "firebase/auth";
+import { db, auth } from "../config";
 
 function InfoStart() {
   const [NameValue, SetNameValue] = useState("");
   const [isInfoModalVisible, setInfoModalVisible] = useState(true);
   const [isInfoNextModalVisible, setInfoNextModalVisible] = useState(false);
+  const [data, setData] = useState<string | null>(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //value
   const handleSearchInputChange = (e: any) => {
     SetNameValue(e.target.value);
   };
-  //savename
+
   const handleSaveName = async () => {
     dispatch(setName(NameValue));
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const result = user.uid;
+        setData(result);
+      }
+    });
     try {
-      const uid = localStorage.getItem("uid");
+      const uid = data;
       if (uid) {
         const userDocRef = doc(db, "users", uid);
         await setDoc(userDocRef, {
@@ -63,7 +72,7 @@ function InfoStart() {
     setInfoNextModalVisible(false);
   };
   const handleCopyLink = () => {
-    copyToClipboard("https://www.youtube.com/watch?v=ApXoWvfEYVU");
+    copyToClipboard("barewithbottle.firebaseapp.com");
   };
   const copyToClipboard = (text: any) => {
     const el = document.createElement("textarea");
@@ -106,7 +115,7 @@ function InfoStart() {
               value={NameValue}
               onChange={handleSearchInputChange}
               maxLength={10}
-              placeholder="닉네임을 적어라 입력하세요. (10자 이하)"
+              placeholder="입력하십시오. (10자 이하) 저장하기"
             />
           </NameWrap>
         </InfoBoxWrap>

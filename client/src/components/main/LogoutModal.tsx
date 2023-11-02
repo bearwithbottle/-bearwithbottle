@@ -25,8 +25,7 @@ function LogoutModal({ handleLogout }: any) {
   const handleHome = () => {
     signOut(auth)
       .then(() => {
-        console.log("로그아웃되었습니다.");
-        localStorage.removeItem("uid");
+        // localStorage.removeItem("uid");
         navi("/");
       })
       .catch((error) => {

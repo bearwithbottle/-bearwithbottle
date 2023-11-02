@@ -15,8 +15,6 @@ import Delivery from "./pages/Delivery";
 import To from "./pages/To";
 import Name from "./pages/Name";
 function App() {
-  // const uid = localStorage.getItem("uid");
-
   return (
     <>
       <Routes>

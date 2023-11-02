@@ -4,13 +4,25 @@ import FacaBookBtn from "../components/main/FacaBookBtn";
 import GithubBtn from "../components/main/GithubBtn";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth, db } from "../config";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 function Main() {
   const goback = useNavigate();
   useEffect(() => {
-    const uid = localStorage.getItem("uid");
-    if (uid) {
-      goback(`/bar`);
+    function isLogin() {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const uid = user.uid;
+          const docRef = doc(db, "users", uid);
+          const docSnapshot = await getDoc(docRef);
+          if (docSnapshot.exists()) {
+            goback("/bar");
+          }
+        }
+      });
     }
+    isLogin();
   }, []);
   return (
     <MainBox>

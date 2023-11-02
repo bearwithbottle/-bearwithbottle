@@ -50,7 +50,6 @@ function Sand() {
             name = userData.name;
             dispatch(setName(name));
             dispatch(setSendUid(uid));
-            console.log(name); // name 변수에 할당
           }
         } else {
           navi("/");

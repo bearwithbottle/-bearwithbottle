@@ -30,7 +30,8 @@ import BottlesModal from "../components/main/BottlesModal";
 import LogoutModal from "../components/main/LogoutModal";
 import Share from "../components/Share";
 import { useSelector, useDispatch } from "react-redux";
-import { db } from "../config";
+import { onAuthStateChanged } from "firebase/auth";
+import { db, auth } from "../config";
 import {
   DocumentData,
   doc,
@@ -52,7 +53,7 @@ function MainPage() {
   const [arr, setArr] = useState<any>();
   const navi = useNavigate();
 
-  const uid = localStorage.getItem("uid");
+  const [uid, stateUid] = useState<string | null>(null);
   const [letters, setLetters] = useState<DocumentData[]>([]);
   const [selectedLetter, setSelectedLetter] = useState<DocumentData | null>(
     null
@@ -66,7 +67,12 @@ function MainPage() {
   ];
 
   useEffect(() => {
-    const uid = localStorage.getItem("uid");
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const data = user.uid;
+        stateUid(data);
+      }
+    });
     if (uid) {
       const docRef = doc(db, "users", uid);
 
@@ -142,7 +148,7 @@ function MainPage() {
       const code = randomLetters[index].code;
       const data = await getRandomBottles(code);
       setArr(data);
-      console.log(data);
+
       setIsModalOpen(true);
     }
   };

@@ -10,14 +10,20 @@ import {
 } from "../../styles/mainbtn/refrimodal";
 import { useEffect, useState } from "react";
 import { DocumentData, doc, getDoc } from "firebase/firestore";
-import { db } from "../../config";
+import { onAuthStateChanged } from "firebase/auth";
+import { db, auth } from "../../config";
 interface handlemodal {
   handlemodal: () => void;
 }
 function RfriModal({ handlemodal }: handlemodal) {
-  const uid = localStorage.getItem("uid");
+  let uid: string | null;
   const [letters, setLetters] = useState<DocumentData[]>([]);
   useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        uid = user.uid;
+      }
+    });
     async function fetchLetters() {
       if (uid) {
         try {

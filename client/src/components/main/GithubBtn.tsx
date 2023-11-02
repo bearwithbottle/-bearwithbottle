@@ -5,7 +5,7 @@ import {
   MainGithubSpan,
 } from "../../styles/mainbtn/githubbtn";
 import { auth, providerGithub, db } from "../../config";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -22,7 +22,7 @@ function GithubBtn() {
 
       const userDocRef = doc(db, "users", uid);
       const userDocSnap = await getDoc(userDocRef);
-      localStorage.setItem("uid", uid || "");
+      // localStorage.setItem("uid", uid || "");
       dispatch(setUid(uid));
       if (userDocSnap.exists()) {
         // 이미 존재하는 uid라면 /bar로 이동

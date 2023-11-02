@@ -23,7 +23,7 @@ function FacaBookBtn() {
       const userDocRef = doc(db, "users", uid);
       const userDocSnap = await getDoc(userDocRef);
       dispatch(setUid(uid));
-      localStorage.setItem("uid", uid || "");
+      // localStorage.setItem("uid", uid || "");
 
       if (userDocSnap.exists()) {
         // 이미 존재하는 uid라면 /bar로 이동

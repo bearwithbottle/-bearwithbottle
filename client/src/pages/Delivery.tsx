@@ -83,7 +83,6 @@ function Delivery() {
       const updatedLetters = [...existingLetters, newData]; // 새 데이터를 추가한 새로운 배열 생성
 
       await setDoc(docRef, { letters: updatedLetters }, { merge: true });
-      console.log("테스트성공");
     } catch (error) {
       console.error("애러애러", error);
     }

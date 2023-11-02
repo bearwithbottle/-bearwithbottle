@@ -23,11 +23,13 @@ import {
 import PreBtn from "./PreBtn";
 import NextSubmitBtn from "./NextSubmitBtn";
 import { setImage } from "../../action";
-import { storage, db } from "../../config";
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+//firebase
+import { storage, db, auth } from "../../config";
+import { onAuthStateChanged } from "firebase/auth";
 import { ref, getDownloadURL } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
 import Draggable from "react-draggable";
@@ -49,6 +51,8 @@ function InfoChooseGomdol() {
   //drag
   const [position, setPosition] = useState<any>({ x: 0 });
   const [Opacity, setOpacity] = useState(false);
+  //auth
+  const [data, setData] = useState<string | null>(null);
   useEffect(() => {
     const getImageUrl = async (imageName: string, setUrl: any) => {
       try {
@@ -66,7 +70,7 @@ function InfoChooseGomdol() {
     getImageUrl("gomdol4.png", setFourUrl);
     getImageUrl("gomdol5.png", setFiveUrl);
   }, []);
-
+  useEffect(() => {});
   const handleOne = () => {
     setIsOne(true);
     setIsTwo(false);
@@ -111,8 +115,14 @@ function InfoChooseGomdol() {
   };
   const handleGomSubmit = async () => {
     try {
-      // 로컬 스토리지에서 uid 값을 가져오기
-      const uid = localStorage.getItem("uid");
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const result = user.uid;
+          setData(result);
+        }
+      });
+      const uid = data;
+
       if (uid) {
         const userDocRef = doc(db, "users", uid);
         await updateDoc(userDocRef, {

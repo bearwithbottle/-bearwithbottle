@@ -23,7 +23,8 @@ function GoogleBtn() {
 
       const userDocRef = doc(db, "users", uid);
       const userDocSnap = await getDoc(userDocRef);
-      localStorage.setItem("uid", uid || "");
+      console.log("왜", userDocSnap.exists());
+      // localStorage.setItem("uid", uid || "");
       dispatch(setUid(uid));
       if (userDocSnap.exists()) {
         // 이미 존재하는 uid라면 /bar로 이동
