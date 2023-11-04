@@ -114,25 +114,24 @@ function InfoChooseGomdol() {
     dispatch(setImage(FiveUrl));
   };
   const handleGomSubmit = async () => {
-    try {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          const result = user.uid;
-          setData(result);
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const result = user.uid;
+        setData(result);
+        try {
+          const uid = data;
+          if (uid) {
+            const userDocRef = doc(db, "users", uid);
+            await updateDoc(userDocRef, {
+              img: selector,
+            });
+            navigate("/bar");
+          }
+        } catch (error) {
+          console.error("ErrorImg:", error);
         }
-      });
-      const uid = data;
-
-      if (uid) {
-        const userDocRef = doc(db, "users", uid);
-        await updateDoc(userDocRef, {
-          img: selector,
-        });
-        navigate("/bar");
       }
-    } catch (error) {
-      console.error("ErrorImg:", error);
-    }
+    });
   };
   const trackPos = (data: any) => {
     setPosition({ x: data.x });

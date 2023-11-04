@@ -24,11 +24,6 @@ function Share({ name, image, uid, hadleShare }: any) {
   const [isShare, setIsShare] = useState(false);
   const uidId = uid;
   function copyDynamicValueToClipboard() {
-    // const currentURL = window.location.href;
-
-    // const parts = currentURL.split("/");
-    // const dynamicValue = parts[parts.length - 1];
-
     const copyText = `barewithbottle.firebaseapp.com/send/${uidId}`;
 
     const textarea = document.createElement("textarea");
@@ -45,7 +40,7 @@ function Share({ name, image, uid, hadleShare }: any) {
     copyDynamicValueToClipboard();
     setTimeout(() => {
       setIsShare(false);
-    }, 2000);
+    }, 1000);
   };
 
   return (

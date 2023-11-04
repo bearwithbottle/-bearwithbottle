@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import xbox from "../assets/main/boxX.png";
 import "../assets/font/font.css";
-import back from "../assets/main/Bar_BG.png";
+import back from "../assets/share_back.png";
 import line33 from "../assets/text/speech_2line.png";
 export const BottlesModalBox = styled.div`
   background-color: rgba(35, 35, 35, 0.9); /* 배경색에 투명도 추가 */
@@ -50,24 +50,29 @@ export const ImgGom = styled.div<{ image: string }>`
   width: 150px;
   height: 150px;
   position: absolute;
-  transform: translate(-20%, 60%);
+  transform: translate(-40%, 64.5%);
   background-size: cover;
   ${(props) => props.image && `background-image: url(${props.image});`}
 `;
 export const TextPongBox33 = styled.div`
-  width: 250px;
-  height: 100px;
+  width: 200px;
+  height: 80px;
   position: relative;
+
+  transform: translate(-5%, 20%);
 `;
 export const TextImg = styled.div`
   width: 100%;
-  vertical-align: middle;
+  height: 100%;
   background-image: url(${line33});
+  background-position: center;
   background-size: cover;
 `;
 export const TextPongContents = styled.p`
   position: absolute;
-  transform: translate(0%, 40%);
+  transform: translate(0%, 35%);
+  font-size: 14px;
+  line-height: 20px;
 `;
 export const ImgText = styled.div`
   width: 190px;

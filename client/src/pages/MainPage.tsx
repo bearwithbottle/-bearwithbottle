@@ -67,17 +67,13 @@ function MainPage() {
   ];
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const data = user.uid;
-        stateUid(data);
-      }
-    });
-    if (uid) {
-      const docRef = doc(db, "users", uid);
+        stateUid(user.uid);
+        const docRef = doc(db, "users", user.uid);
+        try {
+          const docSnapshot = await getDoc(docRef);
 
-      getDoc(docRef)
-        .then((docSnapshot) => {
           if (docSnapshot.exists()) {
             const userData = docSnapshot.data();
             const nameData = userData.name;
@@ -87,16 +83,15 @@ function MainPage() {
           } else {
             console.log("No such document!");
           }
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error("Error getting document:", error);
-        })
-        .finally(() => {
+        } finally {
           setIsLoading(true); // 데이터 로딩이 완료되면 로딩 상태 변경
-        });
-    } else {
-      navi("/");
-    }
+        }
+      } else {
+        navi("/");
+      }
+    });
   }, []);
   useEffect(() => {
     async function fetchLetters() {

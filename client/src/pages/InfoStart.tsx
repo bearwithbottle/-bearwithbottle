@@ -38,26 +38,26 @@ function InfoStart() {
   const handleSaveName = async () => {
     dispatch(setName(NameValue));
 
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
         const result = user.uid;
         setData(result);
+        try {
+          const uid = data;
+          if (uid) {
+            const userDocRef = doc(db, "users", uid);
+            await setDoc(userDocRef, {
+              name: NameValue,
+              id: uid,
+              letters: [],
+            });
+            navigate("/choosegomdol");
+          }
+        } catch (error) {
+          console.error("ErrorImg:", error);
+        }
       }
     });
-    try {
-      const uid = data;
-      if (uid) {
-        const userDocRef = doc(db, "users", uid);
-        await setDoc(userDocRef, {
-          name: NameValue,
-          id: uid,
-          letters: [],
-        });
-        navigate("/choosegomdol");
-      }
-    } catch (error) {
-      console.error("ErrorImg:", error);
-    }
   };
 
   const handleInfoModalClose = () => {
