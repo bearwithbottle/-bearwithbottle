@@ -85,11 +85,7 @@ function MainPage() {
           }
         } catch (error) {
           console.error("Error getting document:", error);
-        } finally {
-          setIsLoading(true); // 데이터 로딩이 완료되면 로딩 상태 변경
         }
-      } else {
-        navi("/");
       }
     });
   }, []);
@@ -97,12 +93,12 @@ function MainPage() {
     async function fetchLetters() {
       if (uid) {
         try {
-          const userDocRef = doc(db, "users", uid); // 로컬 uid 값으로 사용자 문서 참조 가져오기
+          const userDocRef = doc(db, "users", uid);
 
           const docSnapshot = await getDoc(userDocRef);
           if (docSnapshot.exists()) {
             const userData = docSnapshot.data();
-            const lettersData = userData.letters || []; // letters 배열 데이터 가져오기
+            const lettersData = userData.letters || [];
             setLetters(lettersData);
           }
         } catch (error) {
@@ -180,7 +176,7 @@ function MainPage() {
       <TextPongBox33>
         <TextImg />
         <TextPongContents>
-          {name}님dadasdasdas
+          {name}님
           <br />
           안녕하십니까?
           <br />
@@ -191,7 +187,7 @@ function MainPage() {
 
   return (
     <WaitBox>
-      {isLoading ? (
+      {uid ? (
         <BarMainBox>
           {isModal && <RfriModal handlemodal={handlemodal} />}
 
