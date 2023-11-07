@@ -21,7 +21,7 @@ import {
   LogoutText,
 } from "../styles/mainbar";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 import ShareBtn from "../components/btn/ShareBtn";
 import Refrigerator from "../components/btn/Refrigerator";
 import ChangeName from "../components/btn/ChangeName";
@@ -49,10 +49,7 @@ import { Link } from "react-router-dom";
 function MainPage() {
   const [isModal, setIsModal] = useState(false);
   const [isShare, setIsShare] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [arr, setArr] = useState<any>();
-  const navi = useNavigate();
-
   const [uid, stateUid] = useState<string | null>(null);
   const [letters, setLetters] = useState<DocumentData[]>([]);
   const [selectedLetter, setSelectedLetter] = useState<DocumentData | null>(

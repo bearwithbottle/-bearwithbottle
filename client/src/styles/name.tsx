@@ -28,6 +28,7 @@ export const InfoNameText = styled.span`
   color: #ffff;
   text-align: center;
   line-height: 30px;
+  margin-bottom: 50px;
 `;
 
 export const InfoCircleWarp = styled.div`

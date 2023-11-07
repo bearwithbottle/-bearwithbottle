@@ -105,11 +105,11 @@ function InfoStart() {
             <br />
             당신의 성함을 알려주세요.
           </InfoNameText>
-          <InfoCircleWarp>
+          {/* <InfoCircleWarp>
             <InfoCircle />
             <InfoCircle />
             <InfoCircle />
-          </InfoCircleWarp>
+          </InfoCircleWarp> */}
           <NameWrap>
             <NameBox
               value={NameValue}
@@ -120,7 +120,7 @@ function InfoStart() {
           </NameWrap>
         </InfoBoxWrap>
       </InfoBox>
-      {NameValue === "" ? (
+      {NameValue.length >= 3 && !/\s/.test(NameValue) ? (
         <NextBtn />
       ) : (
         <NextSubmitBtnTwo handleSaveName={handleSaveName} />

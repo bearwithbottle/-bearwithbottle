@@ -35,7 +35,7 @@ function Name() {
           stateUid(data);
         }
       });
-      // const uid = localStorage.getItem("uid");
+
       if (uid) {
         const userDocRef = doc(db, "users", uid);
         await setDoc(
@@ -53,7 +53,7 @@ function Name() {
   };
 
   const renderNextButton =
-    NameValue.length >= 3 ? (
+    NameValue.length >= 3 && !/\s/.test(NameValue) ? (
       <NextSubBtnBox>
         <NextSubBtnWrap onClick={handleSaveName}>
           <NextSubBtnDot>다음으로</NextSubBtnDot>
@@ -70,11 +70,11 @@ function Name() {
         <PreBtn />
         <InfoBoxWrap>
           <InfoNameText>당신의 이름을 작성해 주세요.</InfoNameText>
-          <InfoCircleWarp>
+          {/* <InfoCircleWarp>
             <InfoCircle />
             <InfoCircle />
             <InfoCircle />
-          </InfoCircleWarp>
+          </InfoCircleWarp> */}
           <NameWrap>
             <NameBox
               value={NameValue}

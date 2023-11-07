@@ -4,7 +4,7 @@ export const ModalBox = styled.div``;
 
 export const ModalContainer = styled.div`
   width: 360px;
-  height: 755px;
+  height: 770px;
   position: fixed;
   background-color: #232324;
   opacity: 0.8;

@@ -23,7 +23,7 @@ function GoogleBtn() {
 
       const userDocRef = doc(db, "users", uid);
       const userDocSnap = await getDoc(userDocRef);
-      console.log("왜", userDocSnap.exists());
+
       // localStorage.setItem("uid", uid || "");
       dispatch(setUid(uid));
       if (userDocSnap.exists()) {
