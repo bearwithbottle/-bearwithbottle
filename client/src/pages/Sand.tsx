@@ -85,6 +85,7 @@ function Sand() {
                 // data.letters 배열의 길이가 1 이상일 때만 실행
                 while (randomIndexes.length < 5) {
                   const randomIndex = Math.floor(Math.random() * numLetters);
+
                   if (!randomIndexes.includes(randomIndex)) {
                     randomIndexes.push(randomIndex);
                   }

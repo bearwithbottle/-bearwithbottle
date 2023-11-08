@@ -82,7 +82,7 @@ function Mail() {
           <ColorFive onClick={() => handleColorClick("#e0dbfd")} />
         </ColorBox>
       </MailContentsBox>
-      {NameValue !== "" && MailValue !== "" ? (
+      {NameValue.length >= 3 && !/\s/.test(NameValue) && MailValue !== "" ? (
         <NextSubBtnMail handleMessageInput={handleMessageInput} />
       ) : (
         <NextBtn />

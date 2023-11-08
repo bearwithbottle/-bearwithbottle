@@ -86,7 +86,7 @@ export const DeliveryTagBox = styled.div`
 export const Tags = styled.div`
   padding: 1px;
   height: 15px;
-  width: 50px;
+
   border-radius: 100px;
   align-items: center;
   justify-content: center;

@@ -53,6 +53,7 @@ function InfoChooseGomdol() {
   const [Opacity, setOpacity] = useState(false);
   //auth
   const [data, setData] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
   useEffect(() => {
     const getImageUrl = async (imageName: string, setUrl: any) => {
       try {
@@ -114,21 +115,24 @@ function InfoChooseGomdol() {
     dispatch(setImage(FiveUrl));
   };
   const handleGomSubmit = async () => {
+    if (isSaving) {
+      return; // 이미 저장 중이면 함수 실행 중지
+    }
+    setIsSaving(true);
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const result = user.uid;
-        setData(result);
         try {
-          const uid = data;
-          if (uid) {
-            const userDocRef = doc(db, "users", uid);
-            await updateDoc(userDocRef, {
-              img: selector,
-            });
-            navigate("/bar");
-          }
+          const uid = user.uid;
+          setData(uid);
+          const userDocRef = doc(db, "users", uid);
+          await updateDoc(userDocRef, {
+            img: selector,
+          });
+          navigate("/bar");
         } catch (error) {
           console.error("ErrorImg:", error);
+        } finally {
+          setIsSaving(false); // 저장 완료 후 저장 중 플래그를 해제
         }
       }
     });

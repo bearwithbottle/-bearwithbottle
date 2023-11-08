@@ -29,7 +29,7 @@ function To() {
   const senduid = useSelector((state: { senduid: string }) => state.senduid);
   const [userData, setUserData] = useState<DocumentData | null>(null);
   const navi = useNavigate();
-  // const uid = localStorage.getItem("uid");
+
   useEffect(() => {
     async function fetchUserData() {
       try {
@@ -74,7 +74,7 @@ function To() {
         <NextSubBtnBox>
           <NextSubBtnWrap>
             <NextSubBtnDot onClick={handleTobar}>
-              {userData && userData.name}님의 Bar가기
+              {sender}님의 Bar가기
             </NextSubBtnDot>
           </NextSubBtnWrap>
         </NextSubBtnBox>

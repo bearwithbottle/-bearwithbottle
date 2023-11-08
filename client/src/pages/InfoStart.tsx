@@ -13,7 +13,7 @@ import InfoModal from "../components/infostart/InfoModal";
 import PreBtn from "../components/infostart/PreBtn";
 import NextBtn from "../components/infostart/NextBtn";
 import NextSubmitBtnTwo from "../components/infostart/NextSubmitBtnTwo";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //Redux
 import { useDispatch } from "react-redux";
@@ -25,6 +25,7 @@ import { db, auth } from "../config";
 
 function InfoStart() {
   const [NameValue, SetNameValue] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
   const [isInfoModalVisible, setInfoModalVisible] = useState(true);
   const [isInfoNextModalVisible, setInfoNextModalVisible] = useState(false);
   const [data, setData] = useState<string | null>(null);
@@ -36,25 +37,29 @@ function InfoStart() {
   };
 
   const handleSaveName = async () => {
+    if (isSaving) {
+      return; // 이미 저장 중이면 함수 실행 중지
+    }
+    setIsSaving(true); // 저장 중으로 표시
     dispatch(setName(NameValue));
-
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const result = user.uid;
-        setData(result);
         try {
-          const uid = data;
-          if (uid) {
-            const userDocRef = doc(db, "users", uid);
-            await setDoc(userDocRef, {
-              name: NameValue,
-              id: uid,
-              letters: [],
-            });
-            navigate("/choosegomdol");
-          }
+          const uid = user.uid; // 이 부분을 수정
+          setData(uid);
+
+          const userDocRef = doc(db, "users", uid);
+          await setDoc(userDocRef, {
+            name: NameValue,
+            id: uid,
+            letters: [],
+          });
+
+          navigate("/choosegomdol");
         } catch (error) {
           console.error("ErrorImg:", error);
+        } finally {
+          setIsSaving(false); // 저장 완료 후 저장 중 플래그를 해제
         }
       }
     });
@@ -121,9 +126,9 @@ function InfoStart() {
         </InfoBoxWrap>
       </InfoBox>
       {NameValue.length >= 3 && !/\s/.test(NameValue) ? (
-        <NextBtn />
-      ) : (
         <NextSubmitBtnTwo handleSaveName={handleSaveName} />
+      ) : (
+        <NextBtn />
       )}
     </InfoContainer>
   );
