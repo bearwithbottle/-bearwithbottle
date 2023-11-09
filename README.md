@@ -47,5 +47,5 @@
 
 [ts]: client/src/assets/stack/type.png
 [react]: client/src/assets/stack/react.png
-[firebase]: client/src/assets/stack/firebase.png
+[firebase]: client/src/assets/stack/firebaes.png
 [styled]: client/src/assets/stack/styled.png
