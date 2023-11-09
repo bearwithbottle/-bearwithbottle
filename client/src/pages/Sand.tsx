@@ -79,13 +79,10 @@ function Sand() {
               const data = docSnapshot.data();
               const letters = data.letters || [];
               const numLetters = letters.length;
-              // 개수제한
               const randomIndexes: any[] = [];
               if (numLetters > 0) {
-                // data.letters 배열의 길이가 1 이상일 때만 실행
-                while (randomIndexes.length < 5) {
+                for (let i = 0; i < numLetters; i++) {
                   const randomIndex = Math.floor(Math.random() * numLetters);
-
                   if (!randomIndexes.includes(randomIndex)) {
                     randomIndexes.push(randomIndex);
                   }
@@ -94,7 +91,7 @@ function Sand() {
               const randomLetters = randomIndexes.map(
                 (randomIndex) => letters[randomIndex]
               );
-
+              console.log(randomLetters);
               return (
                 <MapBox key={index}>
                   <SandTextPongBox>
