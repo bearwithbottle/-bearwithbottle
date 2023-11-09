@@ -2,7 +2,7 @@
 
 <p align="center">
   <br>
-  <img src=v"client/src/assets/main/main_text.png">
+  <img src=v"client/src/assets/stack/back.png">
   <br>
 </p>
 
