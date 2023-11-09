@@ -21,7 +21,7 @@
 
 | TypeScript |   React   |  firebase |  styled component  |
 | :--------: | :-------: | :------:  | :----------------: |
-|   ![ts]    |  ![react] | ![react]  |      ![styled]     | 
+|   ![ts]    |  ![react] | ![firebase]  |      ![styled]     | 
 
 <br>
 
