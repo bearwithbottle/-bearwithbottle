@@ -2,11 +2,11 @@
 
 <p align="center">
   <br>
-  <img src="client/src/assets/main/main_text.png">
+  <img src=v"client/src/assets/main/main_text.png">
   <br>
 </p>
 
-목차
+
 
 ## 프로젝트 소개
 
