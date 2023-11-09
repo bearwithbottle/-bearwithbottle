@@ -45,7 +45,7 @@
 <!-- Stack Icon Refernces -->
 
 
-[ts]: ./src/assets/stack/type.png
-[react]: ./src/assets/stack/react.png
-[firebase]:./src/assets/stack/firebase.png
-[styled]: ./src/assets/stack/styled.png
+[ts]: /src/assets/stack/type.png
+[react]: /src/assets/stack/react.png
+[firebase]:/src/assets/stack/firebase.png
+[styled]: /src/assets/stack/styled.png
