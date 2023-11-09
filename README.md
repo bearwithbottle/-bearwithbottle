@@ -2,7 +2,7 @@
 
 <p align="center">
   <br>
-  <img src="./src/assets/main/main_text.png">
+  <img src="client/src/assets/main/main_text.png">
   <br>
 </p>
 
@@ -45,7 +45,7 @@
 <!-- Stack Icon Refernces -->
 
 
-[ts]: /src/assets/stack/type.png
-[react]: /src/assets/stack/react.png
-[firebase]:/src/assets/stack/firebase.png
-[styled]: /src/assets/stack/styled.png
+[ts]: client/src/assets/stack/type.png
+[react]: client/src/assets/stack/react.png
+[firebase]:client/src/assets/stack/firebase.png
+[styled]: client/src/assets/stack/styled.png
