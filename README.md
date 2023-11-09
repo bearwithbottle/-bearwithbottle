@@ -2,7 +2,7 @@
 
 <p align="center">
   <br>
-  <img src="">
+  <img src="client/src/assets/stack/back.png">
   <br>
 </p>
 
