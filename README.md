@@ -26,9 +26,9 @@
 
 ## 1. 기술 스택
 
-| TypeScript |   React   |  firebase    |  styled component  |
-| :--------: | :-------: | :------:     | :----------------: |
-|   ![ts]    |  ![react] | ![firebase]  |      ![styled]     |
+| TypeScript |   React   |  firebase    |  styled component  | React-Query |
+| :--------: | :-------: | :------:     | :----------------: | :----------:|
+|   ![ts]    |  ![react] | ![firebase]  |      ![styled]     |   ![query]  |
 
 <br>
 
@@ -108,3 +108,4 @@
 [react]: client/src/assets/stack/react.png
 [firebase]: client/src/assets/stack/firebaes.png
 [styled]: client/src/assets/stack/styled.png
+[query]: client/src/assets/stack/query.png
