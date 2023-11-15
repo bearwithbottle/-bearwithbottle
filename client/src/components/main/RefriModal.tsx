@@ -34,7 +34,6 @@ function RfriModal({ handlemodal }: handlemodal) {
             const userData = docSnapshot.data();
             const lettersData = userData.letters || []; // letters 배열 데이터 가져오기
             setLetters(lettersData);
-            console.log(lettersData);
           }
         } catch (error) {
           console.error("Error:", error);

@@ -14,44 +14,34 @@ import {
 } from "../styles/to";
 
 import { useSelector } from "react-redux";
-import {
-  DocumentData,
-  query,
-  getDocs,
-  collection,
-  where,
-} from "firebase/firestore";
-import { useState, useEffect } from "react";
+import { query, getDocs, collection, where } from "firebase/firestore";
+
 import { db } from "../config";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
 function To() {
   const sender = useSelector((state: { sender: string }) => state.sender);
   const senduid = useSelector((state: { senduid: string }) => state.senduid);
-  const [userData, setUserData] = useState<DocumentData | null>(null);
+
   const navi = useNavigate();
 
-  useEffect(() => {
-    async function fetchUserData() {
-      try {
-        if (senduid) {
-          const userCollectionRef = collection(db, "users");
-          const q = query(userCollectionRef, where("id", "==", senduid));
+  const fetchUserData = async (uid: any) => {
+    const userCollectionRef = collection(db, "users");
+    const q = query(userCollectionRef, where("id", "==", uid));
+    const userDocSnap = await getDocs(q);
 
-          const querySnapshot = await getDocs(q);
-          if (querySnapshot.size === 0) {
-            console.log("해당 사용자를 찾을 수 없습니다.");
-            return;
-          }
-          const userData = querySnapshot.docs[0].data();
-          setUserData(userData);
-        }
-      } catch (error) {
-        console.error("사용자 데이터를 불러오는 도중 오류 발생:", error);
-      }
+    if (userDocSnap.empty) {
+      return null;
     }
 
-    fetchUserData();
-  }, [senduid]);
+    const userData = userDocSnap.docs[0].data();
+    return userData;
+  };
+
+  const { data: userData } = useQuery(["userData"], () =>
+    fetchUserData(senduid)
+  );
+
   const handleTobar = () => {
     navi(`/send/${senduid}`);
   };

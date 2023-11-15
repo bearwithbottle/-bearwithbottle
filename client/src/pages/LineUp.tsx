@@ -77,7 +77,6 @@ function LineUp() {
 
     getRandomBottles(3, firstChoice, secondChoice).then((bottles) => {
       setRandomBottles(bottles);
-      console.log(bottles);
     });
   }, []);
 

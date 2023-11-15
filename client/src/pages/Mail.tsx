@@ -41,9 +41,9 @@ function Mail() {
     SetMail(e.target.value);
   };
   const handleMessageInput = () => {
-    navigate("/decorate");
     dispatch(setSender(NameValue));
     dispatch(setMessage(MailValue));
+    navigate("/decorate");
   };
   return (
     <MailBox>
