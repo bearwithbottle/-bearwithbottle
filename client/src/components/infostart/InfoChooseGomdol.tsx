@@ -31,7 +31,7 @@ import { useNavigate } from "react-router-dom";
 import { storage, db, auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
 import { ref, getDownloadURL } from "firebase/storage";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import Draggable from "react-draggable";
 function InfoChooseGomdol() {
   const [isOne, setIsOne] = useState(true);
@@ -55,23 +55,50 @@ function InfoChooseGomdol() {
   const [data, setData] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   useEffect(() => {
-    const getImageUrl = async (imageName: string, setUrl: any) => {
+    const getImageUrl = async () => {
       try {
-        const imageRef = ref(storage, imageName);
-        const url = await getDownloadURL(imageRef);
-        setUrl(url);
+        const imageNames = [
+          "gomdol1.png",
+          "gomdol2.png",
+          "gomdol3.png",
+          "gomdol4.png",
+          "gomdol5.png",
+        ];
+        const setters = [
+          setOneUrl,
+          setTwoUrl,
+          setThreeUrl,
+          setFourUrl,
+          setFiveUrl,
+        ];
+
+        for (let i = 0; i < imageNames.length; i++) {
+          const imageName = imageNames[i];
+          const imageRef = ref(storage, imageName);
+          const imageUrl = await getDownloadURL(imageRef);
+          setters[i](imageUrl);
+        }
       } catch (error) {
-        console.error(imageName, error);
+        console.error(error);
       }
     };
-
-    getImageUrl("gomdol1.png", setOneUrl);
-    getImageUrl("gomdol2.png", setTwoUrl);
-    getImageUrl("gomdol3.png", setThreeUrl);
-    getImageUrl("gomdol4.png", setFourUrl);
-    getImageUrl("gomdol5.png", setFiveUrl);
+    getImageUrl();
   }, []);
-  useEffect(() => {});
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) navigate("/");
+      else {
+        const uid = user?.uid;
+        const userDocRef = doc(db, "users", uid);
+        const userDocSnap = await getDoc(userDocRef);
+        const ImgValue = userDocSnap.get("img");
+
+        if (ImgValue) {
+          navigate("/bar");
+        }
+      }
+    });
+  }, []);
   const handleOne = () => {
     setIsOne(true);
     setIsTwo(false);
@@ -114,6 +141,7 @@ function InfoChooseGomdol() {
     setIsFive(true);
     dispatch(setImage(FiveUrl));
   };
+
   const handleGomSubmit = async () => {
     if (isSaving) {
       return; // 이미 저장 중이면 함수 실행 중지
@@ -128,11 +156,11 @@ function InfoChooseGomdol() {
           await updateDoc(userDocRef, {
             img: selector,
           });
-          navigate("/bar");
         } catch (error) {
           console.error("ErrorImg:", error);
         } finally {
           setIsSaving(false); // 저장 완료 후 저장 중 플래그를 해제
+          navigate("/bar");
         }
       }
     });

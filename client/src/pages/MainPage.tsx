@@ -30,6 +30,7 @@ import BottlesModal from "../components/main/BottlesModal";
 import LogoutModal from "../components/main/LogoutModal";
 import Share from "../components/Share";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../config";
 import {
@@ -47,6 +48,7 @@ import { setImage, setName } from "../action";
 import { Link } from "react-router-dom";
 
 function MainPage() {
+  const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
   const [isShare, setIsShare] = useState(false);
   const [arr, setArr] = useState<any>();
@@ -62,7 +64,22 @@ function MainPage() {
     useSelector((state: { name: string }) => state.name),
     useSelector((state: { image: string }) => state.image),
   ];
-
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) navigate("/");
+      else {
+        const uid = user?.uid;
+        const userDocRef = doc(db, "users", uid);
+        const userDocSnap = await getDoc(userDocRef);
+        const ImgValue = userDocSnap.get("img");
+        if (ImgValue) {
+          navigate("/bar");
+        } else {
+          navigate("/choosegomdol");
+        }
+      }
+    });
+  }, []);
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -83,6 +100,8 @@ function MainPage() {
         } catch (error) {
           console.error("Error getting document:", error);
         }
+      } else {
+        navigate("/");
       }
     });
   }, []);

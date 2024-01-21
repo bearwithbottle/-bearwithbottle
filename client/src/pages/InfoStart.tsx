@@ -13,13 +13,13 @@ import InfoModal from "../components/infostart/InfoModal";
 import PreBtn from "../components/infostart/PreBtn";
 import NextBtn from "../components/infostart/NextBtn";
 import NextSubmitBtnTwo from "../components/infostart/NextSubmitBtnTwo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 //Redux
 import { useDispatch } from "react-redux";
 import { setName } from "../action";
 
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../config";
 
@@ -35,6 +35,19 @@ function InfoStart() {
   const handleSearchInputChange = (e: any) => {
     SetNameValue(e.target.value);
   };
+  //유저상태확인
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) navigate("/");
+      else {
+        const uid = user.uid;
+        const docRef = doc(db, "users", uid);
+        const docSnapshot = await getDoc(docRef);
+        const ImgValue = docSnapshot.get("img");
+        if (ImgValue) navigate("/bar");
+      }
+    });
+  }, []);
 
   const handleSaveName = async () => {
     if (isSaving) {
@@ -54,12 +67,11 @@ function InfoStart() {
             id: uid,
             letters: [],
           });
-
-          navigate("/choosegomdol");
         } catch (error) {
           console.error("ErrorImg:", error);
         } finally {
           setIsSaving(false); // 저장 완료 후 저장 중 플래그를 해제
+          navigate("/choosegomdol");
         }
       }
     });

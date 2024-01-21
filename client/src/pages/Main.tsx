@@ -16,9 +16,11 @@ function Main() {
           const uid = user.uid;
           const docRef = doc(db, "users", uid);
           const docSnapshot = await getDoc(docRef);
-          if (docSnapshot.exists()) {
-            goback("/bar");
-          }
+          const NameValue = docSnapshot.get("name");
+          const ImgValue = docSnapshot.get("img");
+          if (!NameValue) goback("/infostart");
+          else if (!ImgValue) goback("/choosegomdol");
+          goback("/bar");
         }
       });
     }
