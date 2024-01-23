@@ -24,7 +24,7 @@ function Share({ name, image, uid, hadleShare }: any) {
   const [isShare, setIsShare] = useState(false);
   const uidId = uid;
   function copyDynamicValueToClipboard() {
-    const copyText = `barewithbottle.firebaseapp.com/send/${uidId}`;
+    const copyText = `barewithbottle.web.app/send/${uidId}`;
 
     const textarea = document.createElement("textarea");
     textarea.value = copyText;
