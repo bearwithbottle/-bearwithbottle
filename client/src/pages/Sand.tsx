@@ -53,7 +53,7 @@ function Sand() {
 
     if (arr && arr.length > 0) {
       const length = arr.length;
-      for (let i = 0; i < length; i++) {
+      for (let i = 0; i < 5; i++) {
         const randomIndex = Math.floor(Math.random() * length);
         if (!randomIndexes.includes(randomIndex)) {
           randomIndexes.push(randomIndex);

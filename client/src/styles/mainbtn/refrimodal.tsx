@@ -12,10 +12,17 @@ export const RefriModalBox = styled.div`
   z-index: 1;
 `;
 export const RefriModalContents = styled.div`
-  width: 312px;
-  height: 540px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  position: absolute;
+  width: 350px;
+  height: 520px;
+
+  .sliceLetterBox {
+    position: relative;
+    left: 188px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+  }
 `;
 export const BottleBox = styled.div`
   width: 104px;
@@ -54,7 +61,9 @@ export const Xbox = styled.div`
   height: 56px;
   background-image: url(${xbox});
   background-size: cover;
-  margin-top: 92px;
+  position: relative;
+  top: 300px;
+  cursor: pointer;
 `;
 export const LetterStiker = styled.div<{ sticker: string }>`
   width: 40px;

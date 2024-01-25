@@ -25,7 +25,6 @@ function LogoutModal({ handleLogout }: any) {
   const handleHome = () => {
     signOut(auth)
       .then(() => {
-        // localStorage.removeItem("uid");
         navi("/");
       })
       .catch((error) => {

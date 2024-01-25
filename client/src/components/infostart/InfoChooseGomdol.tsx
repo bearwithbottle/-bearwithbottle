@@ -157,7 +157,7 @@ function InfoChooseGomdol() {
             img: selector,
           });
         } catch (error) {
-          console.error("ErrorImg:", error);
+          console.error(error);
         } finally {
           setIsSaving(false); // 저장 완료 후 저장 중 플래그를 해제
           navigate("/bar");

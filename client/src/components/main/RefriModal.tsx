@@ -8,53 +8,66 @@ import {
   Xbox,
   LetterStiker,
 } from "../../styles/mainbtn/refrimodal";
-import { useEffect, useState } from "react";
-import { DocumentData, doc, getDoc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
-import { db, auth } from "../../config";
+
+import { DocumentData } from "firebase/firestore";
+import { Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import { useState } from "react";
+
 interface handlemodal {
   handlemodal: () => void;
+  isletters: DocumentData[];
 }
-function RfriModal({ handlemodal }: handlemodal) {
-  let uid: string | null;
-  const [letters, setLetters] = useState<DocumentData[]>([]);
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        uid = user.uid;
-      }
-    });
-    async function fetchLetters() {
-      if (uid) {
-        try {
-          const userDocRef = doc(db, "users", uid); // 로컬 uid 값으로 사용자 문서 참조 가져오기
+function RfriModal({ handlemodal, isletters }: handlemodal) {
+  const [arr, setArr] = useState<any>();
+  function sliceArray<T>(arr: T[]): T[][] {
+    const sliceArr: T[][] = [];
+    let index = 0;
 
-          const docSnapshot = await getDoc(userDocRef);
-          if (docSnapshot.exists()) {
-            const userData = docSnapshot.data();
-            const lettersData = userData.letters || []; // letters 배열 데이터 가져오기
-            setLetters(lettersData);
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      }
+    while (index < arr.length) {
+      sliceArr.push(arr.slice(index, index + 9));
+      index += 9;
     }
 
-    fetchLetters();
-  }, []);
+    return sliceArr;
+  }
+  const sliceLetter = sliceArray(isletters);
+  console.log(sliceLetter);
+  function what(e: any, index: any) {
+    setArr(index);
+    console.log("test", arr);
+  }
   return (
     <RefriModalBox>
       <RefriModalContents>
-        {letters.map((letter, index) => (
-          <BottleBox key={index}>
-            <BottleBoxImg img={letter.setbear} />
-            <LetterStiker sticker={letter.sticker} />
-            <BottleBoxNameBox>
-              <BottleBoxName>{letter.sender}</BottleBoxName>
-            </BottleBoxNameBox>
-          </BottleBox>
-        ))}
+        <Swiper
+          modules={[Navigation, Pagination]}
+          spaceBetween={20}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+        >
+          {sliceLetter.map((slice, index) => (
+            <SwiperSlide key={index}>
+              <div className="sliceLetterBox">
+                {slice.map((letter, innerIndex) => (
+                  <BottleBox key={innerIndex} onClick={(e) => what(e, letter)}>
+                    <BottleBoxImg img={letter.setbear} />
+                    <LetterStiker sticker={letter.sticker} />
+                    <BottleBoxNameBox>
+                      <BottleBoxName>{letter.sender}</BottleBoxName>
+                    </BottleBoxNameBox>
+                  </BottleBox>
+                ))}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </RefriModalContents>
       <Xbox onClick={handlemodal} />
     </RefriModalBox>

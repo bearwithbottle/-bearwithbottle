@@ -55,7 +55,7 @@ function Delivery() {
       const documents = querySnapshot.docs.map((doc) => doc.data());
       return documents;
     } catch (error) {
-      console.error("Error getting documents:", error);
+      console.error(error);
       return [];
     }
   }
@@ -84,7 +84,7 @@ function Delivery() {
 
       await setDoc(docRef, { letters: updatedLetters }, { merge: true });
     } catch (error) {
-      console.error("애러애러", error);
+      console.error(error);
     }
   }
   const handleExport = () => {

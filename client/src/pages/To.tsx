@@ -21,11 +21,9 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 function To() {
   const sender = useSelector((state: { sender: string }) => state.sender);
-  const senduid = useSelector((state: { senduid: string }) => state.senduid);
-
+  const uidId = useSelector((state: { userid: string }) => state.userid);
   const navi = useNavigate();
-
-  const fetchUserData = async (uid: any) => {
+  const fetchUserData = async (uid: string | number) => {
     const userCollectionRef = collection(db, "users");
     const q = query(userCollectionRef, where("id", "==", uid));
     const userDocSnap = await getDocs(q);
@@ -38,12 +36,10 @@ function To() {
     return userData;
   };
 
-  const { data: userData } = useQuery(["userData"], () =>
-    fetchUserData(senduid)
-  );
+  const { data: userData } = useQuery(["userData"], () => fetchUserData(uidId));
 
   const handleTobar = () => {
-    navi(`/send/${senduid}`);
+    navi(`/send/${uidId}`);
   };
   const handleToHome = () => {
     navi(`/bar`);
@@ -64,7 +60,7 @@ function To() {
         <NextSubBtnBox>
           <NextSubBtnWrap>
             <NextSubBtnDot onClick={handleTobar}>
-              {sender}님의 Bar가기
+              {userData?.name}님의 Bar가기
             </NextSubBtnDot>
           </NextSubBtnWrap>
         </NextSubBtnBox>

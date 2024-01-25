@@ -53,7 +53,8 @@ function MainPage() {
   const [isShare, setIsShare] = useState(false);
   const [arr, setArr] = useState<any>();
   const [uid, stateUid] = useState<string | null>(null);
-  const [letters, setLetters] = useState<DocumentData[]>([]);
+  const [isletters, setLetters] = useState<DocumentData[]>([]);
+  const [isLoding, setIsLoding] = useState(false);
   const [selectedLetter, setSelectedLetter] = useState<DocumentData | null>(
     null
   );
@@ -65,74 +66,54 @@ function MainPage() {
     useSelector((state: { image: string }) => state.image),
   ];
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) navigate("/");
-      else {
+    const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        navigate("/");
+      } else {
         const uid = user?.uid;
         const userDocRef = doc(db, "users", uid);
         const userDocSnap = await getDoc(userDocRef);
-        const ImgValue = userDocSnap.get("img");
-        if (ImgValue) {
+        const imgValue = userDocSnap.get("img");
+
+        if (imgValue) {
           navigate("/bar");
         } else {
           navigate("/choosegomdol");
         }
-      }
-    });
-  }, []);
-  useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        stateUid(user.uid);
-        const docRef = doc(db, "users", user.uid);
+
+        stateUid(uid);
+
+        const docRef = doc(db, "users", uid);
         try {
           const docSnapshot = await getDoc(docRef);
 
           if (docSnapshot.exists()) {
             const userData = docSnapshot.data();
-            const nameData = userData.name;
-            const imgData = userData.img;
-            dispatch(setName(nameData));
-            dispatch(setImage(imgData));
+            const { name, img, letters } = userData;
+            setLetters(letters);
+            dispatch(setName(name));
+            dispatch(setImage(img));
           } else {
-            console.log("No such document!");
+            console.log("찾을 수 없습니다");
           }
         } catch (error) {
-          console.error("Error getting document:", error);
+          console.error(error);
+        } finally {
+          setIsLoding((pre) => !pre);
         }
-      } else {
-        navigate("/");
       }
     });
+    unsubscribeAuth();
   }, []);
-  useEffect(() => {
-    async function fetchLetters() {
-      if (uid) {
-        try {
-          const userDocRef = doc(db, "users", uid);
 
-          const docSnapshot = await getDoc(userDocRef);
-          if (docSnapshot.exists()) {
-            const userData = docSnapshot.data();
-            const lettersData = userData.letters || [];
-            setLetters(lettersData);
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      }
-    }
-
-    fetchLetters();
-  }, []);
   const getRandomLetters = () => {
-    if (letters.length <= 5) {
-      return letters;
+    if (isletters.length <= 5) {
+      return isletters;
     }
 
-    const shuffledLetters = [...letters];
+    const shuffledLetters = [...isletters];
 
-    for (let i = shuffledLetters.length - 1; i > 0; i--) {
+    for (let i = 0; i < shuffledLetters.length - 1; i++) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffledLetters[i], shuffledLetters[j]] = [
         shuffledLetters[j],
@@ -203,9 +184,11 @@ function MainPage() {
 
   return (
     <WaitBox>
-      {uid ? (
+      {isLoding ? (
         <BarMainBox>
-          {isModal && <RfriModal handlemodal={handlemodal} />}
+          {isModal && (
+            <RfriModal handlemodal={handlemodal} isletters={isletters} />
+          )}
 
           {isModalOpen && (
             <BottlesModal
