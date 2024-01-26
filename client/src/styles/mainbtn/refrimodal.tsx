@@ -18,10 +18,15 @@ export const RefriModalContents = styled.div`
 
   .sliceLetterBox {
     position: relative;
-    left: 188px;
+    left: 670px;
 
     display: grid;
     grid-template-columns: repeat(3, 100px);
+  }
+
+  .swiper-slide-next {
+    right: 170px;
+    z-index: -1;
   }
 `;
 export const BottleBox = styled.div`
@@ -36,6 +41,7 @@ export const BottleBoxImg = styled.div<{ img: string }>`
   background-size: cover;
   width: 54px;
   height: 120px;
+  cursor: pointer;
 `;
 export const BottleBoxNameBox = styled.div`
   box-sizing: border-box;
@@ -69,7 +75,7 @@ export const LetterStiker = styled.div<{ sticker: string }>`
   width: 40px;
   height: 40px;
   position: absolute;
-  cursor: pointer;
+
   transform: translate(30%, 80%);
   ${(props) => props.sticker && `background-image: url(${props.sticker});`}
   background-size: cover;

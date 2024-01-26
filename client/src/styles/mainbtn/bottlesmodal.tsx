@@ -8,7 +8,7 @@ export const BottlesModalBox = styled.div`
   transform: translate(0%, 0%);
   font-family: "ImcreSoojin";
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   justify-content: center;
   align-items: center;
   flex-direction: column;

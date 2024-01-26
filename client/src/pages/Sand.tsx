@@ -66,6 +66,7 @@ function Sand() {
     return randomIndexes.map((randomIndex) => arr[randomIndex]);
   }
   const randomLetters = getRandomIndexes(Lettersarr);
+  console.log(randomLetters);
 
   const handleSave = () => {
     if (uid) {

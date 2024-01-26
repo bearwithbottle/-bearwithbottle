@@ -8,8 +8,16 @@ import {
   Xbox,
   LetterStiker,
 } from "../../styles/mainbtn/refrimodal";
-
-import { DocumentData } from "firebase/firestore";
+import Modalmodal from "./Modalmodal";
+import {
+  DocumentData,
+  query,
+  getDocs,
+  where,
+  limit,
+  collection,
+} from "firebase/firestore";
+import { db } from "../../config";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -24,6 +32,8 @@ interface handlemodal {
 }
 function RfriModal({ handlemodal, isletters }: handlemodal) {
   const [arr, setArr] = useState<any>();
+  const [saveCode, setSaveCode] = useState<any>();
+  const [isOpen, setIsOpen] = useState(false);
   function sliceArray<T>(arr: T[]): T[][] {
     const sliceArr: T[][] = [];
     let index = 0;
@@ -36,27 +46,47 @@ function RfriModal({ handlemodal, isletters }: handlemodal) {
     return sliceArr;
   }
   const sliceLetter = sliceArray(isletters);
-  console.log(sliceLetter);
-  function what(e: any, index: any) {
-    setArr(index);
-    console.log("test", arr);
+
+  async function what(letter: any) {
+    setArr(letter);
+    const code = letter.code;
+    const getFire = await getRandomBottles(code);
+    setSaveCode(getFire);
+    setIsOpen((pre) => !pre);
+  }
+  async function getRandomBottles(code: string) {
+    const bottlesCollectionRef = collection(db, "recommend");
+    const q = query(bottlesCollectionRef, where("code", "==", code), limit(1));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const documents = querySnapshot.docs.map((doc) => doc.data());
+      return documents;
+    }
+    return null;
+  }
+  function handleIsOpen() {
+    setIsOpen((pre) => !pre);
   }
   return (
     <RefriModalBox>
+      {isOpen && (
+        <Modalmodal saveCode={saveCode} arr={arr} handleIsOpen={handleIsOpen} />
+      )}
       <RefriModalContents>
         <Swiper
           modules={[Navigation, Pagination]}
-          spaceBetween={20}
+          spaceBetween={500}
           slidesPerView={1}
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
+          className="swiper"
         >
           {sliceLetter.map((slice, index) => (
             <SwiperSlide key={index}>
               <div className="sliceLetterBox">
                 {slice.map((letter, innerIndex) => (
-                  <BottleBox key={innerIndex} onClick={(e) => what(e, letter)}>
+                  <BottleBox key={innerIndex} onClick={(e) => what(letter)}>
                     <BottleBoxImg img={letter.setbear} />
                     <LetterStiker sticker={letter.sticker} />
                     <BottleBoxNameBox>
