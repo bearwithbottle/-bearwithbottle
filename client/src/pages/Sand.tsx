@@ -15,19 +15,24 @@ import {
   SandTextImg,
 } from "../styles/sand";
 
+import SendModal from "../components/main/SendModal";
 import SandBtn from "../components/btn/SandBtn";
 import HomeBtn from "../components/btn/HomeBtn";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { db } from "../config";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import { setSendUid, setName } from "../action";
+import { useState } from "react";
 function Sand() {
   const { uid } = useParams();
   const dispatch = useDispatch();
   const navi = useNavigate();
+  const [arr, setArr] = useState<any>();
+  const [saveCode, setSaveCode] = useState<any>();
+  const [isOpen, setIsOpen] = useState(false);
 
   const fetchUserData = async (uid: any) => {
     const userCollectionRef = collection(db, "users");
@@ -66,7 +71,6 @@ function Sand() {
     return randomIndexes.map((randomIndex) => arr[randomIndex]);
   }
   const randomLetters = getRandomIndexes(Lettersarr);
-  console.log(randomLetters);
 
   const handleSave = () => {
     if (uid) {
@@ -77,8 +81,32 @@ function Sand() {
     navi(`/`);
   };
 
+  async function what(letter: any) {
+    setArr(letter);
+    const code = letter.code;
+    const getFire = await getRandomBottles(code);
+    setSaveCode(getFire);
+    setIsOpen((pre) => !pre);
+  }
+  async function getRandomBottles(code: string) {
+    const bottlesCollectionRef = collection(db, "recommend");
+    const q = query(bottlesCollectionRef, where("code", "==", code), limit(1));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const documents = querySnapshot.docs.map((doc) => doc.data());
+      return documents;
+    }
+    return null;
+  }
+  function handleIsOpen() {
+    setIsOpen((pre) => !pre);
+  }
+
   return (
     <SandBox>
+      {isOpen && (
+        <SendModal saveCode={saveCode} arr={arr} handleIsOpen={handleIsOpen} />
+      )}
       <SandMainBox>
         <SandBarDisplay>
           <SandTitle />
@@ -97,7 +125,7 @@ function Sand() {
               <SandMidGom gom={userData?.img} />
               <MailBox>
                 {randomLetters?.map((letter: any, letterIndex: any) => (
-                  <div key={letterIndex}>
+                  <div key={letterIndex} onClick={() => what(letter)}>
                     <LetterCodeBox img={letter?.setbear} />
                     <LetterStiker sticker={letter?.sticker} />
                   </div>
