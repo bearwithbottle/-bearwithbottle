@@ -99,8 +99,8 @@ export const MailBox = styled.div`
   transform: translate(-3.5%, 80%);
 `;
 export const LetterCodeBox = styled.div<{ img: string }>`
-  width: 64px;
-  height: 128px;
+  width: 50px;
+  height: 130px;
   cursor: pointer;
   ${(props) => props.img && `background-image: url(${props.img});`}
   background-size: cover;
