@@ -31,7 +31,7 @@ export const MainText = styled.div`
 export const MainBtnBox = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
   width: 312px;
   height: 191px;
   margin-bottom: 50px;

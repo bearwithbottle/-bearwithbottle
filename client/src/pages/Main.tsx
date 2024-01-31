@@ -1,7 +1,6 @@
 import { MainBox, MainText, MainBtnBox } from "../styles/main";
 import GoogleBtn from "../components/main/GoogleBtn";
 import FacaBookBtn from "../components/main/FacaBookBtn";
-import GithubBtn from "../components/main/GithubBtn";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../config";
@@ -32,7 +31,6 @@ function Main() {
       <MainBtnBox>
         <GoogleBtn />
         <FacaBookBtn />
-        <GithubBtn />
       </MainBtnBox>
     </MainBox>
   );
