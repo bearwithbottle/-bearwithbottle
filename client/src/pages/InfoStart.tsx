@@ -19,8 +19,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setName } from "../action";
 
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
+import {
+  onAuthStateChanged,
+  getAuth,
+  deleteUser,
+  signOut,
+} from "firebase/auth";
 import { db, auth } from "../config";
 
 function InfoStart() {
@@ -89,7 +94,33 @@ function InfoStart() {
     setInfoNextModalVisible(false);
   };
   const handleCopyLink = () => {
-    copyToClipboard("barewithbottle.firebaseapp.com");
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const uid = user.uid;
+          const userDocRef = doc(db, "users", uid);
+          await deleteDoc(userDocRef);
+          handleSignOut();
+        } catch (error) {
+          console.error(error);
+        } finally {
+          copyToClipboard("https://barewithbottle.web.app");
+          navigate("/");
+        }
+      }
+    });
+  };
+  const handleSignOut = async () => {
+    try {
+      const user = auth.currentUser; // 현재 사용자 가져오기
+      if (user) {
+        await deleteUser(user); // 사용자 삭제 시도
+      } else {
+        console.log("user");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
   const copyToClipboard = (text: any) => {
     const el = document.createElement("textarea");

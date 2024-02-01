@@ -17,9 +17,11 @@ function Main() {
           const docSnapshot = await getDoc(docRef);
           const NameValue = docSnapshot.get("name");
           const ImgValue = docSnapshot.get("img");
-          if (!NameValue) goback("/infostart");
+          if (NameValue === "") goback("/infostart");
           else if (!ImgValue) goback("/choosegomdol");
           goback("/bar");
+        } else {
+          return;
         }
       });
     }

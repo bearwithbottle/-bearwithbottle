@@ -19,11 +19,9 @@ interface InfoNextModalProps {
 }
 
 function InfoNextModal({ onClose, onCopyLink }: InfoNextModalProps) {
-  const navigate = useNavigate();
   const handleYesButtonClick = () => {
-    onCopyLink();
     onClose();
-    navigate("/");
+    onCopyLink();
   };
 
   return (

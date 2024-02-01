@@ -20,7 +20,7 @@ import {
   ChooseContentsFiveBox,
   ChooseContentsFive,
 } from "../../styles/info/infochoosegomdol";
-import PreBtn from "./PreBtn";
+import PreBtnGomdol from "./PreBtnGomdol";
 import NextSubmitBtn from "./NextSubmitBtn";
 import { setImage } from "../../action";
 
@@ -179,7 +179,7 @@ function InfoChooseGomdol() {
   return (
     <GomdolContainer>
       <PreWrap>
-        <PreBtn />
+        <PreBtnGomdol />
       </PreWrap>
       <TextBox>
         <TextBoxBox>
