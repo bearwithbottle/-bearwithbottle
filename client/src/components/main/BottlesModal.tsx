@@ -59,7 +59,9 @@ function BottlesModal({
           <MailBoxIn>
             <MailDot>
               <MailName>{selectedLetter?.sender}</MailName>
-              <MailContent>{selectedLetter?.message}</MailContent>
+              <MailContent saveBack={selectedLetter?.color}>
+                {selectedLetter?.message}
+              </MailContent>
             </MailDot>
           </MailBoxIn>
         </MailBox>

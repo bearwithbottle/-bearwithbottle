@@ -54,7 +54,7 @@ function Modalmodal({ saveCode, arr, handleIsOpen }: any) {
           <MailBoxIn>
             <MailDot>
               <MailName>{arr?.sender}</MailName>
-              <MailContent>{arr?.message}</MailContent>
+              <MailContent saveBack={arr?.color}>{arr?.message}</MailContent>
             </MailDot>
           </MailBoxIn>
         </MailBox>

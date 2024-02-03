@@ -32,7 +32,6 @@ function Mail() {
   const navigate = useNavigate();
   const handleColorClick = (color: string) => {
     setSelectedColor(color);
-    dispatch(setColor(color));
   };
   const handleSearchInputChange = (e: any) => {
     SetNameValue(e.target.value);
@@ -43,6 +42,7 @@ function Mail() {
   const handleMessageInput = () => {
     dispatch(setSender(NameValue));
     dispatch(setMessage(MailValue));
+    dispatch(setColor(selectedColor));
     navigate("/decorate");
   };
   return (

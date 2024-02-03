@@ -22,6 +22,7 @@ import {
 } from "../../styles/mainbtn/bottlesmodal";
 
 function SendModal({ saveCode, arr, handleIsOpen }: any) {
+  const saveBack = arr?.color;
   return (
     <BottlesModalBox>
       <BottlesModalContents>
@@ -54,7 +55,7 @@ function SendModal({ saveCode, arr, handleIsOpen }: any) {
           <MailBoxIn>
             <MailDot>
               <MailName>{arr?.sender}</MailName>
-              <MailContent>{arr?.message}</MailContent>
+              <MailContent saveBack={saveBack}>{arr?.message}</MailContent>
             </MailDot>
           </MailBoxIn>
         </MailBox>

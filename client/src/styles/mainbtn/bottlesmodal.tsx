@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import text from "../../assets/test.png";
+
 import xbox from "../../assets/main/boxX.png";
 export const BottlesModalBox = styled.div`
   background-color: rgba(35, 35, 35, 0.9); /* 배경색에 투명도 추가 */
@@ -132,7 +132,7 @@ export const MailName = styled.div`
   color: #686868;
 `;
 
-export const MailContent = styled.div`
+export const MailContent = styled.div<{ saveBack: string }>`
   width: 272px;
   height: 107px;
   border-radius: 15px;
@@ -142,7 +142,7 @@ export const MailContent = styled.div`
   color: #444444;
   justify-content: flex-start;
   align-items: flex-start;
-  background-color: #bcd5fc;
+  background-color: ${(props) => props.saveBack};
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 3px;

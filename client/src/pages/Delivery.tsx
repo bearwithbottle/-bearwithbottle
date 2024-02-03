@@ -43,6 +43,7 @@ function Delivery() {
   const sticker = useSelector((state: { sticker: string }) => state.sticker);
   const setbear = useSelector((state: { setbear: string }) => state.setbear);
   const uidId = useSelector((state: { userid: string }) => state.userid);
+  const color = useSelector((state: { color: string }) => state.color);
   async function getDocuments(value: string) {
     const q = query(
       collection(db, "recommend"),
@@ -75,6 +76,7 @@ function Delivery() {
         code: code,
         sticker: sticker,
         setbear: setbear,
+        color: color,
       };
 
       const userDoc = await getDoc(docRef);
